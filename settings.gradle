@@ -1,1 +1,1 @@
-include ':rollbanner'
+include ':rollbanner',':app'
