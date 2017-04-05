@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.banner.BaseIndicatorBanner;
@@ -22,21 +21,13 @@ public class RollImageBanner extends BaseIndicatorBanner<BannerItem, RollImageBa
     private ColorDrawable colorDrawable;
 
     public RollImageBanner(Context context) {
-        this(context, null, 0);
+        this(context, null);
     }
 
     public RollImageBanner(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
+        super(context, attrs);
 
-    public RollImageBanner(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
         colorDrawable = new ColorDrawable(Color.parseColor("#555555"));
-    }
-
-    @Override
-    public void onTitleSlect(TextView tv, int position) {
-        final BannerItem item = mDatas.get(position);
     }
 
     @Override
@@ -75,16 +66,10 @@ public class RollImageBanner extends BaseIndicatorBanner<BannerItem, RollImageBa
                     return;
                 }
 
-                // [逻辑判定]广告轮播图默认只支持KDS_WebPageNoHead, KDS_WebPageWithHead, 故下发其他快捷菜单功能Key则为中台升级使用advtInfoV3字段;
                 if (!TextUtils.isEmpty(linkedUrl)
                         && ("KDS_WebPageNoHead".equalsIgnoreCase(advSrcTitleVisibility)
                         || "KDS_WebPageWithHead".equalsIgnoreCase(advSrcTitleVisibility))) {
 
-                    /*KDS_ActivityUtils.switchWebWindow((Activity) mContext,
-                            YT_HomeAdvActivity.class,
-                            advSrcTitleVisibility,
-                            linkedUrl,
-                            false);*/
                     Toast.makeText(mContext, "跳转", Toast.LENGTH_LONG).show();
 
                 }
