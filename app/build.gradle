@@ -14,9 +14,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
+    signingConfigs {        //签名信息 可以自定义很多
+        releaseConfig {
+            storeFile file('banner.jks')
+            storePassword "com.banner"
+            keyAlias "com.banner"
+            keyPassword "com.banner"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.releaseConfig
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
