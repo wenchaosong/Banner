@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    private RollImageBanner rollImageBanner;
     private String[] url = {"http://api.hzg9999.com/vw/images/advert_demo1.jpg",
             "http://api.hzg9999.com/vw/images/advert_demo2.jpg"};
 
@@ -16,7 +15,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rollImageBanner = (RollImageBanner) findViewById(R.id.yt_sib_anim);
+        RollImageBanner rollImageBanner = (RollImageBanner) findViewById(R.id.yt_sib_anim);
 
         ArrayList<BannerItem> list = new ArrayList<>();
 
