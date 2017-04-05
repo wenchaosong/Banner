@@ -439,7 +439,7 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
                 public void run() {
                     mHandler.obtainMessage().sendToTarget();
                 }
-            }, mDelay, mPeriod, TimeUnit.SECONDS);
+            }, mPeriod, mDelay, TimeUnit.SECONDS);
             mIsAutoScrolling = true;
             Log.d(TAG, this.getClass().getSimpleName() + "--->goOnScroll()");
         } else {
