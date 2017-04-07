@@ -3,12 +3,12 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.github.wenchaosong'
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
 
@@ -26,5 +26,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    compile 'com.android.support:appcompat-v7:23.0.0'
 }
