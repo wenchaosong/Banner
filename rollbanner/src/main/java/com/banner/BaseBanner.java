@@ -9,7 +9,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -28,10 +27,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends RelativeLayout {
-    /**
-     * 日志
-     */
-    private static final String TAG = BaseBanner.class.getSimpleName();
     /**
      * 单线程池定时任务
      */
@@ -441,7 +436,6 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
                 }
             }, mPeriod, mDelay, TimeUnit.SECONDS);
             mIsAutoScrolling = true;
-            Log.d(TAG, this.getClass().getSimpleName() + "--->goOnScroll()");
         } else {
             mIsAutoScrolling = false;
         }
@@ -455,7 +449,6 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
             mStse.shutdown();
             mStse = null;
         }
-        Log.d(TAG, this.getClass().getSimpleName() + "--->pauseScroll()");
 
         mIsAutoScrolling = false;
     }
@@ -553,12 +546,10 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
 
     protected boolean isValid() {
         if (mViewPager == null) {
-            Log.e(TAG, "ViewPager is not exist!");
             return false;
         }
 
         if (mDatas == null || mDatas.size() == 0) {
-            Log.e(TAG, "DataList must be not empty!");
             return false;
         }
 

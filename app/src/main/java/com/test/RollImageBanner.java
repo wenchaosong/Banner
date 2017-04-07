@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -59,7 +58,6 @@ public class RollImageBanner extends BaseIndicatorBanner<BannerItem, RollImageBa
                 String linkedUrl = item.advtLinked;
                 String advSrcTitleVisibility = item.src_TitleVisibility;
                 String advWebViewLoginFlag = item.webViewLoginFlag;
-                Log.d("aaa", "linkedUrl: " + linkedUrl + " advSrcTitleVisibility: " + advSrcTitleVisibility);
 
                 if (TextUtils.isEmpty(linkedUrl)) {
                     Toast.makeText(mContext, "没有配置广告url！", Toast.LENGTH_LONG).show();
