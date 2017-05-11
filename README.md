@@ -11,6 +11,6 @@
 在 gradle 添加: 
 ```groovy
 dependencies {
-    compile "com.cleveroad:adaptivetablelayout:1.0.1"
+    compile 'com.github.wenchaosong:banner:1.0.5'
 }
 ```
