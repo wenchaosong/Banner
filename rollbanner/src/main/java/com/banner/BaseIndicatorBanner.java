@@ -2,6 +2,7 @@ package com.banner;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 public abstract class BaseIndicatorBanner<E, T extends BaseIndicatorBanner<E, T>> extends BaseBanner<E, T> {
-
     public static final int STYLE_DRAWABLE_RESOURCE = 0;
     public static final int STYLE_CORNER_RECTANGLE = 1;
 
@@ -47,13 +47,14 @@ public abstract class BaseIndicatorBanner<E, T extends BaseIndicatorBanner<E, T>
     public BaseIndicatorBanner(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BaseIndicatorBanner);
         mIndicatorStyle = STYLE_CORNER_RECTANGLE;
-        mIndicatorWidth = dp2px(6);
-        mIndicatorHeight = dp2px(6);
-        mIndicatorGap = dp2px(6);
-        mIndicatorCornerRadius = dp2px(3);
-        mSelectColor = Color.parseColor("#ffffff");
-        mUnselectColor = Color.parseColor("#88ffffff");
+        mIndicatorWidth = ta.getDimensionPixelSize(R.styleable.BaseIndicatorBanner_bb_indicatorWidth, dp2px(6));
+        mIndicatorHeight = ta.getDimensionPixelSize(R.styleable.BaseIndicatorBanner_bb_indicatorHeight, dp2px(6));
+        mIndicatorGap = ta.getDimensionPixelSize(R.styleable.BaseIndicatorBanner_bb_indicatorGap, dp2px(6));
+        mIndicatorCornerRadius = ta.getDimensionPixelSize(R.styleable.BaseIndicatorBanner_bb_indicatorCornerRadius, dp2px(3));
+        mSelectColor = ta.getColor(R.styleable.BaseIndicatorBanner_bb_indicatorSelectColor, Color.parseColor("#ffffff"));
+        mUnselectColor = ta.getColor(R.styleable.BaseIndicatorBanner_bb_indicatorUnselectColor, Color.parseColor("#88ffffff"));
 
         int selectRes = 0;
         int unselectRes = 0;

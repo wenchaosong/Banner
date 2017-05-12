@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BaseIndicatorBanner">
+        <attr name="bb_indicatorWidth" format="integer" />
+        <attr name="bb_indicatorHeight" format="integer" />
+        <attr name="bb_indicatorGap" format="integer" />
+        <attr name="bb_indicatorCornerRadius" format="integer" />
+        <attr name="bb_indicatorSelectColor" format="color" />
+        <attr name="bb_indicatorUnselectColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseBanner">
+        <attr name="bb_scale" format="float" />
+        <attr name="bb_isLoopEnable" format="boolean" />
+        <attr name="bb_delay" format="integer" />
+        <attr name="bb_period" format="integer" />
+        <attr name="bb_isAutoScrollEnable" format="boolean" />
+        <attr name="bb_barColor" format="color" />
+        <attr name="bb_isBarShowWhenLast" format="boolean" />
+        <attr name="bb_barPaddingLeft" format="float" />
+        <attr name="bb_barPaddingTop" format="float" />
+        <attr name="bb_barPaddingRight" format="float" />
+        <attr name="bb_barPaddingBottom" format="float" />
+        <attr name="bb_textColor" format="color" />
+        <attr name="bb_textSize" format="float" />
+        <attr name="bb_isTitleShow" format="boolean" />
+        <attr name="bb_isIndicatorShow" format="boolean" />
+    </declare-styleable>
+
+</resources>

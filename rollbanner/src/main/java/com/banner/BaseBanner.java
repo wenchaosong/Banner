@@ -7,8 +7,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -27,6 +29,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends RelativeLayout {
+    /**
+     * 日志
+     */
+    private static final String TAG = BaseBanner.class.getSimpleName();
     /**
      * 单线程池定时任务
      */
@@ -120,30 +126,31 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         this(context, attrs, 0);
     }
 
-    @SuppressWarnings("ResourceType")
     public BaseBanner(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.mContext = context;
         mDisplayMetrics = context.getResources().getDisplayMetrics();
 
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BaseBanner);
         float scale = -1;
 
-        boolean isLoopEnable = true;
-        mDelay = 5;
-        mPeriod = 5;
-        mIsAutoScrollEnable = true;
+        boolean isLoopEnable = ta.getBoolean(R.styleable.BaseBanner_bb_isLoopEnable, true);
+        mDelay = ta.getInt(R.styleable.BaseBanner_bb_delay, 5);
+        mPeriod = ta.getInt(R.styleable.BaseBanner_bb_period, 5);
+        mIsAutoScrollEnable = ta.getBoolean(R.styleable.BaseBanner_bb_isAutoScrollEnable, true);
 
-        int barColor = Color.TRANSPARENT;
-        mIsBarShowWhenLast = true;
+        int barColor = ta.getColor(R.styleable.BaseBanner_bb_barColor, Color.TRANSPARENT);
+        mIsBarShowWhenLast = ta.getBoolean(R.styleable.BaseBanner_bb_isBarShowWhenLast, true);
         int indicatorGravity = Gravity.CENTER;
-        float barPaddingLeft = dp2px(10);
-        float barPaddingTop = dp2px(indicatorGravity == Gravity.CENTER ? 6 : 2);
-        float barPaddingRight = dp2px(10);
-        float barPaddingBottom = dp2px(indicatorGravity == Gravity.CENTER ? 6 : 2);
-        int textColor = Color.parseColor("#ffffff");
-        float textSize = sp2px(12.5f);
-        boolean isTitleShow = true;
-        boolean isIndicatorShow = true;
+        float barPaddingLeft = ta.getDimension(R.styleable.BaseBanner_bb_barPaddingLeft, dp2px(10));
+        float barPaddingTop = ta.getDimension(R.styleable.BaseBanner_bb_barPaddingTop, dp2px(indicatorGravity == Gravity.CENTER ? 6 : 2));
+        float barPaddingRight = ta.getDimension(R.styleable.BaseBanner_bb_barPaddingRight, dp2px(10));
+        float barPaddingBottom = ta.getDimension(R.styleable.BaseBanner_bb_barPaddingBottom, dp2px(indicatorGravity == Gravity.CENTER ? 6 : 2));
+        int textColor = ta.getColor(R.styleable.BaseBanner_bb_textColor, Color.parseColor("#ffffff"));
+        float textSize = ta.getDimension(R.styleable.BaseBanner_bb_textSize, sp2px(12.5f));
+        boolean isTitleShow = ta.getBoolean(R.styleable.BaseBanner_bb_isTitleShow, true);
+        boolean isIndicatorShow = ta.getBoolean(R.styleable.BaseBanner_bb_isIndicatorShow, true);
+        ta.recycle();
 
         //get layout_height
         String height = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
@@ -151,21 +158,23 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         //create ViewPager
         mViewPager = isLoopEnable ? new LoopViewPager(context) : new ViewPager(context);
         mItemWidth = mDisplayMetrics.widthPixels;
-        //scale not set in xml
-        switch (height) {
-            case ViewGroup.LayoutParams.MATCH_PARENT + "":
+        if (scale < 0) {//scale not set in xml
+            if (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + "")) {
                 mItemHeight = LayoutParams.MATCH_PARENT;
-                break;
-            case ViewGroup.LayoutParams.WRAP_CONTENT + "":
+            } else if (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + "")) {
                 mItemHeight = LayoutParams.WRAP_CONTENT;
-                break;
-            default:
+            } else {
                 int[] systemAttrs = {android.R.attr.layout_height};
                 TypedArray a = context.obtainStyledAttributes(attrs, systemAttrs);
                 int h = a.getDimensionPixelSize(0, ViewGroup.LayoutParams.WRAP_CONTENT);
                 a.recycle();
                 mItemHeight = h;
-                break;
+            }
+        } else {
+            if (scale > 1) {
+                scale = 1;
+            }
+            mItemHeight = (int) (mItemWidth * scale);
         }
 
         LayoutParams lp = new LayoutParams(mItemWidth, mItemHeight);
@@ -201,8 +210,28 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mTvTitle.setVisibility(isTitleShow ? VISIBLE : INVISIBLE);
 
-        mLlBottomBar.setGravity(Gravity.CENTER);
-        mLlBottomBar.addView(mLlIndicatorContainer);
+        if (indicatorGravity == Gravity.CENTER) {
+            mLlBottomBar.setGravity(Gravity.CENTER);
+            mLlBottomBar.addView(mLlIndicatorContainer);
+        } else {
+            if (indicatorGravity == Gravity.RIGHT) {
+                mLlBottomBar.setGravity(Gravity.CENTER_VERTICAL);
+                mLlBottomBar.addView(mTvTitle);
+                mLlBottomBar.addView(mLlIndicatorContainer);
+
+                mTvTitle.setPadding(0, 0, dp2px(7), 0);
+                mTvTitle.setEllipsize(TextUtils.TruncateAt.END);
+                mTvTitle.setGravity(Gravity.LEFT);
+            } else if (indicatorGravity == Gravity.LEFT) {
+                mLlBottomBar.setGravity(Gravity.CENTER_VERTICAL);
+                mLlBottomBar.addView(mLlIndicatorContainer);
+                mLlBottomBar.addView(mTvTitle);
+
+                mTvTitle.setPadding(dp2px(7), 0, 0, 0);
+                mTvTitle.setEllipsize(TextUtils.TruncateAt.END);
+                mTvTitle.setGravity(Gravity.RIGHT);
+            }
+        }
     }
 
     /**
@@ -436,6 +465,7 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
                 }
             }, mPeriod, mDelay, TimeUnit.SECONDS);
             mIsAutoScrolling = true;
+            Log.d(TAG, this.getClass().getSimpleName() + "--->goOnScroll()");
         } else {
             mIsAutoScrolling = false;
         }
@@ -449,6 +479,7 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
             mStse.shutdown();
             mStse = null;
         }
+        Log.d(TAG, this.getClass().getSimpleName() + "--->pauseScroll()");
 
         mIsAutoScrolling = false;
     }
@@ -477,6 +508,18 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         }
         return super.dispatchTouchEvent(ev);
     }
+
+//    @Override
+//    protected void onWindowVisibilityChanged(int visibility) {
+//        super.onWindowVisibilityChanged(visibility);
+//        if (mIsSmart) {
+//            if (visibility != VISIBLE) {
+//                pauseScroll();
+//            } else {
+//                goOnScroll();
+//            }
+//        }
+//    }
 
     private class InnerBannerAdapter extends PagerAdapter {
         @Override
@@ -546,10 +589,12 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
 
     protected boolean isValid() {
         if (mViewPager == null) {
+            Log.e(TAG, "ViewPager is not exist!");
             return false;
         }
 
         if (mDatas == null || mDatas.size() == 0) {
+            Log.e(TAG, "DataList must be not empty!");
             return false;
         }
 
