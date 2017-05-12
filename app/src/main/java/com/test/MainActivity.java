@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 
         rollImageBanner.setSelectAnimClass(ZoomInEnter.class)
                 .setSource(list)
-                .setDelay(1)
+                .setDelay(3)
                 .setPeriod(3)
                 .startScroll();
     }

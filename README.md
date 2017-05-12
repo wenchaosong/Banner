@@ -4,7 +4,7 @@
 
 简单的轮播图
 
-![Demo image](/images/demo.gif)
+![Demo image](/images/Demo.gif)
 
 ## 使用
 
