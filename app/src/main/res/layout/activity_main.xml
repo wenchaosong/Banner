@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:banner="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.test.RollImageBanner
-        android:id="@+id/yt_sib_anim"
+    <com.banner.BannerView
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        banner:bb_delay="3"
-        banner:bb_period="1"/>
+        android:layout_height="160dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        app:canLoop="true"
+        app:middle_page_cover="false"
+        app:open_scale_mode="true"
+        app:pageMargin="20dp"
+        app:scale="0.1" />
 
 </LinearLayout>
