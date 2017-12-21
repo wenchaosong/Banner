@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:banner_layout="@layout/banner_custom_viewpager" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/banner"
+        android:padding="10dp"
+        android:text="这是一个修改banner布局文件的例子，你可以按照这个套路修改里面的内容，比如修改指示器位置啊，文字的大小啊，他们之间的间距啊，或者修改他们的摆放位置等待"
+        android:textColor="@color/colorPrimary" />
+</RelativeLayout>
