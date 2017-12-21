@@ -29,9 +29,9 @@ Thumbs.db
 *.iml
 .idea
 .gradle
-gradle/
-gradlew
-gradlew.bat
+#gradle/
+#gradlew
+#gradlew.bat
 build/
 .idea/workspace.xml
 .idea/libraries

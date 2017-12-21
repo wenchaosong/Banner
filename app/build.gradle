@@ -7,7 +7,7 @@ android {
     buildToolsVersion "26.0.2"
 
     defaultConfig {
-        applicationId "com.test"
+        applicationId "com.test.banner"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
