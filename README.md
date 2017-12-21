@@ -8,7 +8,7 @@
 
 |模式|图片
 |---|---|
-|两端缩进模式|![image](/pics/idcard1.png )|
+|两端缩进模式|![image](/pic/1.png )|
 |指示器模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example1.png)|
 |数字模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example2.png)|
 |数字加标题模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example3.png)|
