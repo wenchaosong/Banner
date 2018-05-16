@@ -33,7 +33,7 @@ import static android.support.v4.view.ViewPager.PageTransformer;
 
 public class Banner extends FrameLayout implements OnPageChangeListener {
 
-    public String tag = "banner";
+    private static final String TAG = "Banner2";
     private int mIndicatorMargin = BannerConfig.PADDING_SIZE;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
@@ -46,7 +46,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private boolean isScroll = BannerConfig.IS_SCROLL;
     private int mIndicatorSelectedResId = R.drawable.gray_radius;
     private int mIndicatorUnselectedResId = R.drawable.white_radius;
-    private int mLayoutResId = R.layout.banner;
     private int titleHeight;
     private int titleBackground;
     private int titleTextColor;
@@ -98,7 +97,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private void initView(Context context, AttributeSet attrs) {
         imageViews.clear();
         handleTypedArray(context, attrs);
-        View view = LayoutInflater.from(context).inflate(mLayoutResId, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.banner, this, true);
         bannerDefaultImage = (ImageView) view.findViewById(R.id.bannerDefaultImage);
         viewPager = (BannerViewPager) view.findViewById(R.id.bannerViewPager);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
@@ -134,7 +133,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         titleHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_title_height, BannerConfig.TITLE_HEIGHT);
         titleTextColor = typedArray.getColor(R.styleable.Banner_title_textcolor, BannerConfig.TITLE_TEXT_COLOR);
         titleTextSize = typedArray.getDimensionPixelSize(R.styleable.Banner_title_textsize, BannerConfig.TITLE_TEXT_SIZE);
-        mLayoutResId = typedArray.getResourceId(R.styleable.Banner_banner_layout, mLayoutResId);
         bannerBackgroundImage = typedArray.getResourceId(R.styleable.Banner_banner_default_image, R.drawable.no_banner);
         mPageMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_pageMargin, BannerConfig.PAGE_MARGIN);
         typedArray.recycle();
@@ -148,10 +146,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             mScroller.setDuration(scrollTime);
             mField.set(viewPager, mScroller);
         } catch (Exception e) {
-            Log.e(tag, e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
     }
-
 
     public Banner isAutoPlay(boolean isAutoPlay) {
         this.isAutoPlay = isAutoPlay;
@@ -187,7 +184,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         try {
             setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
-            Log.e(tag, "Please set the PageTransformer class");
+            Log.e(TAG, "Please set the PageTransformer class");
         }
         return this;
     }
@@ -339,7 +336,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private void setImageList(List<?> imagesUrl) {
         if (imagesUrl == null || imagesUrl.size() <= 0) {
             bannerDefaultImage.setVisibility(VISIBLE);
-            Log.e(tag, "The image data set is empty.");
+            Log.e(TAG, "The image data set is empty.");
             return;
         }
         bannerDefaultImage.setVisibility(GONE);
@@ -365,7 +362,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             if (imageLoader != null)
                 imageLoader.displayImage(context, url, imageView);
             else
-                Log.e(tag, "Please set images loader.");
+                Log.e(TAG, "Please set images loader.");
         }
     }
 
@@ -426,7 +423,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         }
     }
 
-
     private void setData() {
         currentItem = 1;
         if (adapter == null) {
@@ -447,7 +443,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             startAutoPlay();
     }
 
-
     public void startAutoPlay() {
         handler.removeCallbacks(task);
         handler.postDelayed(task, delayTime);
@@ -462,7 +457,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         public void run() {
             if (count > 1 && isAutoPlay) {
                 currentItem = currentItem % (count + 1) + 1;
-                //                Log.i(tag, "curr:" + currentItem + " count:" + count);
+                Log.i(TAG, "Runnable --- currentItem:" + currentItem + " count:" + count);
                 if (currentItem == 1) {
                     viewPager.setCurrentItem(currentItem, false);
                     handler.post(task);
@@ -495,14 +490,14 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
      * @param position
      * @return 下标从0开始
      */
-    public int toRealPosition(int position) {
+    private int toRealPosition(int position) {
         int realPosition = (position - 1) % count;
         if (realPosition < 0)
             realPosition += count;
         return realPosition;
     }
 
-    class BannerPagerAdapter extends PagerAdapter {
+    private class BannerPagerAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
@@ -522,7 +517,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 view.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        listener.OnBannerClick(toRealPosition(position));
+                        listener.onBannerClick(toRealPosition(position));
                     }
                 });
             }
@@ -582,6 +577,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
             lastPosition = position;
         }
+        Log.i(TAG, "onPageSelected --- position: " + position);
+
         if (position == 0)
             position = count;
         if (position > count)
@@ -606,12 +603,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     }
 
-    /**
-     * 废弃了旧版接口，新版的接口下标是从1开始，同时解决下标越界问题
-     *
-     * @param listener
-     * @return
-     */
     public Banner setOnBannerListener(OnBannerListener listener) {
         this.listener = listener;
         return this;

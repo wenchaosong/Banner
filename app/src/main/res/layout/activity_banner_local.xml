@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         app:banner_default_image="@mipmap/ic_launcher"
-        app:banner_layout="@layout/banner"
         app:delay_time="3000"
         app:image_scale_type="center_crop"
         app:indicator_drawable_selected="@drawable/selected_radius"

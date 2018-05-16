@@ -30,7 +30,7 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
     }
 
     @Override
-    public void OnBannerClick(int position) {
+    public void onBannerClick(int position) {
 
     }
 

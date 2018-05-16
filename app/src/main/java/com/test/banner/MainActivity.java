@@ -66,16 +66,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         listView.setAdapter(new SampleAdapter(this, data));
         listView.setOnItemClickListener(this);
 
+        String[] urls = getResources().getStringArray(R.array.url4);
+
         //简单使用
-        banner.setImages(new ArrayList<>())
+        banner.setImages(Arrays.asList(urls))
                 .setImageLoader(new GlideImageLoader())
                 .setOnBannerListener(this)
+                .setDelayTime(3000)
+                .isAutoPlay(true)
                 .start();
 
     }
 
     @Override
-    public void OnBannerClick(int position) {
+    public void onBannerClick(int position) {
         Toast.makeText(getApplicationContext(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
     }
 
