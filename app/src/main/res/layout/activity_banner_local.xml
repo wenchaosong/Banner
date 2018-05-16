@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.banner.Banner
+    <com.ms.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         app:banner_default_image="@mipmap/ic_launcher"
+        app:banner_layout="@layout/banner"
         app:delay_time="3000"
-        app:image_scale_type="center_crop"
         app:indicator_drawable_selected="@drawable/selected_radius"
         app:indicator_drawable_unselected="@drawable/unselected_radius"
         app:indicator_height="10dp"

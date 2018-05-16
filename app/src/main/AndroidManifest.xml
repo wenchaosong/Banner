@@ -6,13 +6,13 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name=".App"
+        android:name="ms.test.banner.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="ms.test.banner.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".demo.BannerAnimationActivity" />
-        <activity android:name=".demo.BannerStyleActivity" />
-        <activity android:name=".demo.IndicatorPositionActivity" />
-        <activity android:name=".demo.CustomBannerActivity" />
-        <activity android:name=".demo.BannerLocalActivity" />
+        <activity android:name="ms.test.banner.demo.BannerAnimationActivity" />
+        <activity android:name="ms.test.banner.demo.BannerStyleActivity" />
+        <activity android:name="ms.test.banner.demo.IndicatorPositionActivity" />
+        <activity android:name="ms.test.banner.demo.CustomBannerActivity" />
+        <activity android:name="ms.test.banner.demo.BannerLocalActivity" />
         <activity
-            android:name=".demo.CustomViewPagerActivity"
+            android:name="ms.test.banner.demo.CustomViewPagerActivity"
             android:screenOrientation="portrait" />
     </application>
 

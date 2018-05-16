@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.ms.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner1"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -18,7 +18,7 @@
             app:indicator_margin="4dp"
             app:indicator_width="8dp" />
 
-        <com.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.ms.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner2"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -28,7 +28,7 @@
             app:indicator_margin="4dp"
             app:indicator_width="20dp" />
 
-        <com.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.ms.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner3"
             android:layout_width="match_parent"
             android:layout_height="200dp"
