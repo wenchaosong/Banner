@@ -12,6 +12,7 @@ import com.test.banner.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import ms.test.banner.ui.CustomTransformer;
 import ms.test.banner.ui.CustomViewHolder2;
 
 public class CustomViewPagerActivity extends AppCompatActivity implements OnBannerListener {
@@ -31,6 +32,8 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
         list.add("#00ff00");
 
         banner1.setAutoPlay(false)
+                .setOffscreenPageLimit(list.size())
+                .setPageTransformer(false, new CustomTransformer())
                 .setPages(list, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {

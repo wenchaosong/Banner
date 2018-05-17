@@ -5,47 +5,25 @@ import android.view.View;
 
 public class CustomTransformer implements ViewPager.PageTransformer {
 
-    /*final float SCALE_MAX = 0.8f;
-    final float ALPHA_MAX = 0.5f;
+    private ViewPager viewPager;
+    private static final float SCALE_Y = 0.8f;
+    private static final float SCALE_X = 0.05f;
 
     public void transformPage(View view, float position) {
-        float scale = (position < 0)
-                ? ((1 - SCALE_MAX) * position + 1)
-                : ((SCALE_MAX - 1) * position + 1);
-        float alpha = (position < 0)
-                ? ((1 - ALPHA_MAX) * position + 1)
-                : ((ALPHA_MAX - 1) * position + 1);
-        if (position < 0) {
-            view.setPivotX(view.getWidth());
-            view.setPivotY(view.getHeight() / 2);
-        } else {
-            view.setPivotX(0);
-            view.setPivotY(view.getHeight() / 2);
+        if (viewPager == null) {
+            viewPager = (ViewPager) view.getParent();
         }
-        view.setScaleX(scale);
-        view.setScaleY(scale);
-        view.setAlpha(Math.abs(alpha));
-    }*/
-    private static final float MIN_SCALE = 0.9F;
-
-    @Override
-    public void transformPage(View page, float position) {
-
-        if (position < -1) {
-            page.setScaleY(MIN_SCALE);
-        } else if (position <= 1) {
-            //
-            float scale = Math.max(MIN_SCALE, 1 - Math.abs(position));
-            page.setScaleY(scale);
-            /*page.setScaleX(scale);
-            if(position<0){
-                page.setTranslationX(width * (1 - scale) /2);
-            }else{
-                page.setTranslationX(-width * (1 - scale) /2);
-            }*/
-
-        } else {
-            page.setScaleY(MIN_SCALE);
+        float scale = (position < 0)
+                ? ((1 - SCALE_Y) * position + 1)
+                : ((SCALE_Y - 1) * position + 1);
+        int leftInScreen = view.getLeft() - viewPager.getScrollX();
+        int centerXInViewPager = leftInScreen + view.getMeasuredWidth() / 2;
+        int offsetX = centerXInViewPager - viewPager.getMeasuredWidth() / 2;
+        float offsetRate = (float) offsetX * SCALE_X / viewPager.getMeasuredWidth();
+        float scaleFactor = 1 - Math.abs(offsetRate);
+        if (scaleFactor > 0) {
+            view.setScaleX(scaleFactor);
+            view.setScaleY(scale);
         }
     }
 }
