@@ -441,6 +441,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
+            if (creator == null) {
+                throw new RuntimeException("[Banner] --> The layout is not specified,请指定 holder");
+            }
             BannerViewHolder holder = creator.createViewHolder();
 
             View view = holder.createView(container.getContext());

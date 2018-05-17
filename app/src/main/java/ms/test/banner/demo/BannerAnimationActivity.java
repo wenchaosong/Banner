@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ms.banner.Banner;
+import com.ms.banner.holder.BannerViewHolder;
+import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerListener;
 import com.ms.banner.transformer.AccordionTransformer;
 import com.ms.banner.transformer.BackgroundToForegroundTransformer;
@@ -32,9 +34,12 @@ import com.test.banner.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import ms.test.banner.App;
 import ms.test.banner.SampleAdapter;
+import ms.test.banner.ui.CustomViewHolder;
 
-public class BannerAnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, OnBannerListener {
+public class BannerAnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,
+        OnBannerListener {
 
     Banner banner;
     List<Class<? extends ViewPager.PageTransformer>> transformers = new ArrayList<>();
@@ -70,6 +75,17 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
         listView.setAdapter(new SampleAdapter(this, data));
         listView.setOnItemClickListener(this);
 
+        //简单使用
+        banner.setOnBannerListener(this)
+                .setPages(App.images, new HolderCreator<BannerViewHolder>() {
+                    @Override
+                    public BannerViewHolder createViewHolder() {
+                        return new CustomViewHolder();
+                    }
+                })
+                .setAutoPlay(true)
+                .setDelayTime(3000)
+                .start();
     }
 
     @Override

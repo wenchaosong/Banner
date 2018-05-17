@@ -1,7 +1,6 @@
 package ms.test.banner;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,11 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.ms.banner.Banner;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
@@ -33,8 +30,10 @@ import ms.test.banner.demo.BannerStyleActivity;
 import ms.test.banner.demo.CustomBannerActivity;
 import ms.test.banner.demo.CustomViewPagerActivity;
 import ms.test.banner.demo.IndicatorPositionActivity;
+import ms.test.banner.ui.CustomViewHolder;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, OnBannerListener {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
+        AdapterView.OnItemClickListener, OnBannerListener {
 
     static final int REFRESH_COMPLETE = 0X1112;
     SwipeRefreshLayout mSwipeLayout;
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case REFRESH_COMPLETE:
-                    String[] urls = getResources().getStringArray(R.array.url4);
+                    String[] urls = getResources().getStringArray(R.array.url2);
                     List list = Arrays.asList(urls);
                     List arrayList = new ArrayList(list);
                     banner.update(arrayList);
@@ -72,14 +71,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         listView.setAdapter(new SampleAdapter(this, data));
         listView.setOnItemClickListener(this);
 
-        String[] urls = getResources().getStringArray(R.array.url4);
+        String[] urls = getResources().getStringArray(R.array.url1);
+        List arrList = new ArrayList(Arrays.asList(urls));
 
         //简单使用
         banner.setOnBannerListener(this)
-                .setPages(Arrays.asList(urls), new HolderCreator<BannerViewHolder>() {
+                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
-                        return new MyViewHolder();
+                        return new CustomViewHolder();
                     }
                 })
                 .setAutoPlay(true)
@@ -87,27 +87,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .start();
     }
 
-    private class MyViewHolder implements BannerViewHolder<String> {
-        private ImageView mImageView;
-
-        @Override
-        public View createView(Context context) {
-            // 返回页面布局
-            View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
-            mImageView = (ImageView) view.findViewById(R.id.fragment_qiandai_jingyan_iv);
-            return view;
-        }
-
-        @Override
-        public void onBind(Context context, int position, String data) {
-            // 数据绑定
-            Glide.with(context).load(data).into(mImageView);
-        }
-    }
-
     @Override
     public void onBannerClick(int position) {
-        Toast.makeText(getApplicationContext(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "你点击了：" + position, Toast.LENGTH_SHORT).show();
     }
 
     //如果你需要考虑更好的体验，可以这么操作
@@ -124,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         //结束轮播
         banner.stopAutoPlay();
     }
-
 
     @Override
     public void onRefresh() {
@@ -154,6 +135,5 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 break;
         }
     }
-
 
 }

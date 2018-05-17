@@ -8,7 +8,12 @@ import android.widget.Spinner;
 
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
+import com.ms.banner.holder.BannerViewHolder;
+import com.ms.banner.holder.HolderCreator;
 import com.test.banner.R;
+
+import ms.test.banner.App;
+import ms.test.banner.ui.CustomViewHolder;
 
 public class BannerStyleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -22,6 +27,18 @@ public class BannerStyleActivity extends AppCompatActivity implements AdapterVie
         banner = (Banner) findViewById(R.id.banner);
         spinnerStyle = (Spinner) findViewById(R.id.spinnerStyle);
         spinnerStyle.setOnItemSelectedListener(this);
+
+        //简单使用
+        banner.setBannerTitles(App.titles)
+                .setPages(App.images, new HolderCreator<BannerViewHolder>() {
+                    @Override
+                    public BannerViewHolder createViewHolder() {
+                        return new CustomViewHolder();
+                    }
+                })
+                .setAutoPlay(true)
+                .setDelayTime(3000)
+                .start();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ms.test.banner;
+package ms.test.banner.ui;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

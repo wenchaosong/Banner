@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_qiandai_jingyan_group"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/group"
     android:layout_width="match_parent"
-    android:layout_height="140dp">
-
-    <ImageView
-        android:id="@+id/fragment_qiandai_jingyan_iv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/fragment_qiandai_jingyan_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -26,12 +22,11 @@
             android:ellipsize="marquee"
             android:maxLength="10"
             android:singleLine="true"
-            android:text="攻略大揭密！"
-            android:textColor="#333"
+            android:text="这是测试标题！"
+            android:textColor="#fff"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/fragment_qiandai_jingyan_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -41,8 +36,8 @@
             android:ellipsize="marquee"
             android:maxLength="16"
             android:singleLine="true"
-            android:text="看她如何用0存款实现专修梦！"
-            android:textColor="#333"
+            android:text="这是测试副标题!"
+            android:textColor="#fff"
             android:textSize="15sp" />
 
         <LinearLayout
@@ -52,6 +47,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="16dp"
+            android:background="#fff"
             android:gravity="center"
             android:paddingLeft="13dp"
             android:paddingRight="13dp">
@@ -59,20 +55,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="投稿用户："
-                android:textColor="#999"
+                android:text="测试："
+                android:textColor="#000"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/fragment_qiandai_jingyan_people"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="小丽"
-                android:textColor="#999"
+                android:text="测试"
+                android:textColor="#000"
                 android:textSize="13sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</FrameLayout>
+</android.support.v7.widget.CardView>
