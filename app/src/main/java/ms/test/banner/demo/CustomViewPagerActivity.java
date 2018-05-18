@@ -31,7 +31,7 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
         list.add("#ff0000");
         list.add("#00ff00");
 
-        banner1.setAutoPlay(false)
+        banner1.setAutoPlay(true)
                 .setOffscreenPageLimit(list.size())
                 .setPageTransformer(false, new CustomTransformer())
                 .setPages(list, new HolderCreator<BannerViewHolder>() {

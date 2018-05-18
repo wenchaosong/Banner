@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ import static android.support.v4.view.ViewPager.PageTransformer;
 
 public class Banner extends FrameLayout implements OnPageChangeListener {
 
-    //    private static final String TAG = "Banner";
+    private static final String TAG = "Banner";
     private int mIndicatorMargin = BannerConfig.PADDING_SIZE;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
@@ -354,14 +355,14 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void setData() {
-        currentItem = 1;
+        currentItem = mDatas.size() * 500 / 2;
         if (adapter == null) {
             adapter = new BannerPagerAdapter();
             viewPager.addOnPageChangeListener(this);
         }
         viewPager.setAdapter(adapter);
         viewPager.setFocusable(true);
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(currentItem);
         if (gravity != -1)
             indicator.setGravity(gravity);
         if (isScroll && count > 1) {
@@ -386,9 +387,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         @Override
         public void run() {
             if (count > 1 && isAutoPlay) {
-                currentItem = currentItem % (count + 1) + 1;
-                //                Log.i(TAG, "Runnable --- currentItem:" + currentItem + " count:" + count);
-                if (currentItem == 1) {
+                currentItem = viewPager.getCurrentItem() + 1;
+                Log.i(TAG, "Runnable --- currentItem:" + currentItem + " count:" + count);
+                if (currentItem == adapter.getCount() - 1) {
+                    currentItem = 0;
                     viewPager.setCurrentItem(currentItem, false);
                     handler.post(task);
                 } else {
@@ -431,7 +433,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
         @Override
         public int getCount() {
-            return mDatas.size() + 2;
+            return mDatas.size() * 500;
         }
 
         @Override
@@ -475,25 +477,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageScrollStateChanged(state);
         }
-        //        Log.i(tag,"currentItem: "+currentItem);
-        switch (state) {
-            case 0://No operation
-                if (currentItem == 0) {
-                    viewPager.setCurrentItem(count, false);
-                } else if (currentItem == count + 1) {
-                    viewPager.setCurrentItem(1, false);
-                }
-                break;
-            case 1://start Sliding
-                if (currentItem == count + 1) {
-                    viewPager.setCurrentItem(1, false);
-                } else if (currentItem == 0) {
-                    viewPager.setCurrentItem(count, false);
-                }
-                break;
-            case 2://end Sliding
-                break;
-        }
     }
 
     @Override
@@ -516,10 +499,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
             lastPosition = position;
         }
-        if (position == 0)
-            position = count;
-        if (position > count)
-            position = 1;
+        Log.i(TAG, "onPageSelected --- currentItem:" + currentItem + " position:" + position);
+
         switch (bannerStyle) {
             case BannerConfig.CIRCLE_INDICATOR:
                 break;
