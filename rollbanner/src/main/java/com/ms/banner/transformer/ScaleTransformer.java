@@ -1,9 +1,9 @@
-package ms.test.banner.ui;
+package com.ms.banner.transformer;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-public class CustomTransformer implements ViewPager.PageTransformer {
+public class ScaleTransformer implements ViewPager.PageTransformer {
 
     private ViewPager viewPager;
     private static final float SCALE_Y = 0.8f;

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ms.banner.Banner;
+import com.ms.banner.Transformer;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerListener;
@@ -12,7 +13,6 @@ import com.test.banner.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import ms.test.banner.ui.CustomTransformer;
 import ms.test.banner.ui.CustomViewHolder2;
 
 public class CustomViewPagerActivity extends AppCompatActivity implements OnBannerListener {
@@ -27,13 +27,12 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
         banner1 = (Banner) findViewById(R.id.banner1);
 
         List<String> list = new ArrayList<>();
-        list.add("#0000ff");
         list.add("#ff0000");
         list.add("#00ff00");
+        list.add("#0000ff");
 
         banner1.setAutoPlay(true)
                 .setOffscreenPageLimit(list.size())
-                .setPageTransformer(false, new CustomTransformer())
                 .setPages(list, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
@@ -41,6 +40,7 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
                     }
                 })
                 .setOnBannerListener(this)
+                .setBannerAnimation(Transformer.Scale)
                 .start();
     }
 

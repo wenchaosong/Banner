@@ -6,7 +6,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,6 +34,7 @@ import static android.support.v4.view.ViewPager.PageTransformer;
 public class Banner extends FrameLayout implements OnPageChangeListener {
 
     private static final String TAG = "Banner";
+    private static final int NUM = Integer.MAX_VALUE;
     private int mIndicatorMargin = BannerConfig.PADDING_SIZE;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
@@ -355,7 +355,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void setData() {
-        currentItem = mDatas.size() * 500 / 2;
+        currentItem = NUM / 2 + (count - 2);// 3:1  2:0  4:2
         if (adapter == null) {
             adapter = new BannerPagerAdapter();
             viewPager.addOnPageChangeListener(this);
@@ -388,7 +388,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         public void run() {
             if (count > 1 && isAutoPlay) {
                 currentItem = viewPager.getCurrentItem() + 1;
-                Log.i(TAG, "Runnable --- currentItem:" + currentItem + " count:" + count);
+                //                Log.i(TAG, "Runnable --- currentItem:" + currentItem + " count:" + count);
                 if (currentItem == adapter.getCount() - 1) {
                     currentItem = 0;
                     viewPager.setCurrentItem(currentItem, false);
@@ -433,7 +433,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
         @Override
         public int getCount() {
-            return mDatas.size() * 500;
+            return NUM;
         }
 
         @Override
@@ -499,7 +499,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
             lastPosition = position;
         }
-        Log.i(TAG, "onPageSelected --- currentItem:" + currentItem + " position:" + position);
+        //        Log.i(TAG, "onPageSelected --- currentItem:" + currentItem + " position:" + position);
 
         switch (bannerStyle) {
             case BannerConfig.CIRCLE_INDICATOR:

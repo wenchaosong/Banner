@@ -59,6 +59,7 @@
         <item>RotateDown</item>
         <item>RotateUp</item>
         <item>ScaleInOut</item>
+        <item>Scale</item>
         <item>Stack</item>
         <item>Tablet</item>
         <item>ZoomIn</item>

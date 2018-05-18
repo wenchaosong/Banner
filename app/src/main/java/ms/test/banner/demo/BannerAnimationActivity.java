@@ -9,26 +9,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ms.banner.Banner;
+import com.ms.banner.Transformer;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerListener;
-import com.ms.banner.transformer.AccordionTransformer;
-import com.ms.banner.transformer.BackgroundToForegroundTransformer;
-import com.ms.banner.transformer.CubeInTransformer;
-import com.ms.banner.transformer.CubeOutTransformer;
-import com.ms.banner.transformer.DefaultTransformer;
-import com.ms.banner.transformer.DepthPageTransformer;
-import com.ms.banner.transformer.FlipHorizontalTransformer;
-import com.ms.banner.transformer.FlipVerticalTransformer;
-import com.ms.banner.transformer.ForegroundToBackgroundTransformer;
-import com.ms.banner.transformer.RotateDownTransformer;
-import com.ms.banner.transformer.RotateUpTransformer;
-import com.ms.banner.transformer.ScaleInOutTransformer;
-import com.ms.banner.transformer.StackTransformer;
-import com.ms.banner.transformer.TabletTransformer;
-import com.ms.banner.transformer.ZoomInTransformer;
-import com.ms.banner.transformer.ZoomOutSlideTransformer;
-import com.ms.banner.transformer.ZoomOutTranformer;
 import com.test.banner.R;
 
 import java.util.ArrayList;
@@ -45,23 +29,24 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
     List<Class<? extends ViewPager.PageTransformer>> transformers = new ArrayList<>();
 
     public void initData() {
-        transformers.add(DefaultTransformer.class);
-        transformers.add(AccordionTransformer.class);
-        transformers.add(BackgroundToForegroundTransformer.class);
-        transformers.add(ForegroundToBackgroundTransformer.class);
-        transformers.add(CubeInTransformer.class);//兼容问题，慎用
-        transformers.add(CubeOutTransformer.class);
-        transformers.add(DepthPageTransformer.class);
-        transformers.add(FlipHorizontalTransformer.class);
-        transformers.add(FlipVerticalTransformer.class);
-        transformers.add(RotateDownTransformer.class);
-        transformers.add(RotateUpTransformer.class);
-        transformers.add(ScaleInOutTransformer.class);
-        transformers.add(StackTransformer.class);
-        transformers.add(TabletTransformer.class);
-        transformers.add(ZoomInTransformer.class);
-        transformers.add(ZoomOutTranformer.class);
-        transformers.add(ZoomOutSlideTransformer.class);
+        transformers.add(Transformer.Default);
+        transformers.add(Transformer.Accordion);
+        transformers.add(Transformer.BackgroundToForeground);
+        transformers.add(Transformer.ForegroundToBackground);
+        transformers.add(Transformer.CubeIn);//兼容问题，慎用
+        transformers.add(Transformer.CubeOut);
+        transformers.add(Transformer.DepthPage);
+        transformers.add(Transformer.FlipHorizontal);
+        transformers.add(Transformer.FlipVertical);
+        transformers.add(Transformer.RotateDown);
+        transformers.add(Transformer.RotateUp);
+        transformers.add(Transformer.ScaleInOut);
+        transformers.add(Transformer.Scale);
+        transformers.add(Transformer.Stack);
+        transformers.add(Transformer.Tablet);
+        transformers.add(Transformer.ZoomIn);
+        transformers.add(Transformer.ZoomOut);
+        transformers.add(Transformer.ZoomOutSlide);
     }
 
     @Override
