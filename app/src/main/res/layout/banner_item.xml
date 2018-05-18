@@ -4,6 +4,7 @@
     android:id="@+id/group"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="#666"
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp">
 
@@ -14,6 +15,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -25,20 +27,6 @@
             android:text="这是测试标题！"
             android:textColor="#fff"
             android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="14dp"
-            android:ellipsize="marquee"
-            android:maxLength="16"
-            android:singleLine="true"
-            android:text="这是测试副标题!"
-            android:textColor="#fff"
-            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -258,9 +258,11 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     public Banner start() {
-        setBannerStyleUI();
-        setImageList(mDatas);
-        setData();
+        if (count > 0) {
+            setBannerStyleUI();
+            setImageList(mDatas);
+            setData();
+        }
         return this;
     }
 

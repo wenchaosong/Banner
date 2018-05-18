@@ -13,6 +13,7 @@ import com.test.banner.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import ms.test.banner.CustomData;
 import ms.test.banner.ui.CustomViewHolder2;
 
 public class CustomViewPagerActivity extends AppCompatActivity implements OnBannerListener {
@@ -26,10 +27,10 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
 
         banner1 = (Banner) findViewById(R.id.banner1);
 
-        List<String> list = new ArrayList<>();
-        list.add("#ff0000");
-        list.add("#00ff00");
-        list.add("#0000ff");
+        List<CustomData> list = new ArrayList<>();
+        list.add(new CustomData("CustomLayout", ""));
+        list.add(new CustomData("Transformer", ""));
+        list.add(new CustomData("Viewpager", ""));
 
         banner1.setAutoPlay(true)
                 .setOffscreenPageLimit(list.size())

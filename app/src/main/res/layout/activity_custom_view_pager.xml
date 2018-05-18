@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#999"
     android:orientation="vertical">
 
     <com.ms.banner.Banner
         android:id="@+id/banner1"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="#fff"
+        android:layout_marginTop="50dp"
         app:pageMargin="20dp" />
 
     <TextView
@@ -19,6 +18,5 @@
         android:layout_below="@id/banner"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="这是一个修改banner布局文件的例子，你可以按照这个套路修改里面的内容"
-        android:textColor="#fff" />
+        android:text="这是一个修改banner布局文件的例子，你可以按照这个套路修改里面的内容" />
 </LinearLayout>

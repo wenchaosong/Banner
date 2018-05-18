@@ -1,18 +1,11 @@
 # Android图片轮播控件
 
 在原项目[banner](https://github.com/youth5201314/banner) 基础上
-增加了2端缩进模式的轮播图
+增加布局设置，可以自定义 adapter 中的 view
 
 ## 效果图
 
-|模式|图片
-|---|---|
-|两端缩进模式|![image](/pic/1.png )|
-
-## Attributes属性（banner布局文件中调用）
-|Attributes|forma|describe
-|---|---|---|
-|pageMargin| dimension|两端缩进距离，默认0
+![image](/pic/1.gif )
 
 ## 使用步骤
 
@@ -20,72 +13,58 @@
 Gradle
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:banner:2.1.0'  //最新版本
+    compile 'com.github.wenchaosong:banner:2.1.1'  //最新版本
 }
 ```
 或者引用本地lib
 ```groovy
-compile project(':banner')
+compile project(':rollbanner')
 ```
 
-
-#### Step 2.添加权限到你的 AndroidManifest.xml
-```xml
-<!-- if you want to load images from the internet -->
-<uses-permission android:name="android.permission.INTERNET" />
-
-<!-- if you want to load images from a file OR from the internet -->
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-```
-
-#### Step 3.在布局文件中添加Banner，可以设置自定义属性
+#### Step 2.在布局文件中添加Banner，可以设置自定义属性
 ！！！此步骤可以省略，直接在Activity或者Fragment中new Banner();
 ```xml
-<com.banner.Banner
+<com.ms.banner.Banner
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/banner"
     android:layout_width="match_parent"
     android:layout_height="高度自己设置" />
 ```
 
-#### Step 4.重写图片加载器
+#### Step 4.设置布局
 ```java
-public class GlideImageLoader extends ImageLoader {
+.setPages(list, new HolderCreator<BannerViewHolder>() {
+                    @Override
+                    public BannerViewHolder createViewHolder() {
+                        return new CustomViewHolder();
+                    }
+                })
+
+class CustomViewHolder implements BannerViewHolder<String> {
+
+    private CardView mCardView;
+    private TextView mTextView;
+
     @Override
-    public void displayImage(Context context, Object path, ImageView imageView) {
-        /**
-          注意：
-          1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
-          2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
-          传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
-          切记不要胡乱强转！
-         */
-        eg：
-
-        //Glide 加载图片简单用法
-        Glide.with(context).load(path).into(imageView);
-
-        //Picasso 加载图片简单用法
-        Picasso.with(context).load(path).into(imageView);
-
-        //用fresco加载图片简单用法，记得要写下面的createImageView方法
-        Uri uri = Uri.parse((String) path);
-        imageView.setImageURI(uri);
+    public View createView(Context context) {
+        View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
+        mCardView = (CardView) view.findViewById(R.id.group);
+        mTextView = (TextView) view.findViewById(R.id.position);
+        return view;
     }
 
-    //提供createImageView 方法，如果不用可以不重写这个方法，主要是方便自定义ImageView的创建
     @Override
-    public ImageView createImageView(Context context) {
-        //使用fresco，需要创建它提供的ImageView，当然你也可以用自己自定义的具有图片加载功能的ImageView
-        SimpleDraweeView simpleDraweeView=new SimpleDraweeView(context);
-        return simpleDraweeView;
+    public void onBind(Context context, int position, String data) {
+        // 数据绑定
+        mCardView.setCardBackgroundColor(Color.parseColor(data));
+        mTextView.setText(position + "");
     }
 }
 ```
 
 #### Step 5.在Activity或者Fragment中配置Banner
 
-- 注意！start()方法必须放到最后执行，点击事件请放到start()前，每次都提交问题问为什么点击没有反应？需要轮播一圈才能点击？点击第一个怎么返回1？麻烦仔细阅读文档。
+- 注意！start()方法必须放到最后执行，点击事件请放到start()前
 
 ```java
 --------------------------简单使用-------------------------------
@@ -94,68 +73,14 @@ protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     Banner banner = (Banner) findViewById(R.id.banner);
-    //设置图片加载器
-    banner.setImageLoader(new GlideImageLoader());
-    //设置图片集合
-    banner.setImages(images);
-    //banner设置方法全部调用完毕时最后调用
-    banner.start();
-}
---------------------------详细使用-------------------------------
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Banner banner = (Banner) findViewById(R.id.banner);
-    //设置banner样式
-    banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
-    //设置图片加载器
-    banner.setImageLoader(new GlideImageLoader());
-    //设置图片集合
-    banner.setImages(images);
-    //设置banner动画效果
-    banner.setBannerAnimation(Transformer.DepthPage);
-    //设置标题集合（当banner样式有显示title时）
-    banner.setBannerTitles(titles);
-    //设置自动轮播，默认为true
-    banner.isAutoPlay(true);
-    //设置轮播时间
-    banner.setDelayTime(1500);
-    //设置指示器位置（当banner模式中有指示器时）
-    banner.setIndicatorGravity(BannerConfig.CENTER);
-    //banner设置方法全部调用完毕时最后调用
-    banner.start();
-}
-
------------------布局文件--------------------
-<com.banner.Banner
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        app:banner_default_image="@mipmap/ic_launcher"
-        app:banner_layout="@layout/banner"
-        app:delay_time="3000"
-        app:image_scale_type="center_crop"
-        app:indicator_drawable_selected="@drawable/selected_radius"
-        app:indicator_drawable_unselected="@drawable/unselected_radius"
-        app:indicator_height="10dp"
-        app:indicator_margin="3dp"
-        app:indicator_width="10dp"
-        app:is_auto_play="true"
-        app:pageMargin="20dp"
-        app:scroll_time="1500"
-        app:title_background="#fff"
-        app:title_height="50dp"
-        app:title_textcolor="#000"
-        app:title_textsize="15sp" />
-
------------------当然如果你想偷下懒也可以这么用--------------------
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Banner banner = (Banner) findViewById(R.id.banner);
-    banner.setImages(images).setImageLoader(new GlideImageLoader()).start();
+    banner.setAutoPlay(true)
+            .setPages(list, new HolderCreator<BannerViewHolder>() {
+                @Override
+                public BannerViewHolder createViewHolder() {
+                    return new CustomViewHolder();
+                }
+            })
+            .start();
 }
 ```
 
@@ -186,7 +111,7 @@ protected void onStop() {
   public *;
 }
 # banner 的混淆代码
--keep class com.banner.** {
+-keep class com.ms.banner.** {
     *;
  }
 
