@@ -13,7 +13,7 @@
 Gradle
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:banner:2.1.1'  //最新版本
+    compile 'com.github.wenchaosong:banner:2.1.2'  //最新版本
 }
 ```
 或者引用本地lib
