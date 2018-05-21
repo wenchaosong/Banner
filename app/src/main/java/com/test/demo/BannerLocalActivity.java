@@ -1,4 +1,4 @@
-package ms.test.banner.demo;
+package com.test.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,12 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import com.ms.banner.Banner;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
-import com.test.banner.R;
+import com.test.R;
+import com.test.ui.CustomViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ms.test.banner.ui.CustomViewHolder;
 
 public class BannerLocalActivity extends AppCompatActivity {
 

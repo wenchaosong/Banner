@@ -1,4 +1,4 @@
-package ms.test.banner;
+package com.test;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,19 +18,17 @@ import com.ms.banner.Banner;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerListener;
-import com.test.banner.R;
+import com.test.demo.BannerAnimationActivity;
+import com.test.demo.BannerLocalActivity;
+import com.test.demo.BannerStyleActivity;
+import com.test.demo.CustomBannerActivity;
+import com.test.demo.CustomViewPagerActivity;
+import com.test.demo.IndicatorPositionActivity;
+import com.test.ui.CustomViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import ms.test.banner.demo.BannerAnimationActivity;
-import ms.test.banner.demo.BannerLocalActivity;
-import ms.test.banner.demo.BannerStyleActivity;
-import ms.test.banner.demo.CustomBannerActivity;
-import ms.test.banner.demo.CustomViewPagerActivity;
-import ms.test.banner.demo.IndicatorPositionActivity;
-import ms.test.banner.ui.CustomViewHolder;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
         AdapterView.OnItemClickListener, OnBannerListener {

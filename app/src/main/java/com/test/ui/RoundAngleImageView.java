@@ -1,4 +1,4 @@
-package ms.test.banner.ui;
+package com.test.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;

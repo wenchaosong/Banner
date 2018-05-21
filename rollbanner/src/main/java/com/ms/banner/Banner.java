@@ -34,7 +34,6 @@ import static android.support.v4.view.ViewPager.PageTransformer;
 public class Banner extends FrameLayout implements OnPageChangeListener {
 
     private static final String TAG = "Banner";
-    private static final int NUM = Integer.MAX_VALUE;
     private int mIndicatorMargin = BannerConfig.PADDING_SIZE;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
@@ -357,7 +356,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void setData() {
-        currentItem = NUM / 2 + (count - 2);// 3:1  2:0  4:2
+        currentItem = 1;
         if (adapter == null) {
             adapter = new BannerPagerAdapter();
             viewPager.addOnPageChangeListener(this);
@@ -435,7 +434,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
         @Override
         public int getCount() {
-            return NUM;
+            return mDatas.size() + 2;
         }
 
         @Override

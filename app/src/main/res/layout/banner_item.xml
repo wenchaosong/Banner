@@ -22,8 +22,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:ellipsize="marquee"
-            android:maxLength="10"
-            android:singleLine="true"
             android:text="这是测试标题！"
             android:textColor="#fff"
             android:textSize="20sp" />

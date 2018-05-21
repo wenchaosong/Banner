@@ -1,4 +1,4 @@
-package ms.test.banner.ui;
+package com.test.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,9 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ms.banner.holder.BannerViewHolder;
-import com.test.banner.R;
-
-import ms.test.banner.CustomData;
+import com.test.CustomData;
+import com.test.R;
 
 /**
  * Created by songwenchao

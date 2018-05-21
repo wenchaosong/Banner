@@ -1,10 +1,8 @@
-package ms.test.banner;
+package com.test;
 
 import android.app.Application;
 import android.content.Context;
 import android.util.DisplayMetrics;
-
-import com.test.banner.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

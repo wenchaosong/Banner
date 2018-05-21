@@ -1,4 +1,4 @@
-package ms.test.banner;
+package com.test;
 
 /**
  * Created by songwenchao

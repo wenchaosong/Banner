@@ -1,4 +1,4 @@
-package ms.test.banner.demo;
+package com.test.demo;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -13,14 +13,13 @@ import com.ms.banner.Transformer;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerListener;
-import com.test.banner.R;
+import com.test.App;
+import com.test.R;
+import com.test.SampleAdapter;
+import com.test.ui.CustomViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ms.test.banner.App;
-import ms.test.banner.SampleAdapter;
-import ms.test.banner.ui.CustomViewHolder;
 
 public class BannerAnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,
         OnBannerListener {

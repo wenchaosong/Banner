@@ -1,4 +1,4 @@
-package ms.test.banner.demo;
+package com.test.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +10,9 @@ import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
-import com.test.banner.R;
-
-import ms.test.banner.App;
-import ms.test.banner.ui.CustomViewHolder;
+import com.test.App;
+import com.test.R;
+import com.test.ui.CustomViewHolder;
 
 public class BannerStyleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
