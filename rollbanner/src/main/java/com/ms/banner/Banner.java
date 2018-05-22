@@ -258,11 +258,35 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     public Banner start() {
         if (count > 0) {
-            setBannerStyleUI();
+            setStyleUI();
             setImageList(mDatas);
             setData();
         }
         return this;
+    }
+
+    private void setStyleUI() {
+        int visibility = count > 1 ? View.VISIBLE : View.GONE;
+        switch (bannerStyle) {
+            case BannerConfig.CIRCLE_INDICATOR:
+                indicator.setVisibility(visibility);
+                break;
+            case BannerConfig.NUM_INDICATOR:
+                numIndicator.setVisibility(visibility);
+                break;
+            case BannerConfig.NUM_INDICATOR_TITLE:
+                numIndicatorInside.setVisibility(visibility);
+                setTitleStyleUI();
+                break;
+            case BannerConfig.CIRCLE_INDICATOR_TITLE:
+                indicator.setVisibility(visibility);
+                setTitleStyleUI();
+                break;
+            case BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE:
+                indicatorInside.setVisibility(visibility);
+                setTitleStyleUI();
+                break;
+        }
     }
 
     private void setTitleStyleUI() {
@@ -285,30 +309,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             bannerTitle.setText(titles.get(0));
             bannerTitle.setVisibility(View.VISIBLE);
             titleView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void setBannerStyleUI() {
-        int visibility = count > 1 ? View.VISIBLE : View.GONE;
-        switch (bannerStyle) {
-            case BannerConfig.CIRCLE_INDICATOR:
-                indicator.setVisibility(visibility);
-                break;
-            case BannerConfig.NUM_INDICATOR:
-                numIndicator.setVisibility(visibility);
-                break;
-            case BannerConfig.NUM_INDICATOR_TITLE:
-                numIndicatorInside.setVisibility(visibility);
-                setTitleStyleUI();
-                break;
-            case BannerConfig.CIRCLE_INDICATOR_TITLE:
-                indicator.setVisibility(visibility);
-                setTitleStyleUI();
-                break;
-            case BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE:
-                indicatorInside.setVisibility(visibility);
-                setTitleStyleUI();
-                break;
         }
     }
 
@@ -353,6 +353,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             else if (bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                 indicatorInside.addView(imageView, params);
         }
+        if (gravity != -1)
+            indicator.setGravity(gravity);
     }
 
     private void setData() {
@@ -364,8 +366,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         viewPager.setAdapter(adapter);
         viewPager.setFocusable(true);
         viewPager.setCurrentItem(currentItem);
-        if (gravity != -1)
-            indicator.setGravity(gravity);
+        setOffscreenPageLimit(count);
         if (isScroll && count > 1) {
             viewPager.setScrollable(true);
         } else {

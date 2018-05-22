@@ -13,7 +13,7 @@
 Gradle
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:banner:2.1.2'  //最新版本
+    compile 'com.github.wenchaosong:banner:2.1.3'  //最新版本
 }
 ```
 或者引用本地lib
@@ -100,21 +100,6 @@ protected void onStop() {
     //结束轮播
     banner.stopAutoPlay();
 }
-```
-
-## 混淆代码
-```java
-# glide 的混淆代码
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
-}
-# banner 的混淆代码
--keep class com.ms.banner.** {
-    *;
- }
-
 ```
 
 ## 常见问题
