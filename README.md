@@ -1,5 +1,9 @@
 # Android图片轮播控件
 
+[![](https://jitpack.io/v/wenchaosong/Banner.svg)](https://jitpack.io/#wenchaosong/Banner)
+[![](https://img.shields.io/scrutinizer/build/g/filp/whoops.svg)](https://blog.csdn.net/u012551350/)
+[![Hex.pm](https://img.shields.io/github/stars/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
+
 在原项目[banner](https://github.com/youth5201314/banner) 基础上
 增加布局设置，可以自定义 adapter 中的 view
 
@@ -9,7 +13,7 @@
 
 ## 使用步骤
 
-#### Step 1.依赖banner [![skin-support](https://img.shields.io/badge/release-v3.1.0--beta1-green.svg)](http://jcenter.bintray.com/wenchaosong/Banner)
+#### Step 1.依赖banner
 
 Gradle
 ```groovy
