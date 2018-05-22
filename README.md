@@ -9,7 +9,7 @@
 
 ## 使用步骤
 
-#### Step 1.依赖banner [![Download](https://api.bintray.com/packages/wenchaosong/maven/Banner/images/download.svg)](https://bintray.com/wenchaosong/maven/Banner/_latestVersion)
+#### Step 1.依赖banner [![skin-support](https://img.shields.io/badge/release-v3.1.0--beta1-green.svg)](http://jcenter.bintray.com/wenchaosong/Banner)
 
 Gradle
 ```groovy
