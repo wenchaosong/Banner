@@ -1,7 +1,6 @@
 # Android图片轮播控件
 
 [![](https://jitpack.io/v/wenchaosong/Banner.svg)](https://jitpack.io/#wenchaosong/Banner)
-[![](https://img.shields.io/scrutinizer/build/g/filp/whoops.svg)](https://blog.csdn.net/u012551350/)
 [![Hex.pm](https://img.shields.io/github/stars/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 
 在原项目[banner](https://github.com/youth5201314/banner) 基础上
@@ -18,7 +17,7 @@
 Gradle
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:banner:2.1.3'  //最新版本
+    compile 'com.github.wenchaosong:banner:{latest}'  //最新版本
 }
 ```
 或者引用本地lib
