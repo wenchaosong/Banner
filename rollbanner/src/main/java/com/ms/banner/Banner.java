@@ -520,6 +520,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
             lastPosition = position;
         }
+        if (position == 0)
+            position = count;
+        if (position > count)
+            position = 1;
         //        Log.i(TAG, "onPageSelected --- currentItem:" + currentItem + " position:" + position);
 
         switch (bannerStyle) {
