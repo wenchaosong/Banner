@@ -271,6 +271,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             case BannerConfig.CIRCLE_INDICATOR:
                 indicator.setVisibility(visibility);
                 break;
+            case BannerConfig.CUSTOM_INDICATOR:
+                indicator.setVisibility(visibility);
+                break;
             case BannerConfig.NUM_INDICATOR:
                 numIndicator.setVisibility(visibility);
                 break;
@@ -322,7 +325,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
-                bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE) {
+                bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||
+                bannerStyle == BannerConfig.CUSTOM_INDICATOR) {
             createIndicator();
         } else if (bannerStyle == BannerConfig.NUM_INDICATOR_TITLE) {
             numIndicatorInside.setText("1/" + count);
@@ -341,6 +345,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mIndicatorWidth, mIndicatorHeight);
             params.leftMargin = mIndicatorMargin;
             params.rightMargin = mIndicatorMargin;
+            LinearLayout.LayoutParams custom_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            custom_params.leftMargin = mIndicatorMargin;
+            custom_params.rightMargin = mIndicatorMargin;
             if (i == 0) {
                 imageView.setImageResource(mIndicatorSelectedResId);
             } else {
@@ -352,6 +360,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 indicator.addView(imageView, params);
             else if (bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                 indicatorInside.addView(imageView, params);
+            else if (bannerStyle == BannerConfig.CUSTOM_INDICATOR)
+                indicator.addView(imageView, custom_params);
         }
         if (gravity != -1)
             indicator.setGravity(gravity);
@@ -515,7 +525,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         }
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
-                bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE) {
+                bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||
+                bannerStyle == BannerConfig.CUSTOM_INDICATOR) {
             indicatorImages.get((lastPosition - 1 + count) % count).setImageResource(mIndicatorUnselectedResId);
             indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
             lastPosition = position;
@@ -528,6 +539,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
         switch (bannerStyle) {
             case BannerConfig.CIRCLE_INDICATOR:
+                break;
+            case BannerConfig.CUSTOM_INDICATOR:
                 break;
             case BannerConfig.NUM_INDICATOR:
                 numIndicator.setText(position + "/" + count);
