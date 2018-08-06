@@ -9,7 +9,15 @@
 
 ## 效果图
 
-![image](/pic/1.gif )
+|模式|图片
+|---|---|
+|指示器模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example1.png)|
+|数字模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example2.png)|
+|数字加标题模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example3.png)|
+|指示器加标题模式<br>垂直显示|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example4.png)|
+|指示器加标题模式<br>水平显示|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example5.png)|
+|卡片模式|![效果示例](/pic/1.gif)|
+|自定义指示器模式|![效果示例](https://user-images.githubusercontent.com/11496107/43639926-7b4852fe-9750-11e8-9c50-537c49767d2e.png)|
 
 ## 使用步骤
 
