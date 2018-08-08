@@ -114,7 +114,10 @@ protected void onStop() {
     banner.stopAutoPlay();
 }
 ```
-
+#### 混淆
+```java
+-keep class com.ms.banner.** {*;}
+```
 ## 常见问题
 
 * 问：eclipse怎么使用banner？
