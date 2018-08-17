@@ -39,7 +39,7 @@
     </array>
     <array name="demo_list">
         <item>banner动画预览</item>
-        <item>banner内置样式预览</item>
+        <item>banner指示器样式预览</item>
         <item>banner指示器位置设置预览</item>
         <item>banner一些自定义样式方法预览</item>
         <item>banner加载本地图片</item>
@@ -73,6 +73,7 @@
         <item>NUM_INDICATOR_TITLE</item>
         <item>CIRCLE_INDICATOR_TITLE</item>
         <item>CIRCLE_INDICATOR_TITLE_INSIDE</item>
+        <item>CUSTOM_INDICATOR</item>
     </string-array>
     <string-array name="indicator">
         <item>LEFT</item>

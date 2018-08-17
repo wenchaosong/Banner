@@ -61,6 +61,10 @@ public class BannerStyleActivity extends AppCompatActivity implements AdapterVie
             case 5:
                 banner.updateBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
                 break;
+            case 6:
+                banner.setIndicatorRes(R.mipmap.indicator, R.drawable.gray_radius);
+                banner.updateBannerStyle(BannerConfig.CUSTOM_INDICATOR);
+                break;
         }
     }
 

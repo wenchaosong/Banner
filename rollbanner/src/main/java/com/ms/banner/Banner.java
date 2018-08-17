@@ -2,6 +2,7 @@ package com.ms.banner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -262,6 +263,17 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             setImageList(mDatas);
             setData();
         }
+        return this;
+    }
+
+    public Banner setIndicatorRes(int select, int unSelect) {
+        if (select < 0)
+            throw new RuntimeException("[Banner] --> The select res is not exist");
+        if (unSelect < 0)
+            throw new RuntimeException("[Banner] --> The unSelect res is not exist");
+
+        mIndicatorSelectedResId = select;
+        mIndicatorUnselectedResId = unSelect;
         return this;
     }
 
