@@ -18,6 +18,7 @@
 |指示器加标题模式<br>水平显示|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example5.png)|
 |卡片模式|![效果示例](/pic/1.png)|
 |自定义指示器模式|![效果示例](/pic/2.png)|
+|自定义混合模式|![效果示例](/pic/2.gif)|
 
 ## 使用步骤
 

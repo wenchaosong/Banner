@@ -10,20 +10,30 @@ package com.test;
  */
 public class CustomData {
 
-    private String title;
+    private String url;
     private String name;
+    private boolean isMovie;
 
-    public CustomData(String title, String name) {
-        this.title = title;
+    public CustomData(String url, String name, boolean isMovie) {
+        this.url = url;
         this.name = name;
+        this.isMovie = isMovie;
     }
 
-    public String getTitle() {
-        return title;
+    public boolean isMovie() {
+        return isMovie;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMovie(boolean movie) {
+        isMovie = movie;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getName() {

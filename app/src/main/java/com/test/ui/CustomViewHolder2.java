@@ -33,7 +33,7 @@ public class CustomViewHolder2 implements BannerViewHolder<CustomData> {
     @Override
     public void onBind(Context context, int position, CustomData data) {
         // 数据绑定
-        mTitle.setText(data.getTitle());
+        mTitle.setText(data.getName());
         mPosition.setText(position + "");
     }
 }

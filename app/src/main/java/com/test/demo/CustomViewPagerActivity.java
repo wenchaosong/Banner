@@ -11,6 +11,7 @@ import com.ms.banner.listener.OnBannerListener;
 import com.test.CustomData;
 import com.test.R;
 import com.test.ui.CustomViewHolder2;
+import com.test.ui.CustomViewHolder3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 public class CustomViewPagerActivity extends AppCompatActivity implements OnBannerListener {
 
     Banner banner1;
+    Banner banner2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +27,20 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
         setContentView(R.layout.activity_custom_view_pager);
 
         banner1 = (Banner) findViewById(R.id.banner1);
+        banner2 = (Banner) findViewById(R.id.banner2);
 
         List<CustomData> list = new ArrayList<>();
-        list.add(new CustomData("CustomLayout", ""));
-        list.add(new CustomData("Transformer", ""));
-        list.add(new CustomData("Viewpager", ""));
+        list.add(new CustomData("", "CustomLayout", false));
+        list.add(new CustomData("", "Transformer", false));
+        list.add(new CustomData("", "Viewpager", false));
+
+        ArrayList<CustomData> arrList = new ArrayList<>();
+        CustomData data1 = new CustomData("http://img.zcool.cn/community/01fca557a7f5f90000012e7e9feea8.jpg", "", false);
+        CustomData data2 = new CustomData("", "", true);
+        CustomData data3 = new CustomData("http://img.zcool.cn/community/01996b57a7f6020000018c1bedef97.jpg", "", false);
+        arrList.add(data1);
+        arrList.add(data2);
+        arrList.add(data3);
 
         banner1.setAutoPlay(true)
                 .setOffscreenPageLimit(list.size())
@@ -41,6 +52,17 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
                 })
                 .setOnBannerListener(this)
                 .setBannerAnimation(Transformer.Scale)
+                .start();
+
+        banner2.setAutoPlay(true)
+                .setOffscreenPageLimit(list.size())
+                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
+                    @Override
+                    public BannerViewHolder createViewHolder() {
+                        return new CustomViewHolder3();
+                    }
+                })
+                .setOnBannerListener(this)
                 .start();
     }
 
