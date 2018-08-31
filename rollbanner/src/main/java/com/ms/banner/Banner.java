@@ -7,6 +7,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private int scrollTime = BannerConfig.DURATION;
     private boolean isAutoPlay = BannerConfig.IS_AUTO_PLAY;
     private boolean isScroll = BannerConfig.IS_SCROLL;
+    private boolean isLoop = BannerConfig.IS_LOOP;
     private int mIndicatorSelectedResId = R.drawable.gray_radius;
     private int mIndicatorUnselectedResId = R.drawable.white_radius;
     private int titleHeight;
@@ -125,6 +127,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         delayTime = typedArray.getInt(R.styleable.Banner_delay_time, BannerConfig.TIME);
         scrollTime = typedArray.getInt(R.styleable.Banner_scroll_time, BannerConfig.DURATION);
         isAutoPlay = typedArray.getBoolean(R.styleable.Banner_is_auto_play, BannerConfig.IS_AUTO_PLAY);
+        isLoop = typedArray.getBoolean(R.styleable.Banner_is_loop, BannerConfig.IS_LOOP);
         titleBackground = typedArray.getColor(R.styleable.Banner_title_background, BannerConfig.TITLE_BACKGROUND);
         titleHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_title_height, BannerConfig.TITLE_HEIGHT);
         titleTextColor = typedArray.getColor(R.styleable.Banner_title_textcolor, BannerConfig.TITLE_TEXT_COLOR);
@@ -148,6 +151,11 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     public Banner setAutoPlay(boolean isAutoPlay) {
         this.isAutoPlay = isAutoPlay;
+        return this;
+    }
+
+    public Banner setLoop(boolean isLoop) {
+        this.isLoop = isLoop;
         return this;
     }
 
@@ -339,7 +347,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||
                 bannerStyle == BannerConfig.CUSTOM_INDICATOR) {
-            createIndicator();
+            if (isLoop)
+                createIndicator();
         } else if (bannerStyle == BannerConfig.NUM_INDICATOR_TITLE) {
             numIndicatorInside.setText("1/" + count);
         } else if (bannerStyle == BannerConfig.NUM_INDICATOR) {
@@ -380,7 +389,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void setData() {
-        currentItem = 1;
+        if (isLoop)
+            currentItem = 1;
+        else
+            currentItem = 0;
         if (adapter == null) {
             adapter = new BannerPagerAdapter();
             viewPager.addOnPageChangeListener(this);
@@ -399,12 +411,16 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     public void startAutoPlay() {
-        handler.removeCallbacks(task);
-        handler.postDelayed(task, delayTime);
+        if (isLoop) {
+            handler.removeCallbacks(task);
+            handler.postDelayed(task, delayTime);
+        }
     }
 
     public void stopAutoPlay() {
-        handler.removeCallbacks(task);
+        if (isLoop) {
+            handler.removeCallbacks(task);
+        }
     }
 
     private final Runnable task = new Runnable() {
@@ -457,7 +473,16 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
         @Override
         public int getCount() {
-            return mDatas.size() + 2;
+            if (mDatas.size() == 1) {
+                return mDatas.size();
+            } else if (mDatas.size() < 1) {
+                return 0;
+            } else {
+                if (isLoop)
+                    return mDatas.size() + 2;
+                else
+                    return mDatas.size();
+            }
         }
 
         @Override
@@ -501,7 +526,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageScrollStateChanged(state);
         }
-
+        if (!isLoop)
+            return;
         switch (state) {
             case 0://No operation
                 if (currentItem == 0) {
@@ -535,6 +561,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageSelected(toRealPosition(position));
         }
+        if (!isLoop)
+            return;
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||
