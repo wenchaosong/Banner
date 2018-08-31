@@ -27,7 +27,7 @@
 Gradle
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:Banner:2.1.7'
+    compile 'com.github.wenchaosong:Banner:2.1.8'
 }
 ```
 或者引用本地lib
