@@ -31,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
-        AdapterView.OnItemClickListener, OnBannerListener {
+        AdapterView.OnItemClickListener {
 
     static final int REFRESH_COMPLETE = 0X1112;
     SwipeRefreshLayout mSwipeLayout;
@@ -73,21 +73,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         List arrList = new ArrayList(Arrays.asList(urls));
 
         //简单使用
-        banner.setOnBannerListener(this)
+        banner.setAutoPlay(true)
                 .setPages(arrList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
                         return new CustomViewHolder();
                     }
                 })
-                .setAutoPlay(true)
                 .setDelayTime(3000)
+                .setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void onBannerClick(int position) {
+                        Toast.makeText(MainActivity.this, "你点击了：" + position, Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .start();
-    }
-
-    @Override
-    public void onBannerClick(int position) {
-        Toast.makeText(this, "你点击了：" + position, Toast.LENGTH_SHORT).show();
     }
 
     //如果你需要考虑更好的体验，可以这么操作

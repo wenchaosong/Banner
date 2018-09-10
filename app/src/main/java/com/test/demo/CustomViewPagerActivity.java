@@ -7,7 +7,6 @@ import com.ms.banner.Banner;
 import com.ms.banner.Transformer;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
-import com.ms.banner.listener.OnBannerListener;
 import com.test.CustomData;
 import com.test.R;
 import com.test.ui.CustomViewHolder2;
@@ -16,7 +15,7 @@ import com.test.ui.CustomViewHolder3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomViewPagerActivity extends AppCompatActivity implements OnBannerListener {
+public class CustomViewPagerActivity extends AppCompatActivity {
 
     Banner banner1;
     Banner banner2;
@@ -50,7 +49,6 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
                         return new CustomViewHolder2();
                     }
                 })
-                .setOnBannerListener(this)
                 .setBannerAnimation(Transformer.Scale)
                 .start();
 
@@ -62,13 +60,7 @@ public class CustomViewPagerActivity extends AppCompatActivity implements OnBann
                         return new CustomViewHolder3();
                     }
                 })
-                .setOnBannerListener(this)
                 .start();
-    }
-
-    @Override
-    public void onBannerClick(int position) {
-
     }
 
     //如果你需要考虑更好的体验，可以这么操作

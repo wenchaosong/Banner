@@ -21,8 +21,7 @@ import com.test.ui.CustomViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BannerAnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,
-        OnBannerListener {
+public class BannerAnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     Banner banner;
     List<Class<? extends ViewPager.PageTransformer>> transformers = new ArrayList<>();
@@ -60,14 +59,19 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
         listView.setOnItemClickListener(this);
 
         //简单使用
-        banner.setOnBannerListener(this)
+        banner.setAutoPlay(true)
+                .setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void onBannerClick(int position) {
+                        Toast.makeText(BannerAnimationActivity.this, "你点击了：" + position, Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .setPages(App.images, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
                         return new CustomViewHolder();
                     }
                 })
-                .setAutoPlay(true)
                 .setDelayTime(3000)
                 .start();
     }
@@ -75,10 +79,5 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         banner.setBannerAnimation(transformers.get(position));
-    }
-
-    @Override
-    public void onBannerClick(int position) {
-        Toast.makeText(getApplicationContext(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
     }
 }
