@@ -19,6 +19,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
 
     Banner banner1;
     Banner banner2;
+    Banner banner3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
 
         banner1 = (Banner) findViewById(R.id.banner1);
         banner2 = (Banner) findViewById(R.id.banner2);
+        banner3 = (Banner) findViewById(R.id.banner3);
 
         List<CustomData> list = new ArrayList<>();
         list.add(new CustomData("", "CustomLayout", false));
@@ -61,6 +63,16 @@ public class CustomViewPagerActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+
+        banner3.setAutoPlay(true)
+                .setOffscreenPageLimit(list.size())
+                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
+                    @Override
+                    public BannerViewHolder createViewHolder() {
+                        return new CustomViewHolder3();
+                    }
+                })
+                .start();
     }
 
     //如果你需要考虑更好的体验，可以这么操作
@@ -69,6 +81,8 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         super.onStart();
         //开始轮播
         banner1.startAutoPlay();
+        banner2.startAutoPlay();
+        banner3.startAutoPlay();
     }
 
     @Override
@@ -76,5 +90,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         super.onStop();
         //结束轮播
         banner1.stopAutoPlay();
+        banner2.stopAutoPlay();
+        banner3.stopAutoPlay();
     }
 }

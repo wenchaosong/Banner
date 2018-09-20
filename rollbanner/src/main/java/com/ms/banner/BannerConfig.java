@@ -24,6 +24,7 @@ public class BannerConfig {
      * banner
      */
     public static final int PADDING_SIZE = 5;
+    public static final int MARGIN_BOTTOM = 10;
     public static final int TIME = 2000;
     public static final int DURATION = 800;
     public static final boolean IS_AUTO_PLAY = true;
@@ -42,4 +43,12 @@ public class BannerConfig {
      * margin
      */
     public static final int PAGE_MARGIN = 0;
+
+    /**
+     * arc
+     */
+    public static final int ARC_HEIGHT = 0;
+    public static final int ARC_BACKGROUND = 0XFFFFFFFF;
+    public static final int ARC_DIRECTION = 0;
+
 }

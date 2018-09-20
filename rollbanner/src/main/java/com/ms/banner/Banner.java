@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerListener;
+import com.ms.banner.view.ArcShapeView;
 import com.ms.banner.view.BannerViewPager;
 
 import java.lang.reflect.Field;
@@ -34,7 +35,8 @@ import static android.support.v4.view.ViewPager.PageTransformer;
 public class Banner extends FrameLayout implements OnPageChangeListener {
 
     private static final String TAG = "Banner";
-    private int mIndicatorMargin = BannerConfig.PADDING_SIZE;
+    private int mIndicatorPadding = BannerConfig.PADDING_SIZE;
+    private int mIndicatorMargin = BannerConfig.MARGIN_BOTTOM;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
     private int indicatorSize;
@@ -70,6 +72,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private OnBannerListener listener;
     private DisplayMetrics dm;
     private int mPageMargin;
+    private int mArcHeight;
+    private int mArcBg;
+    private int mArcDirection;
 
     private WeakHandler handler = new WeakHandler();
 
@@ -96,6 +101,15 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         handleTypedArray(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.banner, this, true);
         bannerDefaultImage = (ImageView) view.findViewById(R.id.bannerDefaultImage);
+        ArcShapeView arcShapeView = (ArcShapeView) view.findViewById(R.id.bannerArcView);
+        if (mArcHeight <= 0) {
+            arcShapeView.setVisibility(GONE);
+        } else {
+            arcShapeView.setVisibility(VISIBLE);
+            arcShapeView.setArcHeight(mArcHeight);
+            arcShapeView.setBackground(mArcBg);
+            arcShapeView.setDirection(mArcDirection);
+        }
         viewPager = (BannerViewPager) view.findViewById(R.id.bannerViewPager);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT);
@@ -104,6 +118,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         viewPager.setLayoutParams(params);
         titleView = (LinearLayout) view.findViewById(R.id.titleView);
         indicator = (LinearLayout) view.findViewById(R.id.circleIndicator);
+        RelativeLayout.LayoutParams indicatorParam = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT);
+        indicatorParam.bottomMargin = mIndicatorMargin;
+        indicator.setLayoutParams(indicatorParam);
         indicatorInside = (LinearLayout) view.findViewById(R.id.indicatorInside);
         bannerTitle = (TextView) view.findViewById(R.id.bannerTitle);
         numIndicator = (TextView) view.findViewById(R.id.numIndicator);
@@ -119,7 +137,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Banner);
         mIndicatorWidth = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_width, indicatorSize);
         mIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_height, indicatorSize);
-        mIndicatorMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_margin, BannerConfig.PADDING_SIZE);
+        mIndicatorPadding = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_padding, BannerConfig.PADDING_SIZE);
+        mIndicatorMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_margin, BannerConfig.MARGIN_BOTTOM);
         mIndicatorSelectedResId = typedArray.getResourceId(R.styleable.Banner_indicator_drawable_selected, R.drawable.gray_radius);
         mIndicatorUnselectedResId = typedArray.getResourceId(R.styleable.Banner_indicator_drawable_unselected, R.drawable.white_radius);
         delayTime = typedArray.getInt(R.styleable.Banner_delay_time, BannerConfig.TIME);
@@ -132,6 +151,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         titleTextSize = typedArray.getDimensionPixelSize(R.styleable.Banner_title_textsize, BannerConfig.TITLE_TEXT_SIZE);
         bannerBackgroundImage = typedArray.getResourceId(R.styleable.Banner_banner_default_image, R.drawable.no_banner);
         mPageMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_pageMargin, BannerConfig.PAGE_MARGIN);
+        mArcHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_arc_height, BannerConfig.ARC_HEIGHT);
+        mArcBg = typedArray.getColor(R.styleable.Banner_arc_background, BannerConfig.ARC_BACKGROUND);
+        mArcDirection = typedArray.getInt(R.styleable.Banner_arc_direction, BannerConfig.ARC_DIRECTION);
         typedArray.recycle();
     }
 
@@ -362,12 +384,12 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             ImageView imageView = new ImageView(context);
             imageView.setScaleType(ScaleType.CENTER_CROP);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mIndicatorWidth, mIndicatorHeight);
-            params.leftMargin = mIndicatorMargin;
-            params.rightMargin = mIndicatorMargin;
+            params.leftMargin = mIndicatorPadding;
+            params.rightMargin = mIndicatorPadding;
             LinearLayout.LayoutParams custom_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            custom_params.leftMargin = mIndicatorMargin;
-            custom_params.rightMargin = mIndicatorMargin;
+            custom_params.leftMargin = mIndicatorPadding;
+            custom_params.rightMargin = mIndicatorPadding;
             if (i == 0) {
                 imageView.setImageResource(mIndicatorSelectedResId);
             } else {

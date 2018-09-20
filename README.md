@@ -19,6 +19,7 @@
 |卡片模式|![效果示例](/pic/1.png)|
 |自定义指示器模式|![效果示例](/pic/2.png)|
 |自定义混合模式|![效果示例](/pic/2.gif)|
+|底部弧形模式|![效果示例](/pic/3.png)|
 
 ## 使用步骤
 
@@ -27,7 +28,7 @@
 Gradle
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:Banner:2.1.8'
+    compile 'com.github.wenchaosong:Banner:2.1.9'
 }
 ```
 或者引用本地lib

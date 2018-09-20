@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="none">
 
-    <com.ms.banner.Banner
-        android:id="@+id/banner1"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        app:pageMargin="20dp" />
-
-    <com.ms.banner.Banner
-        android:id="@+id/banner2"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="30dp" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/banner"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:text="这是一个修改banner布局文件的例子，你可以按照这个套路修改里面的内容" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <com.ms.banner.Banner
+            android:id="@+id/banner1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:pageMargin="20dp" />
+
+        <com.ms.banner.Banner
+            android:id="@+id/banner2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <com.ms.banner.Banner
+            android:id="@+id/banner3"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:arc_background="@android:color/darker_gray"
+            app:arc_height="10dp"
+            app:indicator_margin="13dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:padding="10dp"
+            android:text="这是一个修改banner布局文件的例子，你可以按照这个套路修改里面的内容" />
+
+    </LinearLayout>
+</ScrollView>
