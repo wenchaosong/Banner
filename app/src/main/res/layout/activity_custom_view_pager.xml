@@ -10,21 +10,37 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.ms.banner.Banner
-            android:id="@+id/banner1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            app:pageMargin="20dp" />
+            android:layout_height="165dp"
+            android:orientation="vertical">
+
+            <com.ms.banner.Banner
+                android:id="@+id/banner1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:pageMargin="20dp" />
+
+            <LinearLayout
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:gravity="center"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
 
         <com.ms.banner.Banner
             android:id="@+id/banner2"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp" />
 
         <com.ms.banner.Banner
             android:id="@+id/banner3"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:layout_marginTop="30dp"
             app:arc_background="@android:color/darker_gray"
             app:arc_height="10dp"
             app:indicator_margin="13dp" />
