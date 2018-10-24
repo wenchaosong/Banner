@@ -75,7 +75,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private int mArcHeight;
     private int mArcBg;
     private int mArcDirection;
-
+    private static final int NUM = 1000;
     private WeakHandler handler = new WeakHandler();
 
     public Banner(Context context) {
@@ -410,7 +410,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     private void setData() {
         if (isLoop)
-            currentItem = 1;
+            //currentItem = 1;
+            currentItem = NUM / 2 - ((NUM / 2) % count) + 1;
         else
             currentItem = 0;
         if (adapter == null) {
@@ -420,6 +421,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         viewPager.setAdapter(adapter);
         viewPager.setFocusable(true);
         viewPager.setCurrentItem(currentItem);
+        viewPager.setOffscreenPageLimit(count);
         setOffscreenPageLimit(count);
         if (isScroll && count > 1) {
             viewPager.setScrollable(true);
@@ -483,7 +485,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
      * @return 下标从0开始
      */
     private int toRealPosition(int position) {
-        int realPosition = (position - 1) % count;
+        //int realPosition = (position - 1) % count;
+        int realPosition = (position - 1 + count) % count;
         if (realPosition < 0)
             realPosition += count;
         return realPosition;
@@ -499,7 +502,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 return 0;
             } else {
                 if (isLoop)
-                    return mDatas.size() + 2;
+                    //return mDatas.size() + 2;
+                    return NUM;
                 else
                     return mDatas.size();
             }
@@ -546,7 +550,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageScrollStateChanged(state);
         }
-        if (!isLoop)
+        /*if (!isLoop)
             return;
         switch (state) {
             case 0://No operation
@@ -565,7 +569,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 break;
             case 2://end Sliding
                 break;
-        }
+        }*/
     }
 
     @Override
@@ -591,11 +595,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
             lastPosition = position;
         }
-        if (position == 0)
+        /*if (position == 0)
             position = count;
         if (position > count)
-            position = 1;
-        //        Log.i(TAG, "onPageSelected --- currentItem:" + currentItem + " position:" + position);
+            position = 1;*/
 
         switch (bannerStyle) {
             case BannerConfig.CIRCLE_INDICATOR:
@@ -603,17 +606,22 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             case BannerConfig.CUSTOM_INDICATOR:
                 break;
             case BannerConfig.NUM_INDICATOR:
-                numIndicator.setText(position + "/" + count);
+                //numIndicator.setText(position + "/" + count);
+                numIndicator.setText((toRealPosition(position) + 1) + "/" + count);
                 break;
             case BannerConfig.NUM_INDICATOR_TITLE:
-                numIndicatorInside.setText(position + "/" + count);
-                bannerTitle.setText(titles.get(position - 1));
+                //numIndicatorInside.setText(position + "/" + count);
+                //bannerTitle.setText(titles.get(position - 1));
+                numIndicatorInside.setText((toRealPosition(position) + 1) + "/" + count);
+                bannerTitle.setText(titles.get(toRealPosition(position)));
                 break;
             case BannerConfig.CIRCLE_INDICATOR_TITLE:
-                bannerTitle.setText(titles.get(position - 1));
+                //bannerTitle.setText(titles.get(position - 1));
+                bannerTitle.setText(titles.get(toRealPosition(position)));
                 break;
             case BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE:
-                bannerTitle.setText(titles.get(position - 1));
+                //bannerTitle.setText(titles.get(position - 1));
+                bannerTitle.setText(titles.get(toRealPosition(position)));
                 break;
         }
 
