@@ -5,8 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import java.lang.reflect.Field;
-
 public class BannerViewPager extends ViewPager {
 
     private boolean scrollable = true;
@@ -36,7 +34,7 @@ public class BannerViewPager extends ViewPager {
         this.scrollable = scrollable;
     }
 
-    @Override
+    /*@Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         try {
@@ -53,5 +51,5 @@ public class BannerViewPager extends ViewPager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
