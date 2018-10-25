@@ -1,1 +1,2 @@
 include ':rollbanner',':app'
+rootProject.name = 'Banner'
