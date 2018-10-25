@@ -5,7 +5,7 @@
 [![](https://img.shields.io/github/issues/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 
 在原项目[banner](https://github.com/youth5201314/banner) 基础上
-增加布局设置，可以自定义 adapter 中的 view
+增加布局设置，可以自定义 adapter 中的 view，解决了 onPageSelected 方法调用两次的 bug
 
 ## 效果图
 
