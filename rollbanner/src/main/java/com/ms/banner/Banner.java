@@ -550,26 +550,26 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageScrollStateChanged(state);
         }
-        /*if (!isLoop)
+        if (!isLoop)
             return;
         switch (state) {
             case 0://No operation
-                if (currentItem == 0) {
+                /*if (currentItem == 0) {
                     viewPager.setCurrentItem(count, false);
                 } else if (currentItem == count + 1) {
                     viewPager.setCurrentItem(1, false);
+                }*/
+                if (currentItem == 0) {
+                    viewPager.setCurrentItem(NUM - 1, false);
+                } else if (currentItem == NUM - 1) {
+                    viewPager.setCurrentItem(0, false);
                 }
                 break;
             case 1://start Sliding
-                if (currentItem == count + 1) {
-                    viewPager.setCurrentItem(1, false);
-                } else if (currentItem == 0) {
-                    viewPager.setCurrentItem(count, false);
-                }
                 break;
             case 2://end Sliding
                 break;
-        }*/
+        }
     }
 
     @Override
