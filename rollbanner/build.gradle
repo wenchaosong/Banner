@@ -4,7 +4,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.wenchaosong'
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion "28.0.2"
 
     defaultConfig {
         minSdkVersion 14
