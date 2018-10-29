@@ -46,7 +46,7 @@ compile project(':rollbanner')
     android:layout_height="高度自己设置" />
 ```
 
-#### Step 4.设置布局
+#### Step 3.设置布局
 ```java
 .setPages(list, new HolderCreator<BannerViewHolder>() {
                     @Override
@@ -77,7 +77,7 @@ class CustomViewHolder implements BannerViewHolder<String> {
 }
 ```
 
-#### Step 5.在Activity或者Fragment中配置Banner
+#### Step 4.在Activity或者Fragment中配置Banner
 
 - 注意！start()方法必须放到最后执行，点击事件请放到start()前
 
@@ -99,7 +99,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-#### Step 6.（可选）增加体验
+#### Step 5.（可选）增加体验
 ```java
 //如果你需要考虑更好的体验，可以这么操作
 @Override
