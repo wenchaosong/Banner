@@ -15,16 +15,16 @@
 
 |模式|图片
 |---|---|
-|指示器模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-5e7a26460c51022f.png)|
-|数字模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-8322b8379c3c3240.png)|
-|数字加标题模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-6c6204de8cee8d83.png)|
-|标题模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-91d620275e7e3c8d.png)|
-|指示器加标题模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-0f391a0c244e5005.png)|
-|卡片模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-8d85073daf5d8d42.png)|
-|自定义指示器模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-af713b0eea956d16.png)|
-|自定义混合模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-539bb6c0ae0f2743.png)|
-|底部弧形模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-d14b734be7de9e86.png)|
-|指示器在外部|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-d66f82d32ea6aeb9.png)|
+|指示器模式|![效果示例](/pic/1.png)|
+|数字模式|![效果示例](/pic/2.png)|
+|数字加标题模式|![效果示例](/pic/3.png)|
+|标题模式|![效果示例](/pic/4.png)|
+|指示器加标题模式|![效果示例](/pic/5.png)|
+|卡片模式|![效果示例](/pic/6.png)|
+|自定义指示器模式|![效果示例](/pic/7.png)|
+|自定义混合模式|![效果示例](/pic/8.gif)|
+|底部弧形模式|![效果示例](/pic/9.png)|
+|指示器在外部|![效果示例](/pic/10.png)|
 
 ## 使用步骤
 
