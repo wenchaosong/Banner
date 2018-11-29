@@ -1,6 +1,6 @@
 package com.ms.banner.listener;
 
-public interface OnBannerListener {
+public interface OnBannerClickListener {
 
     /**
      * 点击事件

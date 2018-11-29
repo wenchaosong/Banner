@@ -4,31 +4,36 @@
 [![](https://img.shields.io/github/stars/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 [![](https://img.shields.io/github/issues/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 
-在原项目[banner](https://github.com/youth5201314/banner) 基础上
-增加布局设置，可以自定义 adapter 中的 view，解决了 onPageSelected 方法调用两次的 bug
+图片轮播类似控件比较多，但是真正好用的比较少，大家公认的项目[banner](https://github.com/youth5201314/banner) 是比较好用的，
+但是作者已经很久没维护了，所以我在他的基础上优化了一部分，满足大家项目中常用的一些需求。<br>
+**
+具体优化点：<br>
+1.优化了自定义布局，不仅仅是一张图片；<br>
+2.优化了 onPageSelected 方法调用两次的 bug；<br>
+3.增加了多种 banner 样式
+**
 
 ## 效果图
 
 |模式|图片
 |---|---|
-|指示器模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example1.png)|
-|数字模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example2.png)|
-|数字加标题模式|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example3.png)|
-|指示器加标题模式<br>垂直显示|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example4.png)|
-|指示器加标题模式<br>水平显示|![效果示例](http://oceh51kku.bkt.clouddn.com/banner_example5.png)|
-|卡片模式|![效果示例](/pic/1.png)|
-|自定义指示器模式|![效果示例](/pic/2.png)|
-|自定义混合模式|![效果示例](/pic/2.gif)|
-|底部弧形模式|![效果示例](/pic/3.png)|
+|指示器模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-5e7a26460c51022f.png)|
+|数字模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-8322b8379c3c3240.png)|
+|数字加标题模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-6c6204de8cee8d83.png)|
+|标题模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-91d620275e7e3c8d.png)|
+|指示器加标题模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-0f391a0c244e5005.png)|
+|卡片模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-8d85073daf5d8d42.png)|
+|自定义指示器模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-af713b0eea956d16.png)|
+|自定义混合模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-539bb6c0ae0f2743.png)|
+|底部弧形模式|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-d14b734be7de9e86.png)|
+|指示器在外部|![效果示例](https://upload-images.jianshu.io/upload_images/9913211-d66f82d32ea6aeb9.png)|
 
 ## 使用步骤
 
 #### Step 1.依赖banner
-
-Gradle
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:Banner:2.2.5'
+    compile 'com.github.wenchaosong:Banner:2.2.6'
 }
 ```
 或者引用本地lib
@@ -37,7 +42,6 @@ compile project(':rollbanner')
 ```
 
 #### Step 2.在布局文件中添加Banner，可以设置自定义属性
-！！！此步骤可以省略，直接在Activity或者Fragment中new Banner();
 ```xml
 <com.ms.banner.Banner
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -82,7 +86,6 @@ class CustomViewHolder implements BannerViewHolder<String> {
 - 注意！start()方法必须放到最后执行，点击事件请放到start()前
 
 ```java
---------------------------简单使用-------------------------------
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -99,7 +102,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-#### Step 5.（可选）增加体验
+#### Step 5.（可选）
 ```java
 //如果你需要考虑更好的体验，可以这么操作
 @Override
@@ -116,50 +119,60 @@ protected void onStop() {
     banner.stopAutoPlay();
 }
 ```
-#### 混淆
+
+#### Step 6.混淆
 ```java
 -keep class com.ms.banner.** {*;}
 ```
-## 常见问题
 
-* 问：eclipse怎么使用banner？
+### 属性和方法介绍
 
-    * 答：`在历史版本列表中下载你想要版本的aar包提取最新资源/也可以自己把工程转成eclipse的` <br>
-          eclipse的集成demo群文件里有共享！
+##### xml 文件可配置的属性
 
-* 问：怎么显示的一片空白？
-    * 答：<br>
-        1、没有添加网络权限<br>
-        2、检查图片链接是否能打开。
-* 问：怎么加载其他图片资源（资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源）？
-    * 答：列如！如果你使用的是glide，那么可以如下操作，其他图片图片加载框架可能有不同
-        ```java
-        //资源文件
-        Integer[] images={R.mipmap.a,R.mipmap.b,R.mipmap.c};
-        //Uri
-        Uri uri = resourceIdToUri(context, R.mipmap.ic_launcher);
-        Uri[] images={uri};
-        //文件对象
-        File[] images={"文件对象","文件对象"};
-        //raw 两种方式
-        String[] images={"Android.resource://com.frank.glide/raw/raw_1"};
-        String[] images={"android.resource://com.frank.glide/raw/"+R.raw.raw_1"};
-        //ContentProvider
-        String[] images={"content://media/external/images/media/139469"};
-        //assets
-        String[] images={"file:///android_asset/f003.gif"};
-        //sd卡资源
-        String[] images={"file://"+ Environment.getExternalStorageDirectory().getPath()+"/test.jpg"};
+|属性|值|描述
+|---|---|---|
+|delay_time|integer|轮播下一张图片的延迟时间|
+|scroll_time|integer|滚动到下一张图片的时间|
+|is_auto_play|boolean|是否自动轮播|
+|is_loop|boolean|是否循环|
+|title_background|color、reference|title 的背景|
+|title_textcolor|color|title 的字体颜色|
+|title_textsize|dimension|title 的字体大小|
+|title_height|dimension|title 的高度|
+|indicator_width|dimension|指示器的宽度|
+|indicator_height|dimension|指示器的高度|
+|indicator_margin|dimension|指示器到底部的距离|
+|indicator_padding|dimension|指示器之间的间距|
+|indicator_drawable_selected|reference|选中的指示器图片|
+|indicator_drawable_unselected|reference|未选中的指示器图片|
+|banner_default_image|reference|默认的图片|
+|pageMargin|dimension|左右2边缩进的距离|
+|arc_height|dimension|底部弧形的高度|
+|arc_background|reference|底部弧形的背景颜色|
+|arc_direction|enum|底部弧形的方向|
 
-        banner.setImages(images);//这里接收集合,上面写成集合太占地方，这个大家举一反三就行了啊
-        ```
+##### java 文件可调用的方法
 
-* 问：设置banner指示器颜色怎么变成方的了？
+```java
+setDelayTime                设置延迟时间
+setAutoPlay                 设置是否自动轮播
+setLoop                     设置是否循环
+setIndicatorGravity         设置指示器位置
+setBannerAnimation          设置滚动动画
+setOffscreenPageLimit       设置页面个数
+setBannerTitles             设置 title 数据
+setBannerStyle              设置样式
+setViewPagerIsScroll        设置是否可以滚动
+setPages                    设置数据源
+update                      刷新
+updateBannerStyle           刷新样式
+start                       开始使用
+setIndicatorRes             设置指示器资源
+startAutoPlay               开始自动轮播
+stopAutoPlay                停止轮播
+setOnBannerClickListener    监听点击事件
+setOnPageChangeListener     监听页面变化事件
+releaseBanner               释放 banner
+```
 
-    * 答：首先我先要说很多软件的指示器也是矩形的，然后banner的指示器可以设置color、资源图片、drawable文件夹自定义shape ，
-    所以形状你自己可以根据需求定义哦！
-
-* 问：为什么banner的点击事件没有反应，需要下一次轮播才行？点击第一个图片怎么返回1？
-
-     * 答：请将点击事件放在start方法之前执行，start必须放到最后执行，详情可以看demo。
-
+各个模式相应的代码 demo 中已经有了就不再重复，有问题可以提 issue

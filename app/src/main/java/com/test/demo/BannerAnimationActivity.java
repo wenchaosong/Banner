@@ -6,13 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ms.banner.Banner;
 import com.ms.banner.Transformer;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
-import com.ms.banner.listener.OnBannerListener;
 import com.test.App;
 import com.test.R;
 import com.test.SampleAdapter;
@@ -60,12 +58,6 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
 
         //简单使用
         banner.setAutoPlay(true)
-                .setOnBannerListener(new OnBannerListener() {
-                    @Override
-                    public void onBannerClick(int position) {
-                        Toast.makeText(BannerAnimationActivity.this, "你点击了：" + position, Toast.LENGTH_SHORT).show();
-                    }
-                })
                 .setPages(App.images, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {

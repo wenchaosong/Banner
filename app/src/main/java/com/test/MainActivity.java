@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.ms.banner.Banner;
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
-import com.ms.banner.listener.OnBannerListener;
+import com.ms.banner.listener.OnBannerClickListener;
 import com.test.demo.BannerAnimationActivity;
 import com.test.demo.BannerLocalActivity;
 import com.test.demo.BannerStyleActivity;
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                 })
                 .setDelayTime(3000)
-                .setOnBannerListener(new OnBannerListener() {
+                .setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
                     public void onBannerClick(int position) {
                         Toast.makeText(MainActivity.this, "你点击了：" + position, Toast.LENGTH_SHORT).show();

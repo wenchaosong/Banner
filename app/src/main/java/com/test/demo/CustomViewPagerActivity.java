@@ -29,6 +29,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
     private int mIndicatorSelectedResId = R.mipmap.indicator;
     private int mIndicatorUnselectedResId = R.mipmap.indicator2;
     private int lastPosition = 0;
+    private List<CustomData> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,10 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         indicator = (LinearLayout) findViewById(R.id.indicator);
         indicatorImages.clear();
 
-        List<CustomData> list = new ArrayList<>();
-        list.add(new CustomData("", "CustomLayout", false));
-        list.add(new CustomData("", "Transformer", false));
-        list.add(new CustomData("", "Viewpager", false));
+        mList = new ArrayList<>();
+        mList.add(new CustomData("", "CustomLayout", false));
+        mList.add(new CustomData("", "Transformer", false));
+        mList.add(new CustomData("", "Viewpager", false));
 
         ArrayList<CustomData> arrList = new ArrayList<>();
         CustomData data1 = new CustomData("http://img.zcool.cn/community/01fca557a7f5f90000012e7e9feea8.jpg", "", false);
@@ -57,8 +58,8 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         initIndicator();
 
         banner1.setAutoPlay(true)
-                .setOffscreenPageLimit(list.size())
-                .setPages(list, new HolderCreator<BannerViewHolder>() {
+                .setOffscreenPageLimit(mList.size())
+                .setPages(mList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
                         return new CustomViewHolder2();
@@ -75,8 +76,8 @@ public class CustomViewPagerActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                indicatorImages.get((lastPosition + 3) % 3).setImageResource(mIndicatorUnselectedResId);
-                indicatorImages.get((position + 3) % 3).setImageResource(mIndicatorSelectedResId);
+                indicatorImages.get((lastPosition + mList.size()) % mList.size()).setImageResource(mIndicatorUnselectedResId);
+                indicatorImages.get((position + mList.size()) % mList.size()).setImageResource(mIndicatorSelectedResId);
                 lastPosition = position;
             }
 
@@ -87,7 +88,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         });
 
         banner2.setAutoPlay(true)
-                .setOffscreenPageLimit(list.size())
+                .setOffscreenPageLimit(mList.size())
                 .setPages(arrList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
@@ -97,7 +98,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
                 .start();
 
         banner3.setAutoPlay(true)
-                .setOffscreenPageLimit(list.size())
+                .setOffscreenPageLimit(mList.size())
                 .setPages(arrList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
@@ -108,7 +109,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
     }
 
     private void initIndicator() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < mList.size(); i++) {
             ImageView imageView = new ImageView(this);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             LinearLayout.LayoutParams custom_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,

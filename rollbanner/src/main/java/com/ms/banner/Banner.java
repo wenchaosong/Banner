@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.ms.banner.holder.BannerViewHolder;
 import com.ms.banner.holder.HolderCreator;
-import com.ms.banner.listener.OnBannerListener;
+import com.ms.banner.listener.OnBannerClickListener;
 import com.ms.banner.view.ArcShapeView;
 import com.ms.banner.view.BannerViewPager;
 
@@ -69,7 +69,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private BannerPagerAdapter adapter;
     private OnPageChangeListener mOnPageChangeListener;
     private BannerScroller mScroller;
-    private OnBannerListener listener;
+    private OnBannerClickListener listener;
     private DisplayMetrics dm;
     private int mPageMargin;
     private int mArcHeight;
@@ -233,7 +233,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
      * @param transformer         PageTransformer that will modify each page's animation properties
      * @return Banner
      */
-    public Banner setPageTransformer(boolean reverseDrawingOrder, PageTransformer transformer) {
+    private Banner setPageTransformer(boolean reverseDrawingOrder, PageTransformer transformer) {
         viewPager.setPageTransformer(reverseDrawingOrder, transformer);
         return this;
     }
@@ -627,7 +627,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     }
 
-    public Banner setOnBannerListener(OnBannerListener listener) {
+    public Banner setOnBannerClickListener(OnBannerClickListener listener) {
         this.listener = listener;
         return this;
     }
