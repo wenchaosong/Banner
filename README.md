@@ -6,12 +6,10 @@
 
 图片轮播类似控件比较多，但是真正好用的比较少，大家公认的项目[banner](https://github.com/youth5201314/banner) 是比较好用的，
 但是作者已经很久没维护了，所以我在他的基础上优化了一部分，满足大家项目中常用的一些需求。<br>
-**
 具体优化点：<br>
 1.优化了自定义布局，不仅仅是一张图片；<br>
 2.优化了 onPageSelected 方法调用两次的 bug；<br>
 3.增加了多种 banner 样式
-**
 
 ## 效果图
 
@@ -83,7 +81,7 @@ class CustomViewHolder implements BannerViewHolder<String> {
 
 #### Step 4.在Activity或者Fragment中配置Banner
 
-- 注意！start()方法必须放到最后执行，点击事件请放到start()前
+- 注意！start()方法必须放到最后执行
 
 ```java
 @Override
@@ -104,7 +102,6 @@ protected void onCreate(Bundle savedInstanceState) {
 
 #### Step 5.（可选）
 ```java
-//如果你需要考虑更好的体验，可以这么操作
 @Override
 protected void onStart() {
     super.onStart();
