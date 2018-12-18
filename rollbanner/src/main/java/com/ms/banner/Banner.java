@@ -290,6 +290,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             setStyleUI();
             setImageList(mDatas);
             setData();
+        } else {
+            bannerDefaultImage.setVisibility(VISIBLE);
         }
         return this;
     }
