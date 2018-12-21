@@ -2,6 +2,7 @@ package com.ms.banner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -48,6 +49,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private boolean isLoop = BannerConfig.IS_LOOP;
     private int mIndicatorSelectedResId = R.drawable.gray_radius;
     private int mIndicatorUnselectedResId = R.drawable.white_radius;
+    private Drawable mIndicatorSelectedDrawable;
+    private Drawable mIndicatorUnselectedDrawable;
     private int titleHeight;
     private int titleBackground;
     private int titleTextColor;
@@ -286,6 +289,15 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
+    public Banner setIndicatorRes(Drawable select, Drawable unSelect) {
+        if (select == null || unSelect == null)
+            throw new RuntimeException("[Banner] --> The Drawable res is null");
+
+        mIndicatorSelectedDrawable = select;
+        mIndicatorUnselectedDrawable = unSelect;
+        return this;
+    }
+
     private void setStyleUI() {
         int visibility = count > 1 ? View.VISIBLE : View.GONE;
         switch (bannerStyle) {
@@ -366,9 +378,17 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             custom_params.leftMargin = mIndicatorPadding;
             custom_params.rightMargin = mIndicatorPadding;
             if (i == 0) {
-                imageView.setImageResource(mIndicatorSelectedResId);
+                if (mIndicatorSelectedDrawable != null) {
+                    imageView.setImageDrawable(mIndicatorSelectedDrawable);
+                } else {
+                    imageView.setImageResource(mIndicatorSelectedResId);
+                }
             } else {
-                imageView.setImageResource(mIndicatorUnselectedResId);
+                if (mIndicatorUnselectedDrawable != null) {
+                    imageView.setImageDrawable(mIndicatorUnselectedDrawable);
+                } else {
+                    imageView.setImageResource(mIndicatorUnselectedResId);
+                }
             }
             indicatorImages.add(imageView);
             if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
@@ -578,11 +598,21 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||
                 bannerStyle == BannerConfig.CUSTOM_INDICATOR) {
             if (isLoop) {
-                indicatorImages.get((lastPosition - 1 + count) % count).setImageResource(mIndicatorUnselectedResId);
-                indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
+                if (mIndicatorSelectedDrawable != null && mIndicatorUnselectedDrawable != null) {
+                    indicatorImages.get((lastPosition - 1 + count) % count).setImageDrawable(mIndicatorUnselectedDrawable);
+                    indicatorImages.get((position - 1 + count) % count).setImageDrawable(mIndicatorSelectedDrawable);
+                } else {
+                    indicatorImages.get((lastPosition - 1 + count) % count).setImageResource(mIndicatorUnselectedResId);
+                    indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
+                }
             } else {
-                indicatorImages.get((lastPosition + count) % count).setImageResource(mIndicatorUnselectedResId);
-                indicatorImages.get((toRealPosition(position) + count) % count).setImageResource(mIndicatorSelectedResId);
+                if (mIndicatorSelectedDrawable != null && mIndicatorUnselectedDrawable != null) {
+                    indicatorImages.get((lastPosition + count) % count).setImageDrawable(mIndicatorUnselectedDrawable);
+                    indicatorImages.get((toRealPosition(position) + count) % count).setImageDrawable(mIndicatorSelectedDrawable);
+                } else {
+                    indicatorImages.get((lastPosition + count) % count).setImageResource(mIndicatorUnselectedResId);
+                    indicatorImages.get((toRealPosition(position) + count) % count).setImageResource(mIndicatorSelectedResId);
+                }
             }
             lastPosition = position;
         }
