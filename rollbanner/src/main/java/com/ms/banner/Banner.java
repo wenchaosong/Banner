@@ -34,7 +34,6 @@ import static android.support.v4.view.ViewPager.PageTransformer;
 
 public class Banner extends FrameLayout implements OnPageChangeListener {
 
-    private static final String TAG = "Banner";
     private int mIndicatorPadding = BannerConfig.PADDING_SIZE;
     private int mIndicatorMargin = BannerConfig.MARGIN_BOTTOM;
     private int mIndicatorWidth;
@@ -56,7 +55,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private int count = 0;
     private int currentItem;
     private int gravity = -1;
-    private int lastPosition = 1;
+    private int lastPosition;
     private List<String> titles;
     private List mDatas;
     private HolderCreator<BannerViewHolder> creator;
@@ -68,14 +67,12 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private ImageView bannerDefaultImage;
     private BannerPagerAdapter adapter;
     private OnPageChangeListener mOnPageChangeListener;
-    private BannerScroller mScroller;
     private OnBannerClickListener listener;
-    private DisplayMetrics dm;
     private int mPageMargin;
     private int mArcHeight;
     private int mArcBg;
     private int mArcDirection;
-    private static final int NUM = 1000;
+    private static final int NUM = 5000;
     private WeakHandler handler = new WeakHandler();
 
     public Banner(Context context) {
@@ -92,7 +89,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         titles = new ArrayList<>();
         mDatas = new ArrayList<>();
         indicatorImages = new ArrayList<>();
-        dm = context.getResources().getDisplayMetrics();
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
         indicatorSize = dm.widthPixels / 80;
         initView(context, attrs);
     }
@@ -161,11 +158,11 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         try {
             Field mField = ViewPager.class.getDeclaredField("mScroller");
             mField.setAccessible(true);
-            mScroller = new BannerScroller(viewPager.getContext());
-            mScroller.setDuration(scrollTime);
-            mField.set(viewPager, mScroller);
+            BannerScroller scroller = new BannerScroller(viewPager.getContext());
+            scroller.setDuration(scrollTime);
+            mField.set(viewPager, scroller);
         } catch (Exception e) {
-            //            Log.e(TAG, e.getMessage());
+
         }
     }
 
@@ -201,21 +198,13 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     public Banner setBannerAnimation(Class<? extends PageTransformer> transformer) {
         try {
-            setPageTransformer(true, transformer.newInstance());
+            viewPager.setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
-            //            Log.e(TAG, "Please set the PageTransformer class");
+
         }
         return this;
     }
 
-    /**
-     * Set the number of pages that should be retained to either side of the
-     * current page in the view hierarchy in an idle state. Pages beyond this
-     * limit will be recreated from the adapter when needed.
-     *
-     * @param limit How many pages will be kept offscreen in an idle state.
-     * @return Banner
-     */
     public Banner setOffscreenPageLimit(int limit) {
         if (viewPager != null) {
             viewPager.setOffscreenPageLimit(limit);
@@ -223,17 +212,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    /**
-     * Set a {@link PageTransformer} that will be called for each attached page whenever
-     * the scroll position is changed. This allows the application to apply custom property
-     * transformations to each page, overriding the default sliding look and feel.
-     *
-     * @param reverseDrawingOrder true if the supplied PageTransformer requires page views
-     *                            to be drawn from last to first instead of first to last.
-     * @param transformer         PageTransformer that will modify each page's animation properties
-     * @return Banner
-     */
-    private Banner setPageTransformer(boolean reverseDrawingOrder, PageTransformer transformer) {
+    public Banner setPageTransformer(boolean reverseDrawingOrder, PageTransformer transformer) {
         viewPager.setPageTransformer(reverseDrawingOrder, transformer);
         return this;
     }
@@ -288,7 +267,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     public Banner start() {
         if (count > 0) {
             setStyleUI();
-            setImageList(mDatas);
+            setImageList();
             setData();
         } else {
             bannerDefaultImage.setVisibility(VISIBLE);
@@ -357,20 +336,14 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         }
     }
 
-    private void setImageList(List<?> datas) {
-        if (datas == null || datas.size() <= 0) {
-            bannerDefaultImage.setVisibility(VISIBLE);
-            //            Log.e(TAG, "The image data set is empty.");
-            return;
-        }
+    private void setImageList() {
         bannerDefaultImage.setVisibility(GONE);
 
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||
                 bannerStyle == BannerConfig.CUSTOM_INDICATOR) {
-            if (isLoop)
-                createIndicator();
+            createIndicator();
         } else if (bannerStyle == BannerConfig.NUM_INDICATOR_TITLE) {
             numIndicatorInside.setText("1/" + count);
         } else if (bannerStyle == BannerConfig.NUM_INDICATOR) {
@@ -411,38 +384,38 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     private void setData() {
-        if (isLoop)
+        if (isLoop) {
             //currentItem = 1;
             currentItem = NUM / 2 - ((NUM / 2) % count) + 1;
-        else
+            lastPosition = 1;
+        } else {
             currentItem = 0;
+            lastPosition = 0;
+        }
         if (adapter == null) {
             adapter = new BannerPagerAdapter();
             viewPager.addOnPageChangeListener(this);
         }
         viewPager.setAdapter(adapter);
-        viewPager.setFocusable(true);
         viewPager.setCurrentItem(currentItem);
         viewPager.setOffscreenPageLimit(count);
-        setOffscreenPageLimit(count);
         if (isScroll && count > 1) {
             viewPager.setScrollable(true);
         } else {
             viewPager.setScrollable(false);
         }
-        if (isAutoPlay)
-            startAutoPlay();
+        startAutoPlay();
     }
 
     public void startAutoPlay() {
-        if (isLoop) {
+        if (isAutoPlay) {
             handler.removeCallbacks(task);
             handler.postDelayed(task, delayTime);
         }
     }
 
     public void stopAutoPlay() {
-        if (isLoop) {
+        if (isAutoPlay) {
             handler.removeCallbacks(task);
         }
     }
@@ -450,16 +423,24 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private final Runnable task = new Runnable() {
         @Override
         public void run() {
-            if (count > 1 && isAutoPlay) {
+            if (count > 1) {
                 currentItem = viewPager.getCurrentItem() + 1;
-                //                Log.i(TAG, "Runnable --- currentItem:" + currentItem + " count:" + count);
-                if (currentItem == adapter.getCount() - 1) {
-                    currentItem = 0;
-                    viewPager.setCurrentItem(currentItem, false);
-                    handler.post(task);
+                if (isLoop) {
+                    if (currentItem == adapter.getCount() - 1) {
+                        currentItem = 0;
+                        viewPager.setCurrentItem(currentItem, false);
+                        handler.post(task);
+                    } else {
+                        viewPager.setCurrentItem(currentItem);
+                        handler.postDelayed(task, delayTime);
+                    }
                 } else {
-                    viewPager.setCurrentItem(currentItem);
-                    handler.postDelayed(task, delayTime);
+                    if (currentItem >= adapter.getCount()) {
+                        stopAutoPlay();
+                    } else {
+                        viewPager.setCurrentItem(currentItem);
+                        handler.postDelayed(task, delayTime);
+                    }
                 }
             }
         }
@@ -467,15 +448,15 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        //        Log.i(tag, ev.getAction() + "--" + isAutoPlay);
-        if (isAutoPlay) {
-            int action = ev.getAction();
-            if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL
-                    || action == MotionEvent.ACTION_OUTSIDE) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_OUTSIDE:
                 startAutoPlay();
-            } else if (action == MotionEvent.ACTION_DOWN) {
+                break;
+            case MotionEvent.ACTION_DOWN:
                 stopAutoPlay();
-            }
+                break;
         }
         return super.dispatchTouchEvent(ev);
     }
@@ -488,7 +469,12 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
      */
     private int toRealPosition(int position) {
         //int realPosition = (position - 1) % count;
-        int realPosition = (position - 1 + count) % count;
+        int realPosition;
+        if (isLoop) {
+            realPosition = (position - 1 + count) % count;
+        } else {
+            realPosition = (position + count) % count;
+        }
         if (realPosition < 0)
             realPosition += count;
         return realPosition;
@@ -561,11 +547,11 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 } else if (currentItem == count + 1) {
                     viewPager.setCurrentItem(1, false);
                 }*/
-                if (currentItem == 0) {
+                /*if (currentItem == 0) {
                     viewPager.setCurrentItem(NUM - 1, false);
                 } else if (currentItem == NUM - 1) {
                     viewPager.setCurrentItem(0, false);
-                }
+                }*/
                 break;
             case 1://start Sliding
                 break;
@@ -587,14 +573,17 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (mOnPageChangeListener != null) {
             mOnPageChangeListener.onPageSelected(toRealPosition(position));
         }
-        if (!isLoop)
-            return;
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||
                 bannerStyle == BannerConfig.CUSTOM_INDICATOR) {
-            indicatorImages.get((lastPosition - 1 + count) % count).setImageResource(mIndicatorUnselectedResId);
-            indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
+            if (isLoop) {
+                indicatorImages.get((lastPosition - 1 + count) % count).setImageResource(mIndicatorUnselectedResId);
+                indicatorImages.get((position - 1 + count) % count).setImageResource(mIndicatorSelectedResId);
+            } else {
+                indicatorImages.get((lastPosition + count) % count).setImageResource(mIndicatorUnselectedResId);
+                indicatorImages.get((toRealPosition(position) + count) % count).setImageResource(mIndicatorSelectedResId);
+            }
             lastPosition = position;
         }
         /*if (position == 0)

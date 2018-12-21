@@ -8,16 +8,13 @@ import android.view.MotionEvent;
 public class BannerViewPager extends ViewPager {
 
     private boolean scrollable = true;
-    private boolean isShow;
 
     public BannerViewPager(Context context) {
         super(context);
-        isShow = true;
     }
 
     public BannerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
-        isShow = true;
     }
 
     @Override
@@ -34,22 +31,4 @@ public class BannerViewPager extends ViewPager {
         this.scrollable = scrollable;
     }
 
-    /*@Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        try {
-            Field mFirstLayout = ViewPager.class.getDeclaredField("mFirstLayout");
-            mFirstLayout.setAccessible(true);
-            if (isShow) {
-                isShow = false;
-                mFirstLayout.set(this, true);
-            } else {
-                mFirstLayout.set(this, false);
-            }
-            getAdapter().notifyDataSetChanged();
-            setCurrentItem(getCurrentItem());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 }
