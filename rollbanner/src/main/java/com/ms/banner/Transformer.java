@@ -15,6 +15,7 @@ import com.ms.banner.transformer.RotateDownTransformer;
 import com.ms.banner.transformer.RotateUpTransformer;
 import com.ms.banner.transformer.ScaleInOutTransformer;
 import com.ms.banner.transformer.ScaleTransformer;
+import com.ms.banner.transformer.ScaleRightTransformer;
 import com.ms.banner.transformer.StackTransformer;
 import com.ms.banner.transformer.TabletTransformer;
 import com.ms.banner.transformer.ZoomInTransformer;
@@ -36,6 +37,7 @@ public class Transformer {
     public static Class<? extends PageTransformer> RotateUp = RotateUpTransformer.class;
     public static Class<? extends PageTransformer> ScaleInOut = ScaleInOutTransformer.class;
     public static Class<? extends PageTransformer> Scale = ScaleTransformer.class;
+    public static Class<? extends PageTransformer> ScaleRight = ScaleRightTransformer.class;
     public static Class<? extends PageTransformer> Stack = StackTransformer.class;
     public static Class<? extends PageTransformer> Tablet = TabletTransformer.class;
     public static Class<? extends PageTransformer> ZoomIn = ZoomInTransformer.class;
