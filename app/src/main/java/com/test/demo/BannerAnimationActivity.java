@@ -38,6 +38,7 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
         transformers.add(Transformer.RotateUp);
         transformers.add(Transformer.ScaleInOut);
         transformers.add(Transformer.Scale);
+        transformers.add(Transformer.ScaleRight);
         transformers.add(Transformer.Stack);
         transformers.add(Transformer.Tablet);
         transformers.add(Transformer.ZoomIn);
