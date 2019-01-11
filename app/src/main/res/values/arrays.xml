@@ -60,6 +60,7 @@
         <item>RotateUp</item>
         <item>ScaleInOut</item>
         <item>Scale</item>
+        <item>ScaleRight</item>
         <item>Stack</item>
         <item>Tablet</item>
         <item>ZoomIn</item>
