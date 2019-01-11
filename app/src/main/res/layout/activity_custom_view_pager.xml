@@ -38,6 +38,13 @@
             android:layout_marginTop="30dp" />
 
         <com.ms.banner.Banner
+            android:id="@+id/banner4"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp"
+            app:page_right_margin="35dp" />
+
+        <com.ms.banner.Banner
             android:id="@+id/banner3"
             android:layout_width="match_parent"
             android:layout_height="150dp"
