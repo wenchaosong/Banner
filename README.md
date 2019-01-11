@@ -25,13 +25,14 @@
 |自定义混合模式|![效果示例](/pic/8.gif)|
 |底部弧形模式|![效果示例](/pic/9.png)|
 |指示器在外部|![效果示例](/pic/10.png)|
+|右端缩进模式|![效果示例](/pic/11.png)|
 
 ## 使用步骤
 
 #### Step 1.依赖banner
 ```groovy
 dependencies{
-    compile 'com.github.wenchaosong:Banner:2.2.8'
+    compile 'com.github.wenchaosong:Banner:2.2.9'
 }
 ```
 或者引用本地lib
@@ -143,7 +144,8 @@ protected void onStop() {
 |indicator_drawable_selected|reference|选中的指示器图片|
 |indicator_drawable_unselected|reference|未选中的指示器图片|
 |banner_default_image|reference|默认的图片|
-|pageMargin|dimension|左右2边缩进的距离|
+|page_left_margin|dimension|左边缩进的距离|
+|page_right_margin|dimension|右边缩进的距离|
 |arc_height|dimension|底部弧形的高度|
 |arc_background|reference|底部弧形的背景颜色|
 |arc_direction|enum|底部弧形的方向|
