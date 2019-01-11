@@ -19,7 +19,8 @@
                 android:id="@+id/banner1"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                app:pageMargin="20dp" />
+                app:page_left_margin="20dp"
+                app:page_right_margin="20dp" />
 
             <LinearLayout
                 android:id="@+id/indicator"
