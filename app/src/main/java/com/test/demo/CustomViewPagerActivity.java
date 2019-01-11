@@ -24,6 +24,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
     Banner banner1;
     Banner banner2;
     Banner banner3;
+    Banner banner4;
     LinearLayout indicator;
     private List<ImageView> indicatorImages = new ArrayList<>();
     private int mIndicatorSelectedResId = R.mipmap.indicator;
@@ -39,6 +40,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         banner1 = (Banner) findViewById(R.id.banner1);
         banner2 = (Banner) findViewById(R.id.banner2);
         banner3 = (Banner) findViewById(R.id.banner3);
+        banner4 = (Banner) findViewById(R.id.banner4);
         indicator = (LinearLayout) findViewById(R.id.indicator);
         indicatorImages.clear();
 
@@ -106,6 +108,17 @@ public class CustomViewPagerActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+
+        banner4.setAutoPlay(true)
+                .setBannerAnimation(Transformer.ScaleRight)
+                .setOffscreenPageLimit(mList.size())
+                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
+                    @Override
+                    public BannerViewHolder createViewHolder() {
+                        return new CustomViewHolder3();
+                    }
+                })
+                .start();
     }
 
     private void initIndicator() {
@@ -134,6 +147,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         banner1.startAutoPlay();
         banner2.startAutoPlay();
         banner3.startAutoPlay();
+        banner4.startAutoPlay();
     }
 
     @Override
@@ -143,5 +157,6 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         banner1.stopAutoPlay();
         banner2.stopAutoPlay();
         banner3.stopAutoPlay();
+        banner4.stopAutoPlay();
     }
 }
