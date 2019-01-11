@@ -71,7 +71,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private BannerPagerAdapter adapter;
     private OnPageChangeListener mOnPageChangeListener;
     private OnBannerClickListener listener;
-    private int mPageMargin;
+    private int mPageLeftMargin;
+    private int mPageRightMargin;
     private int mArcHeight;
     private int mArcBg;
     private int mArcDirection;
@@ -113,8 +114,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         viewPager = (BannerViewPager) view.findViewById(R.id.bannerViewPager);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT);
-        params.leftMargin = mPageMargin;
-        params.rightMargin = mPageMargin;
+        params.leftMargin = mPageLeftMargin;
+        params.rightMargin = mPageRightMargin;
         viewPager.setLayoutParams(params);
         titleView = (LinearLayout) view.findViewById(R.id.titleView);
         indicator = (LinearLayout) view.findViewById(R.id.circleIndicator);
@@ -150,7 +151,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         titleTextColor = typedArray.getColor(R.styleable.Banner_title_textcolor, BannerConfig.TITLE_TEXT_COLOR);
         titleTextSize = typedArray.getDimensionPixelSize(R.styleable.Banner_title_textsize, BannerConfig.TITLE_TEXT_SIZE);
         bannerBackgroundImage = typedArray.getResourceId(R.styleable.Banner_banner_default_image, R.drawable.no_banner);
-        mPageMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_pageMargin, BannerConfig.PAGE_MARGIN);
+        mPageLeftMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_page_left_margin, BannerConfig.PAGE_MARGIN);
+        mPageRightMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_page_right_margin, BannerConfig.PAGE_MARGIN);
         mArcHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_arc_height, BannerConfig.ARC_HEIGHT);
         mArcBg = typedArray.getColor(R.styleable.Banner_arc_background, BannerConfig.ARC_BACKGROUND);
         mArcDirection = typedArray.getInt(R.styleable.Banner_arc_direction, BannerConfig.ARC_DIRECTION);
