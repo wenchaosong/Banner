@@ -31,6 +31,11 @@
 
 #### Step 1.依赖banner
 ```groovy
+repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+
 dependencies{
     compile 'com.github.wenchaosong:Banner:2.2.9'
 }
