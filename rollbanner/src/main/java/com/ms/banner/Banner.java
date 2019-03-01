@@ -256,6 +256,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         }
         if (imageUrls.size() == 0) {
             bannerDefaultImage.setVisibility(VISIBLE);
+            this.mDatas.clear();
+            this.indicatorImages.clear();
+            adapter.notifyDataSetChanged();
         } else {
             this.mDatas.clear();
             this.indicatorImages.clear();
