@@ -37,7 +37,7 @@ repositories {
     }
 
 dependencies{
-    compile 'com.github.wenchaosong:Banner:2.2.9'
+    implementation 'com.github.wenchaosong:Banner:2.3.0'
 }
 ```
 或者引用本地lib
