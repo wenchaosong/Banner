@@ -251,11 +251,18 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     public void update(List<?> imageUrls) {
-        this.mDatas.clear();
-        this.indicatorImages.clear();
-        this.mDatas.addAll(imageUrls);
-        this.count = this.mDatas.size();
-        start();
+        if (imageUrls == null) {
+            imageUrls = new ArrayList<>();
+        }
+        if (imageUrls.size() == 0) {
+            bannerDefaultImage.setVisibility(VISIBLE);
+        } else {
+            this.mDatas.clear();
+            this.indicatorImages.clear();
+            this.mDatas.addAll(imageUrls);
+            this.count = this.mDatas.size();
+            start();
+        }
     }
 
     public void updateBannerStyle(int bannerStyle) {
