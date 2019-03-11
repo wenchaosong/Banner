@@ -56,7 +56,7 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
         String[] data = getResources().getStringArray(R.array.anim);
         listView.setAdapter(new SampleAdapter(this, data));
         listView.setOnItemClickListener(this);
-
+        App.images.clear();
         //简单使用
         banner.setAutoPlay(true)
                 .setPages(App.images, new HolderCreator<BannerViewHolder>() {
@@ -67,6 +67,8 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
                 })
                 .setDelayTime(3000)
                 .start();
+        banner.update(App.images);
+
     }
 
     @Override
