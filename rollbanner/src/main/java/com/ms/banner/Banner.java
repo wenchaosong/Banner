@@ -3,7 +3,6 @@ package com.ms.banner;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -251,7 +250,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         update(imageUrls);
     }
 
-    public void update(@NonNull List<?> imageUrls) {
+    public void update(List<?> imageUrls) {
+        if (imageUrls == null) {
+            imageUrls = new ArrayList<>();
+        }
         if (imageUrls.size() == 0) {
             bannerDefaultImage.setVisibility(VISIBLE);
             this.mDatas.clear();
