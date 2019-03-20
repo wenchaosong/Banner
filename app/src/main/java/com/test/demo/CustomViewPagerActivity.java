@@ -60,7 +60,6 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         initIndicator();
 
         banner1.setAutoPlay(true)
-                .setOffscreenPageLimit(mList.size())
                 .setPages(mList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
@@ -90,7 +89,6 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         });
 
         banner2.setAutoPlay(true)
-                .setOffscreenPageLimit(mList.size())
                 .setPages(arrList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
@@ -100,7 +98,6 @@ public class CustomViewPagerActivity extends AppCompatActivity {
                 .start();
 
         banner3.setAutoPlay(true)
-                .setOffscreenPageLimit(mList.size())
                 .setPages(arrList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
@@ -111,7 +108,6 @@ public class CustomViewPagerActivity extends AppCompatActivity {
 
         banner4.setAutoPlay(true)
                 .setBannerAnimation(Transformer.ScaleRight)
-                .setOffscreenPageLimit(mList.size())
                 .setPages(arrList, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {

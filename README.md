@@ -1,18 +1,24 @@
-# Android图片轮播控件
+# Android 图片轮播控件
 
 [![](https://jitpack.io/v/wenchaosong/Banner.svg)](https://jitpack.io/#wenchaosong/Banner)
 [![](https://img.shields.io/github/stars/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 [![](https://img.shields.io/github/issues/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 
-图片轮播类似控件比较多，但是真正好用的比较少，大家公认的项目[banner](https://github.com/youth5201314/banner) 是比较好用的，
-但是作者已经很久没维护了，所以我在他的基础上优化了一部分，满足大家项目中常用的一些需求。<br>
-具体优化点：<br>
-1.优化了自定义布局，不仅仅是一张图片；<br>
-2.优化了 onPageSelected 方法调用两次的 bug；<br>
+图片轮播类似控件比较多,但是真正好用的比较少,大家公认的项目[banner](https://github.com/youth5201314/banner)是比较好用的,
+但是作者已经很久没维护了,所以我在他的基础上优化了一部分,满足大家项目中常用的一些需求.<br>
+具体优化点:<br>
+1.优化了自定义布局,不仅仅是一张图片;<br>
+2.优化了 onPageSelected 方法调用两次的 bug;<br>
 3.增加了多种 banner 样式
 
 ## 关于本库的优化点
-目前存在一个优化点,就是实现原理上,为了兼容卡片模式,无限轮播的实现方式我用了无限大,这种方式其实我是不太想用的,另外一个实现方式是在前后各加一个,总数加2,这其实才是真正意义的无限轮播,在这里我也是搜集了各种 banner 的实现源码,发现第二个方式总有瑕疵,所以在此希望大家有好的处理方式能提 pr,或者 issue,我会认真看,认真解决
+
+目前存在一个优化点,就是实现原理上,为了兼容卡片模式,无限轮播的实现方式采用的是 adapter 的 count 取一个比较大的数值,这种方式
+其实我是不太想用的,另外一个实现方式是 count 总数加 2,这其实才是真正意义的无限轮播,在这里我也是搜集了各种 banner 的实现源码,
+发现第二个方式总有瑕疵.具体就是:卡片模式滑动的时候,最后一张到第一张或者第一张到最后一张图片有个延迟的白边,造成的原因是调用
+的方法执行的比较慢,所以有个延迟(第二种方式可以参照 [BannerNew.java][BannerNew.java] 里面的代码)
+
+所以在此希望大家有好的处理方式能提 pr,或者 issue,我会认真看,认真解决
 
 ## 效果图
 
@@ -33,7 +39,7 @@
 ## 使用步骤
 
 #### Step 1.依赖banner
-```groovy
+```
 repositories {
         jcenter()
         maven { url 'https://jitpack.io' }
@@ -44,12 +50,12 @@ dependencies{
 }
 ```
 或者引用本地lib
-```groovy
+```
 compile project(':rollbanner')
 ```
 
-#### Step 2.在布局文件中添加Banner，可以设置自定义属性
-```xml
+#### Step 2.在布局文件中添加Banner,可以设置自定义属性
+```
 <com.ms.banner.Banner
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/banner"
@@ -58,7 +64,7 @@ compile project(':rollbanner')
 ```
 
 #### Step 3.设置布局
-```java
+```
 .setPages(list, new HolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
@@ -92,7 +98,7 @@ class CustomViewHolder implements BannerViewHolder<String> {
 
 - 注意！start()方法必须放到最后执行
 
-```java
+```
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -110,7 +116,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 
 #### Step 5.（可选）
-```java
+```
 @Override
 protected void onStart() {
     super.onStart();
@@ -127,7 +133,7 @@ protected void onStop() {
 ```
 
 #### Step 6.混淆
-```java
+```
 -keep class com.ms.banner.** {*;}
 ```
 
@@ -160,7 +166,7 @@ protected void onStop() {
 
 ##### java 文件可调用的方法
 
-```java
+```
 setDelayTime                设置延迟时间
 setAutoPlay                 设置是否自动轮播
 setLoop                     设置是否循环
@@ -182,4 +188,4 @@ setOnPageChangeListener     监听页面变化事件
 releaseBanner               释放 banner
 ```
 
-各个模式相应的代码 demo 中已经有了就不再重复，有问题可以提 issue
+各个模式相应的代码 demo 中已经有了就不再重复,有问题可以提 issue
