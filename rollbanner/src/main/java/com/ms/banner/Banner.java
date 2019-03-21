@@ -490,7 +490,12 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 startAutoPlay();
                 break;
             case MotionEvent.ACTION_DOWN:
-                stopAutoPlay();
+                float downX = ev.getX();
+                if (mPageLeftMargin != 0 || mPageRightMargin != 0) {
+                    if (downX > mPageLeftMargin && downX < mPageRightMargin) {
+                        stopAutoPlay();
+                    }
+                }
                 break;
         }
         return super.dispatchTouchEvent(ev);
