@@ -1,6 +1,7 @@
 # Android 图片轮播控件
 
 [![](https://jitpack.io/v/wenchaosong/Banner.svg)](https://jitpack.io/#wenchaosong/Banner)
+[![](https://api.bintray.com/packages/songwenchao0714/maven/banner/images/download.svg)](https://bintray.com/songwenchao0714/maven/banner/latest)
 [![](https://img.shields.io/github/stars/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 [![](https://img.shields.io/github/issues/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 
@@ -40,13 +41,8 @@
 
 #### Step 1.依赖banner
 ```
-repositories {
-        jcenter()
-        maven { url 'https://jitpack.io' }
-    }
-
 dependencies{
-    implementation 'com.github.wenchaosong:Banner:2.3.7'
+    implementation 'com.ms:banner:latest'
 }
 ```
 或者引用本地lib
@@ -177,6 +173,7 @@ setBannerTitles             设置 title 数据
 setBannerStyle              设置样式
 setViewPagerIsScroll        设置是否可以滚动
 setPages                    设置数据源
+setCurrentPage              设置当前页
 update                      刷新
 updateBannerStyle           刷新样式
 start                       开始使用

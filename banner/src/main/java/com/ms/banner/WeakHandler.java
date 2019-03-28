@@ -20,144 +20,42 @@ public class WeakHandler {
     @VisibleForTesting
     final ChainedRef mRunnables = new ChainedRef(mLock, null);
 
-    /**
-     * Default constructor associates this handler with the {@link Looper} for the
-     * current thread.
-     * <p>
-     * If this thread does not have a looper, this handler won't be able to receive messages
-     * so an exception is thrown.
-     */
     public WeakHandler() {
         mCallback = null;
         mExec = new ExecHandler();
     }
 
-    /**
-     * Constructor associates this handler with the {@link Looper} for the
-     * current thread and takes a callback interface in which you can handle
-     * messages.
-     * <p>
-     * If this thread does not have a looper, this handler won't be able to receive messages
-     * so an exception is thrown.
-     *
-     * @param callback The callback interface in which to handle messages, or null.
-     */
     public WeakHandler(@Nullable Handler.Callback callback) {
         mCallback = callback; // Hard referencing body
         mExec = new ExecHandler(new WeakReference<>(callback)); // Weak referencing inside ExecHandler
     }
 
-    /**
-     * Use the provided {@link Looper} instead of the default one.
-     *
-     * @param looper The looper, must not be null.
-     */
     public WeakHandler(@NonNull Looper looper) {
         mCallback = null;
         mExec = new ExecHandler(looper);
     }
 
-    /**
-     * Use the provided {@link Looper} instead of the default one and take a callback
-     * interface in which to handle messages.
-     *
-     * @param looper   The looper, must not be null.
-     * @param callback The callback interface in which to handle messages, or null.
-     */
     public WeakHandler(@NonNull Looper looper, @NonNull Handler.Callback callback) {
         mCallback = callback;
         mExec = new ExecHandler(looper, new WeakReference<>(callback));
     }
 
-    /**
-     * Causes the Runnable r to be added to the message queue.
-     * The runnable will be run on the thread to which this handler is
-     * attached.
-     *
-     * @param r The Runnable that will be executed.
-     * @return Returns true if the Runnable was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.
-     */
     public final boolean post(@NonNull Runnable r) {
         return mExec.post(wrapRunnable(r));
     }
 
-    /**
-     * Causes the Runnable r to be added to the message queue, to be run
-     * at a specific time given by <var>uptimeMillis</var>.
-     * <b>The time-base is {@link android.os.SystemClock#uptimeMillis}.</b>
-     * The runnable will be run on the thread to which this handler is attached.
-     *
-     * @param r            The Runnable that will be executed.
-     * @param uptimeMillis The absolute time at which the callback should run,
-     *                     using the {@link android.os.SystemClock#uptimeMillis} time-base.
-     * @return Returns true if the Runnable was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.  Note that a
-     * result of true does not mean the Runnable will be processed -- if
-     * the looper is quit before the delivery time of the message
-     * occurs then the message will be dropped.
-     */
     public final boolean postAtTime(@NonNull Runnable r, long uptimeMillis) {
         return mExec.postAtTime(wrapRunnable(r), uptimeMillis);
     }
 
-    /**
-     * Causes the Runnable r to be added to the message queue, to be run
-     * at a specific time given by <var>uptimeMillis</var>.
-     * <b>The time-base is {@link android.os.SystemClock#uptimeMillis}.</b>
-     * The runnable will be run on the thread to which this handler is attached.
-     *
-     * @param r            The Runnable that will be executed.
-     * @param uptimeMillis The absolute time at which the callback should run,
-     *                     using the {@link android.os.SystemClock#uptimeMillis} time-base.
-     * @return Returns true if the Runnable was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.  Note that a
-     * result of true does not mean the Runnable will be processed -- if
-     * the looper is quit before the delivery time of the message
-     * occurs then the message will be dropped.
-     * @see android.os.SystemClock#uptimeMillis
-     */
     public final boolean postAtTime(Runnable r, Object token, long uptimeMillis) {
         return mExec.postAtTime(wrapRunnable(r), token, uptimeMillis);
     }
 
-    /**
-     * Causes the Runnable r to be added to the message queue, to be run
-     * after the specified amount of time elapses.
-     * The runnable will be run on the thread to which this handler
-     * is attached.
-     *
-     * @param r           The Runnable that will be executed.
-     * @param delayMillis The delay (in milliseconds) until the Runnable
-     *                    will be executed.
-     * @return Returns true if the Runnable was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.  Note that a
-     * result of true does not mean the Runnable will be processed --
-     * if the looper is quit before the delivery time of the message
-     * occurs then the message will be dropped.
-     */
     public final boolean postDelayed(Runnable r, long delayMillis) {
         return mExec.postDelayed(wrapRunnable(r), delayMillis);
     }
 
-    /**
-     * Posts a message to an object that implements Runnable.
-     * Causes the Runnable r to executed on the next iteration through the
-     * message queue. The runnable will be run on the thread to which this
-     * handler is attached.
-     * <b>This method is only for use in very special circumstances -- it
-     * can easily starve the message queue, cause ordering problems, or have
-     * other unexpected side-effects.</b>
-     *
-     * @param r The Runnable that will be executed.
-     * @return Returns true if the message was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.
-     */
     public final boolean postAtFrontOfQueue(Runnable r) {
         return mExec.postAtFrontOfQueue(wrapRunnable(r));
     }
@@ -208,28 +106,10 @@ public class WeakHandler {
         return mExec.sendEmptyMessage(what);
     }
 
-    /**
-     * Sends a Message containing only the what value, to be delivered
-     * after the specified amount of time elapses.
-     *
-     * @return Returns true if the message was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.
-     * @see #sendMessageDelayed(android.os.Message, long)
-     */
     public final boolean sendEmptyMessageDelayed(int what, long delayMillis) {
         return mExec.sendEmptyMessageDelayed(what, delayMillis);
     }
 
-    /**
-     * Sends a Message containing only the what value, to be delivered
-     * at a specific time.
-     *
-     * @return Returns true if the message was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.
-     * @see #sendMessageAtTime(android.os.Message, long)
-     */
     public final boolean sendEmptyMessageAtTime(int what, long uptimeMillis) {
         return mExec.sendEmptyMessageAtTime(what, uptimeMillis);
     }
@@ -250,23 +130,6 @@ public class WeakHandler {
         return mExec.sendMessageDelayed(msg, delayMillis);
     }
 
-    /**
-     * Enqueue a message into the message queue after all pending messages
-     * before the absolute time (in milliseconds) <var>uptimeMillis</var>.
-     * <b>The time-base is {@link android.os.SystemClock#uptimeMillis}.</b>
-     * You will receive it in callback, in the thread attached
-     * to this handler.
-     *
-     * @param uptimeMillis The absolute time at which the message should be
-     *                     delivered, using the
-     *                     {@link android.os.SystemClock#uptimeMillis} time-base.
-     * @return Returns true if the message was successfully placed in to the
-     * message queue.  Returns false on failure, usually because the
-     * looper processing the message queue is exiting.  Note that a
-     * result of true does not mean the message will be processed -- if
-     * the looper is quit before the delivery time of the message
-     * occurs then the message will be dropped.
-     */
     public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
         return mExec.sendMessageAtTime(msg, uptimeMillis);
     }
