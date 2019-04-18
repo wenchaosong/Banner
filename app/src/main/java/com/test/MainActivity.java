@@ -15,8 +15,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ms.banner.Banner;
-import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerClickListener;
 import com.test.demo.BannerAnimationActivity;
 import com.test.demo.BannerLocalActivity;
@@ -74,12 +72,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         //简单使用
         banner.setAutoPlay(true)
-                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+                .setPages(arrList, new CustomViewHolder())
                 .setDelayTime(3000)
                 .setOnBannerClickListener(new OnBannerClickListener() {
                     @Override

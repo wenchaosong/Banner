@@ -9,8 +9,6 @@ import android.widget.LinearLayout;
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 import com.ms.banner.Transformer;
-import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
 import com.test.CustomData;
 import com.test.R;
 import com.test.ui.CustomViewHolder2;
@@ -60,12 +58,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         initIndicator();
 
         banner1.setAutoPlay(true)
-                .setPages(mList, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder2();
-                    }
-                })
+                .setPages(mList, new CustomViewHolder2())
                 .setBannerStyle(BannerConfig.NOT_INDICATOR)
                 .setBannerAnimation(Transformer.Scale)
                 .start();
@@ -89,31 +82,16 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         });
 
         banner2.setAutoPlay(true)
-                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder3();
-                    }
-                })
+                .setPages(arrList, new CustomViewHolder3())
                 .start();
 
         banner3.setAutoPlay(true)
-                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder3();
-                    }
-                })
+                .setPages(arrList, new CustomViewHolder3())
                 .start();
 
         banner4.setAutoPlay(true)
                 .setBannerAnimation(Transformer.ScaleRight)
-                .setPages(arrList, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder3();
-                    }
-                })
+                .setPages(arrList, new CustomViewHolder3())
                 .start();
     }
 

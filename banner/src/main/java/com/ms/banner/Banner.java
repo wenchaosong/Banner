@@ -22,7 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
 import com.ms.banner.listener.OnBannerClickListener;
 import com.ms.banner.view.ArcShapeView;
 import com.ms.banner.view.BannerViewPager;
@@ -62,7 +61,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private int lastPosition;
     private List<String> titles;
     private List mDatas;
-    private HolderCreator<BannerViewHolder> creator;
+    private BannerViewHolder creator;
     private List<ImageView> indicatorImages;
     private Context context;
     private BannerViewPager viewPager;
@@ -252,7 +251,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public Banner setPages(List<?> datas, HolderCreator<BannerViewHolder> creator) {
+    public Banner setPages(List<?> datas, BannerViewHolder creator) {
         this.mDatas = datas;
         this.creator = creator;
         this.count = datas.size();
@@ -562,13 +561,11 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             if (creator == null) {
                 throw new RuntimeException("[Banner] --> The layout is not specified,please set holder");
             }
-            BannerViewHolder holder = creator.createViewHolder();
-
-            View view = holder.createView(container.getContext());
+            View view = creator.createView(container.getContext());
             container.addView(view);
 
             if (mDatas != null && mDatas.size() > 0) {
-                holder.onBind(container.getContext(), toRealPosition(position), mDatas.get(toRealPosition(position)));
+                creator.onBind(container.getContext(), toRealPosition(position), mDatas.get(toRealPosition(position)));
             }
             if (listener != null) {
                 view.setOnClickListener(new OnClickListener() {

@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ms.banner.Banner;
-import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
 import com.test.R;
 import com.test.ui.CustomViewHolder;
 
@@ -32,12 +30,7 @@ public class BannerLocalActivity extends AppCompatActivity {
         list.add(R.mipmap.b3);
 
         banner.setAutoPlay(true)
-                .setPages(list, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+                .setPages(list, new CustomViewHolder())
                 .start();
     }
 }

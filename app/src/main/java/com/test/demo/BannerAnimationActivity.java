@@ -9,8 +9,6 @@ import android.widget.ListView;
 
 import com.ms.banner.Banner;
 import com.ms.banner.Transformer;
-import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
 import com.test.App;
 import com.test.R;
 import com.test.SampleAdapter;
@@ -59,12 +57,7 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
 
         //简单使用
         banner.setAutoPlay(true)
-                .setPages(App.images, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+                .setPages(App.images, new CustomViewHolder())
                 .setDelayTime(3000)
                 .start();
     }

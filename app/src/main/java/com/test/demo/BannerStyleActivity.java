@@ -8,8 +8,6 @@ import android.widget.Spinner;
 
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
-import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
 import com.test.App;
 import com.test.R;
 import com.test.ui.CustomViewHolder;
@@ -29,12 +27,7 @@ public class BannerStyleActivity extends AppCompatActivity implements AdapterVie
 
         //简单使用
         banner.setBannerTitles(App.titles)
-                .setPages(App.images, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+                .setPages(App.images, new CustomViewHolder())
                 .setAutoPlay(true)
                 .setDelayTime(3000)
                 .start();

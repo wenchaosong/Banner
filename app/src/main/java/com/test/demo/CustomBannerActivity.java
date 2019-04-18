@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
-import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
 import com.test.App;
 import com.test.R;
 import com.test.ui.CustomViewHolder;
@@ -24,31 +22,16 @@ public class CustomBannerActivity extends AppCompatActivity {
         banner3 = (Banner) findViewById(R.id.banner3);
 
         banner1.setAutoPlay(true)
-                .setPages(App.images, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+                .setPages(App.images, new CustomViewHolder())
                 .start();
 
         banner2.setAutoPlay(true)
-                .setPages(App.images, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+                .setPages(App.images, new CustomViewHolder())
                 .start();
 
         banner3.setBannerTitles(App.titles)
                 .setAutoPlay(true)
-                .setPages(App.images, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+                .setPages(App.images, new CustomViewHolder())
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                 .start();
     }
