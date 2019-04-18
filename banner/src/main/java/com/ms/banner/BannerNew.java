@@ -44,6 +44,8 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
     private int delayTime = BannerConfig.TIME;
     private int scrollTime = BannerConfig.DURATION;
     private boolean isAutoPlay = BannerConfig.IS_AUTO_PLAY;
+    private boolean isStart = false;
+    private boolean isPrepare = false;
     private boolean isScroll = BannerConfig.IS_SCROLL;
     private boolean isLoop = BannerConfig.IS_LOOP;
     private int mIndicatorSelectedResId = R.drawable.gray_radius;
@@ -288,8 +290,18 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
         } else {
             bannerDefaultImage.setVisibility(VISIBLE);
         }
+        isPrepare = true;
         return this;
     }
+
+    public boolean isPrepare() {
+        return isPrepare;
+    }
+
+    public boolean isStart() {
+        return isStart;
+    }
+
 
     public BannerNew setIndicatorRes(int select, int unSelect) {
         if (select < 0)
@@ -443,12 +455,14 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
         if (isAutoPlay) {
             handler.removeCallbacks(task);
             handler.postDelayed(task, delayTime);
+            isStart = true;
         }
     }
 
     public void stopAutoPlay() {
         if (isAutoPlay) {
             handler.removeCallbacks(task);
+            isStart = false;
         }
     }
 

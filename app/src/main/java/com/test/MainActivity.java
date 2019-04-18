@@ -22,6 +22,7 @@ import com.test.demo.BannerStyleActivity;
 import com.test.demo.CustomBannerActivity;
 import com.test.demo.CustomViewPagerActivity;
 import com.test.demo.IndicatorPositionActivity;
+import com.test.demo.SimpleFragmentActivity;
 import com.test.ui.CustomViewHolder;
 
 import java.util.ArrayList;
@@ -123,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 break;
             case 6:
                 startActivity(new Intent(this, CustomViewPagerActivity.class));
+                break;
+            case 7:
+                startActivity(new Intent(this, SimpleFragmentActivity.class));
                 break;
         }
     }

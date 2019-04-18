@@ -26,6 +26,7 @@
         <activity android:name=".demo.IndicatorPositionActivity" />
         <activity android:name=".demo.CustomBannerActivity" />
         <activity android:name=".demo.BannerLocalActivity" />
+        <activity android:name=".demo.SimpleFragmentActivity" />
         <activity
             android:name=".demo.CustomViewPagerActivity"
             android:screenOrientation="portrait" />

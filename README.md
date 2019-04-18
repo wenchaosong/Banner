@@ -47,7 +47,7 @@ repositories {
     }
 
 dependencies{
-    implementation 'com.github.wenchaosong:Banner:2.3.8'
+    implementation 'com.github.wenchaosong:Banner:2.3.9'
     // 或者
     implementation 'com.ms:banner:latest'
 }
@@ -68,12 +68,7 @@ compile project(':rollbanner')
 
 #### Step 3.设置布局
 ```
-.setPages(list, new HolderCreator<BannerViewHolder>() {
-                    @Override
-                    public BannerViewHolder createViewHolder() {
-                        return new CustomViewHolder();
-                    }
-                })
+.setPages(arrList, new CustomViewHolder())
 
 class CustomViewHolder implements BannerViewHolder<String> {
 
@@ -108,12 +103,7 @@ protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_main);
     Banner banner = (Banner) findViewById(R.id.banner);
     banner.setAutoPlay(true)
-            .setPages(list, new HolderCreator<BannerViewHolder>() {
-                @Override
-                public BannerViewHolder createViewHolder() {
-                    return new CustomViewHolder();
-                }
-            })
+            .setPages(arrList, new CustomViewHolder())
             .start();
 }
 ```
@@ -124,14 +114,18 @@ protected void onCreate(Bundle savedInstanceState) {
 protected void onStart() {
     super.onStart();
     //开始轮播
-    banner.startAutoPlay();
+    if (banner != null && !banner.isStart() && banner.isPrepare()) {
+        banner.startAutoPlay();
+    }
 }
 
 @Override
 protected void onStop() {
     super.onStop();
     //结束轮播
-    banner.stopAutoPlay();
+    if (banner != null && banner.isStart() && banner.isPrepare()) {
+        banner.stopAutoPlay();
+    }
 }
 ```
 
@@ -184,6 +178,8 @@ setCurrentPage              设置当前页
 update                      刷新
 updateBannerStyle           刷新样式
 start                       开始使用
+isPrepare                   是否加载完成
+isStart                     是否轮播中
 setIndicatorRes             设置指示器资源
 startAutoPlay               开始自动轮播
 stopAutoPlay                停止轮播
