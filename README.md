@@ -49,7 +49,9 @@ repositories {
 dependencies{
     implementation 'com.github.wenchaosong:Banner:2.3.9'
     // 或者
-    implementation 'com.ms:banner:latest'
+    implementation('com.github.wenchaosong:Banner:2.3.9') {
+        exclude group: 'com.android.support'
+    }
 }
 ```
 或者引用本地lib
