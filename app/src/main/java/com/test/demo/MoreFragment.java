@@ -6,12 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ms.banner.Banner;
+import com.test.CustomData;
 import com.test.LazyFragment;
 import com.test.R;
-import com.test.ui.CustomViewHolder;
+import com.test.ui.CustomViewHolder2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MoreFragment extends LazyFragment {
@@ -31,10 +31,12 @@ public class MoreFragment extends LazyFragment {
 
     @Override
     protected void initData() {
-        String[] urls = getResources().getStringArray(R.array.url2);
-        List arrList = new ArrayList(Arrays.asList(urls));
+        List mList = new ArrayList<>();
+        mList.add(new CustomData("", "CustomLayout", false));
+        mList.add(new CustomData("", "Transformer", false));
+        mList.add(new CustomData("", "Viewpager", false));
         mBanner.setAutoPlay(true)
-                .setPages(arrList, new CustomViewHolder())
+                .setPages(mList, new CustomViewHolder2())
                 .start();
     }
 
