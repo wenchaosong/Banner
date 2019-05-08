@@ -19,12 +19,22 @@ public class BannerViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        return this.scrollable && super.onTouchEvent(ev);
+        try {
+            return this.scrollable && super.onTouchEvent(ev);
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return this.scrollable && super.onInterceptTouchEvent(ev);
+        try {
+            return this.scrollable && super.onInterceptTouchEvent(ev);
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     public void setScrollable(boolean scrollable) {
