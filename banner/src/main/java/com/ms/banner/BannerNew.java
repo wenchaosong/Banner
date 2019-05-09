@@ -3,6 +3,7 @@ package com.ms.banner;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntRange;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -57,7 +58,7 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
     private int titleTextColor;
     private int titleTextSize;
     private int count = 0;
-    private int currentItem;
+    private int currentItem = -1;
     private int gravity = -1;
     private int lastPosition;
     private List<String> titles;
@@ -237,6 +238,20 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
+    public BannerNew setCurrentPage(@IntRange(from = 0) int page) {
+        if (count == 0)
+            return this;
+        if (page > count) {
+            throw new RuntimeException("[Banner] --> The current page is out of range");
+        }
+        if (isLoop) {
+            this.currentItem = page + 1;
+        } else {
+            this.currentItem = page;
+        }
+        return this;
+    }
+
     public BannerNew setPages(List<?> datas, BannerViewHolder creator) {
         this.mDatas = datas;
         this.creator = creator;
@@ -301,7 +316,6 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
     public boolean isStart() {
         return isStart;
     }
-
 
     public BannerNew setIndicatorRes(int select, int unSelect) {
         if (select < 0)
@@ -430,10 +444,14 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
 
     private void setData() {
         if (isLoop) {
-            currentItem = 1;
+            if (currentItem < 0) {
+                currentItem = 1;
+            }
             lastPosition = 1;
         } else {
-            currentItem = 0;
+            if (currentItem < 0) {
+                currentItem = 0;
+            }
             lastPosition = 0;
         }
         if (adapter == null) {
@@ -501,15 +519,19 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
                 startAutoPlay();
                 break;
             case MotionEvent.ACTION_DOWN:
-                stopAutoPlay();
+                float downX = ev.getX();
+                if (mPageLeftMargin != 0 || mPageRightMargin != 0) {
+                    if (downX > mPageLeftMargin && downX < getWidth() - mPageRightMargin) {
+                        stopAutoPlay();
+                    }
+                } else {
+                    stopAutoPlay();
+                }
                 break;
         }
         return super.dispatchTouchEvent(ev);
     }
 
-    /**
-     * @param position
-     */
     private int toRealPosition(int position) {
         int realPosition;
         if (isLoop) {
@@ -603,10 +625,10 @@ public class BannerNew extends FrameLayout implements OnPageChangeListener {
 
     @Override
     public void onPageSelected(int position) {
+        currentItem = position;
         if (mOnPageChangeListener != null && currentItem < count + 1 && currentItem > 0) {
             mOnPageChangeListener.onPageSelected(toRealPosition(position));
         }
-        currentItem = position;
         if (bannerStyle == BannerConfig.CIRCLE_INDICATOR ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE ||
                 bannerStyle == BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE ||

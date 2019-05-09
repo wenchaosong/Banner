@@ -243,7 +243,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (count == 0)
             return this;
         if (page > count) {
-            throw new RuntimeException("[Banner] --> The current page is out of adapter's count");
+            throw new RuntimeException("[Banner] --> The current page is out of range");
         }
         if (isLoop) {
             this.currentItem = NUM / 2 - ((NUM / 2) % count) + 1 + page;
