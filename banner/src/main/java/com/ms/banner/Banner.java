@@ -103,8 +103,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private void initView(Context context, AttributeSet attrs) {
         handleTypedArray(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.banner, this, true);
-        bannerDefaultImage = (ImageView) view.findViewById(R.id.bannerDefaultImage);
-        ArcShapeView arcShapeView = (ArcShapeView) view.findViewById(R.id.bannerArcView);
+        bannerDefaultImage = view.findViewById(R.id.bannerDefaultImage);
+        ArcShapeView arcShapeView = view.findViewById(R.id.bannerArcView);
         if (mArcHeight <= 0) {
             arcShapeView.setVisibility(GONE);
         } else {
@@ -113,22 +113,22 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             arcShapeView.setBackground(mArcBg);
             arcShapeView.setDirection(mArcDirection);
         }
-        viewPager = (BannerViewPager) view.findViewById(R.id.bannerViewPager);
+        viewPager = view.findViewById(R.id.bannerViewPager);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT);
         params.leftMargin = mPageLeftMargin;
         params.rightMargin = mPageRightMargin;
         viewPager.setLayoutParams(params);
-        titleView = (LinearLayout) view.findViewById(R.id.titleView);
-        indicator = (LinearLayout) view.findViewById(R.id.circleIndicator);
+        titleView = view.findViewById(R.id.titleView);
+        indicator = view.findViewById(R.id.circleIndicator);
         RelativeLayout.LayoutParams indicatorParam = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
         indicatorParam.bottomMargin = mIndicatorMargin;
         indicator.setLayoutParams(indicatorParam);
-        indicatorInside = (LinearLayout) view.findViewById(R.id.indicatorInside);
-        bannerTitle = (TextView) view.findViewById(R.id.bannerTitle);
-        numIndicator = (TextView) view.findViewById(R.id.numIndicator);
-        numIndicatorInside = (TextView) view.findViewById(R.id.numIndicatorInside);
+        indicatorInside = view.findViewById(R.id.indicatorInside);
+        bannerTitle = view.findViewById(R.id.bannerTitle);
+        numIndicator = view.findViewById(R.id.numIndicator);
+        numIndicatorInside = view.findViewById(R.id.numIndicatorInside);
         bannerDefaultImage.setImageResource(bannerBackgroundImage);
         initViewPagerScroll();
     }
