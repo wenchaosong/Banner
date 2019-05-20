@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .setDelayTime(3000)
                 .setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
-                    public void onBannerClick(int position) {
+                    public void onBannerClick(List datas, int position) {
                         Toast.makeText(MainActivity.this, "你点击了：" + position, Toast.LENGTH_SHORT).show();
                     }
                 })

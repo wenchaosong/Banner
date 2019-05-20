@@ -47,9 +47,9 @@ repositories {
     }
 
 dependencies{
-    implementation 'com.github.wenchaosong:Banner:2.3.10'
+    implementation 'com.github.wenchaosong:Banner:2.3.11'
     // 或者
-    implementation('com.github.wenchaosong:Banner:2.3.10') {
+    implementation('com.github.wenchaosong:Banner:2.3.11') {
         exclude group: 'com.android.support'
     }
 }
@@ -160,7 +160,8 @@ protected void onStop() {
 |page_left_margin|dimension|左边缩进的距离|
 |page_right_margin|dimension|右边缩进的距离|
 |arc_height|dimension|底部弧形的高度|
-|arc_background|reference|底部弧形的背景颜色|
+|arc_start_color|reference|底部弧形的起始颜色|
+|arc_end_color|reference|底部弧形的结束颜色|
 |arc_direction|enum|底部弧形的方向|
 
 ##### java 文件可调用的方法

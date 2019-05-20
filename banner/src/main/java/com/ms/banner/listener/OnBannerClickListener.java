@@ -1,6 +1,8 @@
 package com.ms.banner.listener;
 
+import java.util.List;
+
 public interface OnBannerClickListener {
 
-    void onBannerClick(int position);
+    void onBannerClick(List datas, int position);
 }

@@ -20,7 +20,8 @@
         <attr name="page_left_margin" format="dimension" />
         <attr name="page_right_margin" format="dimension" />
         <attr name="arc_height" format="dimension" />
-        <attr name="arc_background" format="color|reference" />
+        <attr name="arc_start_color" format="color|reference" />
+        <attr name="arc_end_color" format="color|reference" />
         <attr name="arc_direction" format="enum">
             <enum name="up" value="0" />
             <enum name="down" value="1" />

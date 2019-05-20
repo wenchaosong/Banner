@@ -2,8 +2,10 @@ package com.ms.banner.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -12,7 +14,8 @@ public class ArcShapeView extends View {
     private Paint mPaint;
     private Path mPath;
     private int arcHeight = 0;
-    private int background = 0XFFFFFFFF;
+    private int startColor = 0XFFFFFFFF;
+    private int endColor = 0XFFFFFFFF;
     private int direction = 0;
 
     public ArcShapeView(Context context) {
@@ -42,7 +45,9 @@ public class ArcShapeView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mPaint.setColor(background);
+        LinearGradient gradient = new LinearGradient(0, 0, getWidth(), getHeight(),
+                startColor, endColor, Shader.TileMode.CLAMP);
+        mPaint.setShader(gradient);
 
         if (direction == 0) {
             mPath.moveTo(0, getHeight());
@@ -61,8 +66,9 @@ public class ArcShapeView extends View {
         this.arcHeight = arcHeight;
     }
 
-    public void setBackground(int background) {
-        this.background = background;
+    public void setBackground(int startColor, int endColor) {
+        this.startColor = startColor;
+        this.endColor = endColor;
     }
 
     public void setDirection(int direction) {

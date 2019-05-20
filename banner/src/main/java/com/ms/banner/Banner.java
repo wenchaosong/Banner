@@ -76,7 +76,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private int mPageLeftMargin;
     private int mPageRightMargin;
     private int mArcHeight;
-    private int mArcBg;
+    private int mArcStartColor, mArcEndColor;
     private int mArcDirection;
     private static final int NUM = 5000;
     private WeakHandler handler = new WeakHandler();
@@ -110,7 +110,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         } else {
             arcShapeView.setVisibility(VISIBLE);
             arcShapeView.setArcHeight(mArcHeight);
-            arcShapeView.setBackground(mArcBg);
+            arcShapeView.setBackground(mArcStartColor, mArcEndColor);
             arcShapeView.setDirection(mArcDirection);
         }
         viewPager = view.findViewById(R.id.bannerViewPager);
@@ -156,7 +156,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         mPageLeftMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_page_left_margin, BannerConfig.PAGE_MARGIN);
         mPageRightMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_page_right_margin, BannerConfig.PAGE_MARGIN);
         mArcHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_arc_height, BannerConfig.ARC_HEIGHT);
-        mArcBg = typedArray.getColor(R.styleable.Banner_arc_background, BannerConfig.ARC_BACKGROUND);
+        mArcStartColor = typedArray.getColor(R.styleable.Banner_arc_start_color, BannerConfig.ARC_BACKGROUND);
+        mArcEndColor = typedArray.getColor(R.styleable.Banner_arc_end_color, BannerConfig.ARC_BACKGROUND);
         mArcDirection = typedArray.getInt(R.styleable.Banner_arc_direction, BannerConfig.ARC_DIRECTION);
         typedArray.recycle();
     }
@@ -584,7 +585,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 view.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        listener.onBannerClick(toRealPosition(position));
+                        listener.onBannerClick(mDatas, toRealPosition(position));
                     }
                 });
             }

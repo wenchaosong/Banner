@@ -49,8 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginTop="30dp"
-            app:arc_background="@android:color/darker_gray"
+            app:arc_end_color="#009cff"
             app:arc_height="10dp"
+            app:arc_start_color="#00ffff"
             app:indicator_margin="13dp" />
 
         <TextView
