@@ -3,6 +3,9 @@ package com.ms.banner;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntRange;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -27,13 +30,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.IntRange;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager.widget.ViewPager.PageTransformer;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
-
-public class Banner extends FrameLayout implements OnPageChangeListener {
+public class Banner extends FrameLayout implements ViewPager.OnPageChangeListener {
 
     private int mIndicatorPadding = BannerConfig.PADDING_SIZE;
     private int mIndicatorMargin = BannerConfig.MARGIN_BOTTOM;
@@ -71,7 +68,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private LinearLayout indicator, indicatorInside, titleView;
     private ImageView bannerDefaultImage;
     private BannerPagerAdapter adapter;
-    private OnPageChangeListener mOnPageChangeListener;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
     private OnBannerClickListener listener;
     private int mPageLeftMargin;
     private int mPageRightMargin;
@@ -204,7 +201,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public Banner setBannerAnimation(Class<? extends PageTransformer> transformer) {
+    public Banner setBannerAnimation(Class<? extends ViewPager.PageTransformer> transformer) {
         try {
             viewPager.setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
@@ -220,7 +217,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public Banner setPageTransformer(boolean reverseDrawingOrder, PageTransformer transformer) {
+    public Banner setPageTransformer(boolean reverseDrawingOrder, ViewPager.PageTransformer transformer) {
         viewPager.setPageTransformer(reverseDrawingOrder, transformer);
         return this;
     }
@@ -699,7 +696,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         mOnPageChangeListener = onPageChangeListener;
     }
 

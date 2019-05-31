@@ -1,14 +1,13 @@
 package com.test.demo;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 import com.test.App;
 import com.test.R;
 import com.test.ui.CustomViewHolder;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class CustomBannerActivity extends AppCompatActivity {
 

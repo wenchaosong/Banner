@@ -1,10 +1,9 @@
 package com.ms.banner.transformer;
 
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import androidx.viewpager.widget.ViewPager.PageTransformer;
-
-public abstract class ABaseTransformer implements PageTransformer {
+public abstract class ABaseTransformer implements ViewPager.PageTransformer {
 
     protected abstract void onTransform(View page, float position);
 
