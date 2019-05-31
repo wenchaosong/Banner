@@ -22,6 +22,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxVersion"
 }
 
+/*
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
@@ -29,16 +30,15 @@ def siteUrl = 'https://github.com/wenchaosong/Banner'
 def gitUrl = 'https://github.com/wenchaosong/Banner.git'
 
 group = 'com.github.wenchaosong'
-version = "2.3.13"
+version = "2.3.12"
 
 install {
     repositories.mavenInstaller {
-        pom.artifactId = 'Banner-androidx'
         pom {
             project {
                 packaging 'aar'
-                name 'Banner-androidx'
-                description 'Android图片轮播控件'
+                name 'Android图片轮播控件'
+                artifactId 'Banner-androidx'
                 url siteUrl
                 licenses {
                     license {
@@ -98,4 +98,4 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
     }
-}
+}*/
