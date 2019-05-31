@@ -3,9 +3,6 @@ package com.ms.banner;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntRange;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -30,8 +27,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.v4.view.ViewPager.OnPageChangeListener;
-import static android.support.v4.view.ViewPager.PageTransformer;
+import androidx.annotation.IntRange;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.PageTransformer;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 public class Banner extends FrameLayout implements OnPageChangeListener {
 

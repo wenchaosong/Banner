@@ -50,14 +50,17 @@ public class ArcShapeView extends View {
         mPaint.setShader(gradient);
 
         if (direction == 0) {
+            //up
             mPath.moveTo(0, getHeight());
             mPath.quadTo(getWidth() / 2, getHeight() - 2 * arcHeight, getWidth(), getHeight());
             canvas.drawPath(mPath, mPaint);
         } else {
-            mPath.moveTo(0, getHeight());
-            mPath.lineTo(0, getHeight() - arcHeight);
-            mPath.quadTo(getWidth() / 2, getHeight(), getWidth(), getHeight() - arcHeight);
+            //down
+            mPath.moveTo(0, getHeight() - arcHeight);
+            mPath.lineTo(0, getHeight());
             mPath.lineTo(getWidth(), getHeight());
+            mPath.lineTo(getWidth(), getHeight() - arcHeight);
+            mPath.quadTo(getWidth() / 2, getHeight() + arcHeight, 0, getHeight() - arcHeight);
             canvas.drawPath(mPath, mPaint);
         }
     }

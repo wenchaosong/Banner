@@ -1,7 +1,6 @@
 package com.test.demo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -11,6 +10,8 @@ import com.ms.banner.BannerConfig;
 import com.test.App;
 import com.test.R;
 import com.test.ui.CustomViewHolder;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BannerStyleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 

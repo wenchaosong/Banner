@@ -47,11 +47,7 @@ repositories {
     }
 
 dependencies{
-    implementation 'com.github.wenchaosong:Banner:2.3.11'
-    // 或者
-    implementation('com.github.wenchaosong:Banner:2.3.11') {
-        exclude group: 'com.android.support'
-    }
+    implementation 'com.github.wenchaosong:Banner:2.3.12' //此版本适配了 androidx
 }
 ```
 或者引用本地lib
