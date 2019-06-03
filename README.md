@@ -47,8 +47,8 @@ repositories {
     }
 
 dependencies{
-    implementation 'com.ms:Banner:2.3.13'
-    implementation 'com.ms:banner-androidx:2.3.13'
+    implementation 'com.ms:Banner:2.3.14'
+    implementation 'com.ms:Banner-androidx:2.3.14'
 }
 ```
 或者引用本地lib
