@@ -41,11 +41,6 @@
 
 #### Step 1.依赖banner
 ```
-repositories {
-        jcenter()
-        maven { url 'https://jitpack.io' }
-    }
-
 dependencies{
     implementation 'com.ms:Banner:2.3.14'
     implementation 'com.ms:Banner-androidx:2.3.14'
