@@ -1,1 +1,1 @@
-include ':banner',':app', ':banner_x'
+include ':LibBanner', ':demo', ':LibBannerAndroidx'
