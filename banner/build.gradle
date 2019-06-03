@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.wenchaosong'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -23,13 +22,13 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
 }
 
-/*
+apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 def siteUrl = 'https://github.com/wenchaosong/Banner'
 def gitUrl = 'https://github.com/wenchaosong/Banner.git'
 
-group = 'com.github.wenchaosong'
+group = 'com.ms'
 version = "2.3.13"
 
 install {
@@ -98,4 +97,4 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
     }
-}*/
+}

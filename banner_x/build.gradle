@@ -22,15 +22,14 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxVersion"
 }
 
-/*
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 def siteUrl = 'https://github.com/wenchaosong/Banner'
 def gitUrl = 'https://github.com/wenchaosong/Banner.git'
 
-group = 'com.github.wenchaosong'
-version = "2.3.12"
+group = 'com.ms'
+version = "2.3.13"
 
 install {
     repositories.mavenInstaller {
@@ -98,4 +97,4 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
     }
-}*/
+}
