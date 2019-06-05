@@ -262,6 +262,10 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     public void update(List<?> imageUrls, List<String> titles) {
+        if (imageUrls == null || titles == null || imageUrls.size() != titles.size()) {
+            update(null);
+            return;
+        }
         this.titles.clear();
         this.titles.addAll(titles);
         update(imageUrls);
