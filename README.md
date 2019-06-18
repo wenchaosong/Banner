@@ -1,7 +1,7 @@
 # Android 图片轮播控件
 
 [![](https://jitpack.io/v/wenchaosong/Banner.svg)](https://jitpack.io/#wenchaosong/Banner)
-[![](https://api.bintray.com/packages/songwenchao0714/maven/banner/images/download.svg)](https://bintray.com/songwenchao0714/maven/banner/latest)
+[![](https://api.bintray.com/packages/songwenchao0714/maven/Banner/images/download.svg)](https://bintray.com/songwenchao0714/maven/Banner)
 [![](https://img.shields.io/github/stars/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 [![](https://img.shields.io/github/issues/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
 
