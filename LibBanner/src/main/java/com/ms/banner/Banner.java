@@ -539,6 +539,8 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     private int toRealPosition(int position) {
         //int realPosition = (position - 1) % count;
         int realPosition;
+        if (count <= 0)
+            return 0;
         if (isLoop) {
             realPosition = (position - 1 + count) % count;
         } else {
