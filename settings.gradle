@@ -1,1 +1,1 @@
-include ':LibBanner', ':demo', ':LibBannerAndroidx'
+include ':LibBanner', ':demo'
