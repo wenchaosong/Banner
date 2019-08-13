@@ -464,7 +464,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         }
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(currentItem);
-        viewPager.setOffscreenPageLimit(count);
         if (isScroll && count > 1) {
             viewPager.setScrollable(true);
         } else {
