@@ -57,6 +57,7 @@ public class BannerAnimationActivity extends AppCompatActivity implements Adapte
 
         //简单使用
         banner.setAutoPlay(true)
+                .setOffscreenPageLimit(App.images.size())
                 .setPages(App.images, new CustomViewHolder())
                 .setDelayTime(3000)
                 .start();

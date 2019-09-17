@@ -30,6 +30,7 @@ public class BannerLocalActivity extends AppCompatActivity {
         list.add(R.mipmap.b3);
 
         banner.setAutoPlay(true)
+                .setOffscreenPageLimit(list.size())
                 .setPages(list, new CustomViewHolder())
                 .start();
     }

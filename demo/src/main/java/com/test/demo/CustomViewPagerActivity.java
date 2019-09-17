@@ -48,9 +48,9 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         mList.add(new CustomData("", "Viewpager", false));
 
         ArrayList<CustomData> arrList = new ArrayList<>();
-        CustomData data1 = new CustomData("http://img.zcool.cn/community/01fca557a7f5f90000012e7e9feea8.jpg", "", false);
+        CustomData data1 = new CustomData("https://upload-images.jianshu.io/upload_images/9913211-8f28da27dd550fe5.jpg", "", false);
         CustomData data2 = new CustomData("", "", true);
-        CustomData data3 = new CustomData("http://img.zcool.cn/community/01996b57a7f6020000018c1bedef97.jpg", "", false);
+        CustomData data3 = new CustomData("https://upload-images.jianshu.io/upload_images/9913211-a0575ae640238bfe.jpg", "", false);
         arrList.add(data1);
         arrList.add(data2);
         arrList.add(data3);
@@ -58,6 +58,7 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         initIndicator();
 
         banner1.setAutoPlay(true)
+                .setOffscreenPageLimit(mList.size())
                 .setPages(mList, new CustomViewHolder2())
                 .setBannerStyle(BannerConfig.NOT_INDICATOR)
                 .setBannerAnimation(Transformer.Scale)
@@ -82,14 +83,17 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         });
 
         banner2.setAutoPlay(true)
+                .setOffscreenPageLimit(arrList.size())
                 .setPages(arrList, new CustomViewHolder3())
                 .start();
 
         banner3.setAutoPlay(true)
+                .setOffscreenPageLimit(arrList.size())
                 .setPages(arrList, new CustomViewHolder3())
                 .start();
 
         banner4.setAutoPlay(true)
+                .setOffscreenPageLimit(arrList.size())
                 .setBannerAnimation(Transformer.ScaleRight)
                 .setPages(arrList, new CustomViewHolder3())
                 .start();

@@ -285,6 +285,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             this.indicatorImages.clear();
             this.mDatas.addAll(imageUrls);
             this.count = this.mDatas.size();
+            setOffscreenPageLimit(imageUrls.size());
             start();
         }
     }

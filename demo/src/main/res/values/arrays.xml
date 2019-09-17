@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="url">
-        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic1xjab4j30ci08cjrv.jpg</item>
-        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg</item>
-        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic259ohaj30ci08c74r.jpg</item>
-        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic2b16zuj30ci08cwf4.jpg</item>
-        <item>http://ww4.sinaimg.cn/large/006uZZy8jw1faic2e7vsaj30ci08cglz.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-fc35f7c7fc8c37d2.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-3d3ebe3484d91c0e.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-9b33a47c7032f638.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-edc2769c1a2ef404.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-c1ede2e29e85371e.jpg</item>
     </array>
 
     <array name="url1">
-        <item>http://img.zcool.cn/community/01700557a7f42f0000018c1bd6eb23.jpg</item>
-        <item>http://img.zcool.cn/community/01ae5656e1427f6ac72531cb72bac5.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-1c553827bdae32d2.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-a6e6062a81d9258d.jpg</item>
     </array>
     <array name="url2">
-        <item>http://img.zcool.cn/community/01b72057a7e0790000018c1bf4fce0.png</item>
-        <item>http://img.zcool.cn/community/01fca557a7f5f90000012e7e9feea8.jpg</item>
-        <item>http://img.zcool.cn/community/01996b57a7f6020000018c1bedef97.jpg</item>
-        <item>http://img.zcool.cn/community/01700557a7f42f0000018c1bd6eb23.jpg</item>
-    </array>
-    <!-- http://588ku.com/image/daitengmandelitizi.html -->
-    <array name="test_num_url">
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f19cc0079.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f1ac12d1d.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f1bad97d1.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f1c83c228.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f1d53e3dd.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f1e37fea9.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f1ef4d709.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f20b3ea10.jpg</item>
-        <item>http://bpic.588ku.com/element_origin_min_pic/00/00/05/115732f21927f8d.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-51b0484e0c906c91.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-8f28da27dd550fe5.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-a0575ae640238bfe.jpg</item>
+        <item>https://upload-images.jianshu.io/upload_images/9913211-1c553827bdae32d2.jpg</item>
     </array>
     <array name="title">
         <item>51巅峰钜惠</item>

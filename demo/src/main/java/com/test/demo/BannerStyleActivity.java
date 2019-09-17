@@ -27,6 +27,7 @@ public class BannerStyleActivity extends AppCompatActivity implements AdapterVie
 
         //简单使用
         banner.setBannerTitles(App.titles)
+                .setOffscreenPageLimit(App.images.size())
                 .setPages(App.images, new CustomViewHolder())
                 .setAutoPlay(true)
                 .setDelayTime(3000)

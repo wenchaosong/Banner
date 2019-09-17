@@ -27,6 +27,7 @@ public class IndicatorPositionActivity extends AppCompatActivity implements Adap
 
         banner.setAutoPlay(true)
                 .setDelayTime(3000)
+                .setOffscreenPageLimit(App.images.size())
                 .setPages(App.images, new CustomViewHolder())
                 .start();
     }
