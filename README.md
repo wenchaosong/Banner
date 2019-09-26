@@ -42,8 +42,8 @@
 #### Step 1.依赖banner
 ```
 dependencies{
-    implementation 'com.ms:Banner:2.3.16'
-    implementation 'com.ms:Banner-androidx:2.3.16'
+    implementation 'com.ms:Banner:2.3.17'
+    implementation 'com.ms:Banner-androidx:2.3.17'
 }
 ```
 或者引用本地lib

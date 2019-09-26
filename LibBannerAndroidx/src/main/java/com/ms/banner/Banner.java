@@ -59,6 +59,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private int titleTextSize;
     private int count = 0;
     private int currentItem = -1;
+    private int mCurrentPage = 0;
     private int gravity = -1;
     private int lastPosition;
     private List<String> titles;
@@ -170,7 +171,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             scroller.setDuration(scrollTime);
             mField.set(viewPager, scroller);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -208,7 +209,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         try {
             viewPager.setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return this;
     }
@@ -241,21 +242,13 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     }
 
     public Banner setCurrentPage(@IntRange(from = 0) int page) {
-        if (count == 0)
-            return this;
-        if (page > count) {
-            throw new RuntimeException("[Banner] --> The current page is out of range");
-        }
-        if (isLoop) {
-            this.currentItem = NUM / 2 - ((NUM / 2) % count) + 1 + page;
-        } else {
-            this.currentItem = page;
-        }
+        mCurrentPage = page;
         return this;
     }
 
     public Banner setPages(List<?> datas, BannerViewHolder creator) {
-        this.mDatas = datas;
+        this.mDatas.clear();
+        this.mDatas.addAll(datas);
         this.creator = creator;
         this.count = datas.size();
         return this;
@@ -275,19 +268,18 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         if (imageUrls == null) {
             imageUrls = new ArrayList<>();
         }
+        this.mDatas.clear();
+        this.indicatorImages.clear();
         if (imageUrls.size() == 0) {
             bannerDefaultImage.setVisibility(VISIBLE);
-            this.mDatas.clear();
-            this.indicatorImages.clear();
             this.count = 0;
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
             }
         } else {
-            this.mDatas.clear();
-            this.indicatorImages.clear();
             this.mDatas.addAll(imageUrls);
             this.count = this.mDatas.size();
+            setOffscreenPageLimit(imageUrls.size());
             start();
         }
     }
@@ -450,13 +442,16 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     private void setData() {
         if (isLoop) {
-            //currentItem = 1;
-            if (currentItem == -1) {
+            if (mCurrentPage > 0 && mCurrentPage < count) {
+                currentItem = NUM / 2 - ((NUM / 2) % count) + 1 + mCurrentPage;
+            } else {
                 currentItem = NUM / 2 - ((NUM / 2) % count) + 1;
             }
             lastPosition = 1;
         } else {
-            if (currentItem == -1) {
+            if (mCurrentPage > 0 && mCurrentPage < count) {
+                currentItem = mCurrentPage;
+            } else {
                 currentItem = 0;
             }
             lastPosition = 0;
@@ -467,7 +462,6 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         }
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(currentItem);
-        viewPager.setOffscreenPageLimit(count);
         if (isScroll && count > 1) {
             viewPager.setScrollable(true);
         } else {
@@ -581,12 +575,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             if (creator == null) {
                 throw new RuntimeException("[Banner] --> The layout is not specified,please set holder");
             }
-            View view = creator.createView(container.getContext());
+            View view = creator.createView(container.getContext(), toRealPosition(position), mDatas.get(toRealPosition(position)));
             container.addView(view);
 
-            if (mDatas != null && mDatas.size() > 0) {
-                creator.onBind(container.getContext(), toRealPosition(position), mDatas.get(toRealPosition(position)));
-            }
             if (listener != null) {
                 view.setOnClickListener(new OnClickListener() {
                     @Override
