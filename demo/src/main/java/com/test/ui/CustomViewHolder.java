@@ -18,23 +18,19 @@ import com.ms.banner.holder.BannerViewHolder;
  */
 public class CustomViewHolder implements BannerViewHolder<Object> {
 
-    private ImageView mImageView;
-
     @Override
-    public View createView(Context context) {
+    public View createView(Context context, int position, Object data) {
         // 返回mImageView页面布局
-        mImageView = new ImageView(context);
+        ImageView imageView = new ImageView(context);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         );
-        mImageView.setLayoutParams(params);
-        mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        return mImageView;
+        imageView.setLayoutParams(params);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        Glide.with(context).load(data).into(imageView);
+
+        return imageView;
     }
 
-    @Override
-    public void onBind(Context context, int position, Object data) {
-        // 数据绑定
-        Glide.with(context).load(data).into(mImageView);
-    }
 }

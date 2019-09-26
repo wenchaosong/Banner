@@ -1,5 +1,6 @@
 package com.test.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,21 +20,17 @@ import com.test.R;
  */
 public class CustomViewHolder2 implements BannerViewHolder<CustomData> {
 
-    private TextView mTitle;
-    private TextView mPosition;
-
+    @SuppressLint("InflateParams")
     @Override
-    public View createView(Context context) {
+    public View createView(Context context, int position, CustomData data) {
         View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
-        mTitle = (TextView) view.findViewById(R.id.title);
-        mPosition = (TextView) view.findViewById(R.id.position);
+        TextView title = view.findViewById(R.id.title);
+        TextView position1 = view.findViewById(R.id.position);
+
+        title.setText(data.getName());
+        position1.setText(String.valueOf(position));
+
         return view;
     }
 
-    @Override
-    public void onBind(Context context, int position, CustomData data) {
-        // 数据绑定
-        mTitle.setText(data.getName());
-        mPosition.setText(position + "");
-    }
 }

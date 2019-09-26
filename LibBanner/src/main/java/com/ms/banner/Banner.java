@@ -168,7 +168,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             scroller.setDuration(scrollTime);
             mField.set(viewPager, scroller);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -206,7 +206,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         try {
             viewPager.setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return this;
     }
@@ -440,14 +440,14 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     private void setData() {
         if (isLoop) {
             if (mCurrentPage > 0 && mCurrentPage < count) {
-                this.currentItem = NUM / 2 - ((NUM / 2) % count) + 1 + mCurrentPage;
+                currentItem = NUM / 2 - ((NUM / 2) % count) + 1 + mCurrentPage;
             } else {
                 currentItem = NUM / 2 - ((NUM / 2) % count) + 1;
             }
             lastPosition = 1;
         } else {
             if (mCurrentPage > 0 && mCurrentPage < count) {
-                this.currentItem = mCurrentPage;
+                currentItem = mCurrentPage;
             } else {
                 currentItem = 0;
             }
@@ -572,12 +572,9 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             if (creator == null) {
                 throw new RuntimeException("[Banner] --> The layout is not specified,please set holder");
             }
-            View view = creator.createView(container.getContext());
+            View view = creator.createView(container.getContext(), toRealPosition(position), mDatas.get(toRealPosition(position)));
             container.addView(view);
 
-            if (mDatas != null && mDatas.size() > 0) {
-                creator.onBind(container.getContext(), toRealPosition(position), mDatas.get(toRealPosition(position)));
-            }
             if (listener != null) {
                 view.setOnClickListener(new OnClickListener() {
                     @Override

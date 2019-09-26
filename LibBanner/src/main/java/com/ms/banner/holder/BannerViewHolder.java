@@ -5,7 +5,6 @@ import android.view.View;
 
 public interface BannerViewHolder<T> {
 
-    View createView(Context context);
+    View createView(Context context, int position, T data);
 
-    void onBind(Context context, int position, T data);
 }

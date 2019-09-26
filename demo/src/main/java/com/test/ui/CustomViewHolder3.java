@@ -1,5 +1,6 @@
 package com.test.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,25 +23,16 @@ import com.test.R;
  */
 public class CustomViewHolder3 implements BannerViewHolder<CustomData> {
 
-    private TextView mPosition;
-    private LinearLayout ll;
-    private ImageView image1;
-    private ImageView image2;
-
+    @SuppressLint("InflateParams")
     @Override
-    public View createView(Context context) {
+    public View createView(Context context, int position, CustomData data) {
         View view = LayoutInflater.from(context).inflate(R.layout.banner_item2, null);
-        mPosition = (TextView) view.findViewById(R.id.position);
-        ll = (LinearLayout) view.findViewById(R.id.ll_group);
-        image1 = (ImageView) view.findViewById(R.id.image1);
-        image2 = (ImageView) view.findViewById(R.id.image2);
-        return view;
-    }
+        TextView position1 = view.findViewById(R.id.position);
+        LinearLayout ll = view.findViewById(R.id.ll_group);
+        ImageView image1 = view.findViewById(R.id.image1);
+        ImageView image2 = view.findViewById(R.id.image2);
 
-    @Override
-    public void onBind(Context context, int position, CustomData data) {
-        // 数据绑定
-        mPosition.setText(position + "");
+        position1.setText(String.valueOf(position));
         if (data.isMovie()) {
             ll.setVisibility(View.GONE);
             image2.setVisibility(View.VISIBLE);
@@ -52,5 +44,7 @@ public class CustomViewHolder3 implements BannerViewHolder<CustomData> {
             Glide.with(context).load(data.getUrl()).into(image1);
             Glide.with(context).load(R.mipmap.b1).into(image2);
         }
+        return view;
     }
+
 }
