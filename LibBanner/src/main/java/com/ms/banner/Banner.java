@@ -56,6 +56,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     private int titleTextSize;
     private int count = 0;
     private int currentItem = -1;
+    private int mCurrentPage = 0;
     private int gravity = -1;
     private int lastPosition;
     private List<String> titles;
@@ -238,21 +239,13 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     }
 
     public Banner setCurrentPage(@IntRange(from = 0) int page) {
-        if (count == 0)
-            return this;
-        if (page > count) {
-            throw new RuntimeException("[Banner] --> The current page is out of range");
-        }
-        if (isLoop) {
-            this.currentItem = NUM / 2 - ((NUM / 2) % count) + 1 + page;
-        } else {
-            this.currentItem = page;
-        }
+        mCurrentPage = page;
         return this;
     }
 
     public Banner setPages(List<?> datas, BannerViewHolder creator) {
-        this.mDatas = datas;
+        this.mDatas.clear();
+        this.mDatas.addAll(datas);
         this.creator = creator;
         this.count = datas.size();
         return this;
@@ -272,17 +265,15 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         if (imageUrls == null) {
             imageUrls = new ArrayList<>();
         }
+        this.mDatas.clear();
+        this.indicatorImages.clear();
         if (imageUrls.size() == 0) {
             bannerDefaultImage.setVisibility(VISIBLE);
-            this.mDatas.clear();
-            this.indicatorImages.clear();
             this.count = 0;
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
             }
         } else {
-            this.mDatas.clear();
-            this.indicatorImages.clear();
             this.mDatas.addAll(imageUrls);
             this.count = this.mDatas.size();
             setOffscreenPageLimit(imageUrls.size());
@@ -448,13 +439,16 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
 
     private void setData() {
         if (isLoop) {
-            //currentItem = 1;
-            if (currentItem == -1) {
+            if (mCurrentPage > 0 && mCurrentPage < count) {
+                this.currentItem = NUM / 2 - ((NUM / 2) % count) + 1 + mCurrentPage;
+            } else {
                 currentItem = NUM / 2 - ((NUM / 2) % count) + 1;
             }
             lastPosition = 1;
         } else {
-            if (currentItem == -1) {
+            if (mCurrentPage > 0 && mCurrentPage < count) {
+                this.currentItem = mCurrentPage;
+            } else {
                 currentItem = 0;
             }
             lastPosition = 0;
