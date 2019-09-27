@@ -25,6 +25,7 @@
 
 ### 动态展示及 apk 下载
 [demo-debug.apk](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
+
 ![效果示例](/pic/GIF.gif)
 
 |模式|图片
