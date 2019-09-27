@@ -23,10 +23,13 @@
 
 ## 效果图
 
-### 动态展示及 apk 下载
+### apk 下载及动态展示
+
 [demo-debug.apk](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
 
 ![效果示例](/pic/GIF.gif)
+
+### 部分效果图
 
 |模式|图片
 |---|---|
