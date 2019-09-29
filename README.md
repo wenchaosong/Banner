@@ -9,9 +9,9 @@
 图片轮播类似控件比较多,但是真正好用的比较少,大家公认的项目[banner](https://github.com/youth5201314/banner)是比较好用的,
 但是作者已经很久没维护了,所以我在他的基础上优化了一部分,满足大家项目中常用的一些需求.
 > 具体优化点:
-> 1.优化了自定义布局,不仅仅是一张图片;
-> 2.优化了 onPageSelected 方法调用两次的 bug;
-> 3.增加了多种 banner 样式
+1.优化了自定义布局,不仅仅是一张图片;
+2.优化了 onPageSelected 方法调用两次的 bug;
+3.增加了多种 banner 样式
 
 ## 关于本库的优化点
 
@@ -30,6 +30,8 @@
 
 ### apk 下载及动态展示
 
+[![](https://img.shields.io/badge/downloadAPK-Banner-ff69b4)](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
+[![](https://img.shields.io/badge/downloadAPK-Banner-ff69b4)](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
 [![](https://img.shields.io/badge/downloadAPK-Banner-ff69b4)](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
 
 ![效果示例](/pic/GIF.gif)
@@ -199,9 +201,8 @@ releaseBanner               释放 banner
 ## 注意事项
 
 > 1.卡片模式使用需要多调用一个方法 setOffscreenPageLimit,否则滑动效果不好
-> 2. setCurrentPage 方法不建议调用,因为使用的是成员变量保存,除非再次初始化,否则每次都会先显示设定的图片
-> 3.有问题先参考 demo
+2. setCurrentPage 方法不建议调用,因为使用的是成员变量保存,除非再次初始化,否则每次都会先显示设定的图片
+3.有问题先参考 demo
 
 另只要是 banner 中布局中可以定义的,都可以重写,包括但不限于指示器,图片,文字
-
 各个模式相应的代码 demo 中已经有了,有问题可以先参考,实在有问题可以提 issue
