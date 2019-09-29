@@ -1,9 +1,10 @@
 # Android 图片轮播控件
 
-[![](https://jitpack.io/v/wenchaosong/Banner.svg)](https://jitpack.io/#wenchaosong/Banner)
 [![](https://api.bintray.com/packages/songwenchao0714/maven/Banner/images/download.svg)](https://bintray.com/songwenchao0714/maven/Banner)
-[![](https://img.shields.io/github/stars/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
-[![](https://img.shields.io/github/issues/wenchaosong/Banner.svg)](https://github.com/wenchaosong/Banner)
+[![](https://img.shields.io/github/stars/wenchaosong/Banner?color=green)](https://github.com/wenchaosong/Banner)
+[![](https://img.shields.io/github/issues/wenchaosong/Banner?color=red)](https://github.com/wenchaosong/Banner)
+[![](https://img.shields.io/github/last-commit/wenchaosong/Banner?color=yellow)](https://github.com/wenchaosong/Banner)
+[![](https://img.shields.io/github/release-date/wenchaosong/Banner?color=yellow)](https://github.com/wenchaosong/Banner)
 
 图片轮播类似控件比较多,但是真正好用的比较少,大家公认的项目[banner](https://github.com/youth5201314/banner)是比较好用的,
 但是作者已经很久没维护了,所以我在他的基础上优化了一部分,满足大家项目中常用的一些需求.<br>
@@ -21,11 +22,15 @@
 
 所以在此希望大家有好的处理方式能提 pr,或者 issue,我会认真看,认真解决
 
+- [有问题先看注意事项](#注意事项)
+- [有问题先看注意事项](#注意事项)
+- [有问题先看注意事项](#注意事项)
+
 ## 效果图
 
 ### apk 下载及动态展示
 
-[demo-debug.apk](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
+[![](https://img.shields.io/badge/downloadAPK-Banner-orange)](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
 
 ![效果示例](/pic/GIF.gif)
 
@@ -116,7 +121,7 @@ protected void onCreate(Bundle savedInstanceState) {
 protected void onStart() {
     super.onStart();
     //开始轮播
-    if (banner != null && !banner.isStart() && banner.isPrepare()) {
+    if (banner != null && banner.isPrepare() && !banner.isStart()) {
         banner.startAutoPlay();
     }
 }
@@ -125,7 +130,7 @@ protected void onStart() {
 protected void onStop() {
     super.onStop();
     //结束轮播
-    if (banner != null && banner.isStart() && banner.isPrepare()) {
+    if (banner != null && banner.isPrepare() && banner.isStart()) {
         banner.stopAutoPlay();
     }
 }
@@ -191,4 +196,11 @@ setOnPageChangeListener     监听页面变化事件
 releaseBanner               释放 banner
 ```
 
-各个模式相应的代码 demo 中已经有了就不再重复,有问题可以提 issue
+## 注意事项
+
+1.卡片模式使用需要多调用一个方法 setOffscreenPageLimit,否则滑动效果不好
+2. setCurrentPage 方法不建议调用,因为使用的是成员变量保存,除非再次初始化,否则每次都会先显示设定的图片
+3.有问题先参考 demo
+
+另只要是 banner 中布局中可以定义的,都可以重写,包括但不限于指示器,图片,文字
+各个模式相应的代码 demo 中已经有了,有问题可以先参考,实在有问题可以提 issue
