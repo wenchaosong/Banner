@@ -30,7 +30,7 @@
 
 ### apk 下载及动态展示
 
-[![](https://img.shields.io/badge/downloadAPK-Banner-ff69b4)](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo-debug.apk)
+[![](https://img.shields.io/badge/downloadAPK-Banner-ff69b4)](https://github.com/wenchaosong/Banner/releases/download/2.3.17/demo.apk)
 
 ![效果示例](/pic/GIF.gif)
 
