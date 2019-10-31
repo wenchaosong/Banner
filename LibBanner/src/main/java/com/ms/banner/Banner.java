@@ -212,7 +212,8 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     }
 
     public Banner setOffscreenPageLimit(int limit) {
-        if (viewPager != null) {
+        if (viewPager != null && adapter != null) {
+            adapter.notifyDataSetChanged();
             viewPager.setOffscreenPageLimit(limit);
         }
         return this;
