@@ -22,18 +22,15 @@ public class CustomBannerActivity extends AppCompatActivity {
         banner3 = (Banner) findViewById(R.id.banner3);
 
         banner1.setAutoPlay(true)
-                .setOffscreenPageLimit(App.images.size())
                 .setPages(App.images, new CustomViewHolder())
                 .start();
 
         banner2.setAutoPlay(true)
-                .setOffscreenPageLimit(App.images.size())
                 .setPages(App.images, new CustomViewHolder())
                 .start();
 
         banner3.setBannerTitles(App.titles)
                 .setAutoPlay(true)
-                .setOffscreenPageLimit(App.images.size())
                 .setPages(App.images, new CustomViewHolder())
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                 .start();

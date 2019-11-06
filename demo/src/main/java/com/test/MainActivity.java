@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         //简单使用
         banner.setAutoPlay(true)
-                .setOffscreenPageLimit(arrList.size())
                 .setPages(arrList, new CustomViewHolder())
                 .setDelayTime(3000)
                 .setOnBannerClickListener(new OnBannerClickListener() {

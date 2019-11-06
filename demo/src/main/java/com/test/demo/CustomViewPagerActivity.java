@@ -58,7 +58,6 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         initIndicator();
 
         banner1.setAutoPlay(true)
-                .setOffscreenPageLimit(mList.size())
                 .setPages(mList, new CustomViewHolder2())
                 .setBannerStyle(BannerConfig.NOT_INDICATOR)
                 .setBannerAnimation(Transformer.Scale)
@@ -83,17 +82,14 @@ public class CustomViewPagerActivity extends AppCompatActivity {
         });
 
         banner2.setAutoPlay(true)
-                .setOffscreenPageLimit(arrList.size())
                 .setPages(arrList, new CustomViewHolder3())
                 .start();
 
         banner3.setAutoPlay(true)
-                .setOffscreenPageLimit(arrList.size())
                 .setPages(arrList, new CustomViewHolder3())
                 .start();
 
         banner4.setAutoPlay(true)
-                .setOffscreenPageLimit(arrList.size())
                 .setBannerAnimation(Transformer.ScaleRight)
                 .setPages(arrList, new CustomViewHolder3())
                 .start();

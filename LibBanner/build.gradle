@@ -31,7 +31,7 @@ publish {
     userOrg = 'songwenchao0714'
     groupId = 'com.ms'
     artifactId = 'Banner'
-    publishVersion = '2.3.18'
+    publishVersion = '2.3.19'
     desc = 'A simple banner lib'
     website = 'https://github.com/wenchaosong/Banner'
 }

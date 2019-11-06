@@ -211,14 +211,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         return this;
     }
 
-    public Banner setOffscreenPageLimit(int limit) {
-        if (viewPager != null && adapter != null) {
-            adapter.notifyDataSetChanged();
-            viewPager.setOffscreenPageLimit(limit);
-        }
-        return this;
-    }
-
     public Banner setPageTransformer(boolean reverseDrawingOrder, ViewPager.PageTransformer transformer) {
         viewPager.setPageTransformer(reverseDrawingOrder, transformer);
         return this;
@@ -277,7 +269,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         } else {
             this.mDatas.addAll(imageUrls);
             this.count = this.mDatas.size();
-            setOffscreenPageLimit(imageUrls.size());
             start();
         }
     }
@@ -459,6 +450,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             viewPager.addOnPageChangeListener(this);
         }
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(count);
         viewPager.setCurrentItem(currentItem);
         if (isScroll && count > 1) {
             viewPager.setScrollable(true);

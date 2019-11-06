@@ -36,7 +36,6 @@ public class MoreFragment extends LazyFragment {
         mList.add(new CustomData("", "Transformer", false));
         mList.add(new CustomData("", "Viewpager", false));
         mBanner.setAutoPlay(true)
-                .setOffscreenPageLimit(mList.size())
                 .setPages(mList, new CustomViewHolder2())
                 .start();
     }

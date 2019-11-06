@@ -41,7 +41,6 @@ public class HomeFragment extends LazyFragment {
         String[] urls = getResources().getStringArray(R.array.url2);
         List arrList = new ArrayList(Arrays.asList(urls));
         mBanner.setAutoPlay(true)
-                .setOffscreenPageLimit(arrList.size())
                 .setPages(arrList, new CustomViewHolder())
                 .start();
     }
