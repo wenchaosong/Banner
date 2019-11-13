@@ -112,11 +112,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             arcShapeView.setDirection(mArcDirection);
         }
         viewPager = view.findViewById(R.id.bannerViewPager);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT);
-        params.leftMargin = mPageLeftMargin;
-        params.rightMargin = mPageRightMargin;
-        viewPager.setLayoutParams(params);
+        viewPager.setPadding(mPageLeftMargin, 0, mPageRightMargin, 0);
         titleView = view.findViewById(R.id.titleView);
         indicator = view.findViewById(R.id.circleIndicator);
         RelativeLayout.LayoutParams indicatorParam = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
@@ -510,14 +506,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
                 startAutoPlay();
                 break;
             case MotionEvent.ACTION_DOWN:
-                float downX = ev.getX();
-                if (mPageLeftMargin != 0 || mPageRightMargin != 0) {
-                    if (downX > mPageLeftMargin && downX < getWidth() - mPageRightMargin) {
-                        stopAutoPlay();
-                    }
-                } else {
-                    stopAutoPlay();
-                }
+                stopAutoPlay();
                 break;
         }
         return super.dispatchTouchEvent(ev);

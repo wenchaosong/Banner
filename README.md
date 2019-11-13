@@ -55,8 +55,8 @@
 #### Step 1.依赖banner
 ```
 dependencies{
-    implementation 'com.ms:Banner:2.3.19'
-    implementation 'com.ms:Banner-androidx:2.3.19'
+    implementation 'com.ms:Banner:2.3.20'
+    implementation 'com.ms:Banner-androidx:2.3.20'
 }
 ```
 或者引用本地lib
@@ -197,8 +197,8 @@ releaseBanner               释放 banner
 
 ## 注意事项
 
-> 1. setCurrentPage 方法不建议调用,因为使用的是成员变量保存,除非再次初始化,否则每次都会先显示设定的图片<br>
-> 2.有问题先参考 demo
+> 1. setCurrentPage 方法不建议调用,因为使用的是成员变量保存,除非再次初始化,否则每次都会先显示设定的图片;<br>
+ 2.有问题先参考 demo
 
 另只要是 banner 中布局中可以定义的,都可以重写,包括但不限于指示器,图片,文字<br>
 各个模式相应的代码 demo 中已经有了,有问题可以先参考,实在有问题可以提 issue
