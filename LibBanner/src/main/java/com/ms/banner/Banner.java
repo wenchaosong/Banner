@@ -678,8 +678,4 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         mOnPageChangeListener = onPageChangeListener;
     }
-
-    public void releaseBanner() {
-        handler.removeCallbacksAndMessages(null);
-    }
 }

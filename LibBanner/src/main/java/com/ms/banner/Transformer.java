@@ -20,7 +20,7 @@ import com.ms.banner.transformer.StackTransformer;
 import com.ms.banner.transformer.TabletTransformer;
 import com.ms.banner.transformer.ZoomInTransformer;
 import com.ms.banner.transformer.ZoomOutSlideTransformer;
-import com.ms.banner.transformer.ZoomOutTranformer;
+import com.ms.banner.transformer.ZoomOutTransformer;
 
 public class Transformer {
 
@@ -41,7 +41,7 @@ public class Transformer {
     public static Class<? extends PageTransformer> Stack = StackTransformer.class;
     public static Class<? extends PageTransformer> Tablet = TabletTransformer.class;
     public static Class<? extends PageTransformer> ZoomIn = ZoomInTransformer.class;
-    public static Class<? extends PageTransformer> ZoomOut = ZoomOutTranformer.class;
+    public static Class<? extends PageTransformer> ZoomOut = ZoomOutTransformer.class;
     public static Class<? extends PageTransformer> ZoomOutSlide = ZoomOutSlideTransformer.class;
 
 }
