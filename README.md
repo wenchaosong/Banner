@@ -56,7 +56,7 @@
 ```
 dependencies{
     implementation 'com.ms:Banner:2.3.20'
-    implementation 'com.ms:Banner-androidx:2.3.20'
+    implementation 'com.ms:Banner-androidx:2.3.21'
 }
 ```
 或者引用本地lib
