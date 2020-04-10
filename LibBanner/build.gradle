@@ -30,8 +30,8 @@ apply plugin: 'com.novoda.bintray-release'
 publish {
     userOrg = 'songwenchao0714'
     groupId = 'com.ms'
-    artifactId = 'Banner'
-    publishVersion = '2.3.20'
+    artifactId = 'banner'
+    publishVersion = '1.0.0'
     desc = 'A simple banner lib'
     website = 'https://github.com/wenchaosong/Banner'
 }
