@@ -1,7 +1,8 @@
 package com.test.ui;
 
-import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * 自定义动画效果

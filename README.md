@@ -56,7 +56,7 @@
 ```
 dependencies{
     implementation 'com.ms:banner:1.0.0'
-    implementation 'com.ms:banner-androidx:1.0.0'
+    implementation 'com.github.wenchaosong:Banner:2.4.0'
 }
 ```
 或者引用本地lib

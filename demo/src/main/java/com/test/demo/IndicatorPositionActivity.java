@@ -1,10 +1,11 @@
 package com.test.demo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;

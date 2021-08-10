@@ -26,12 +26,12 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    implementation "com.android.support:cardview-v7:$rootProject.ext.supportVersion"
-    /*annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'*/
-    implementation 'com.ms:bottombar:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.wenchaosong:BottomBar:3.0.9'
+
     implementation project(':LibBanner')
 }
